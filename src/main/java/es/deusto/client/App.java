@@ -1,4 +1,4 @@
-package es.deusto.spqe3;
+package es.deusto.client;
 
 /**
  * Hello world!
