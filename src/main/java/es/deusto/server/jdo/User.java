@@ -11,20 +11,19 @@ import java.util.HashSet;
 @PersistenceCapable
 public class User {
 	@PrimaryKey
-	String login=null;
-	String password=null;
+	public String username=null;
+	public String password=null;
 	
 	
-	
-	
-	public User(String login, String password) {
-		this.login = login;
+	public User(String username, String password) {
+		this.username = username;
 		this.password = password;
+		
 	}
 	
 
 	public String getLogin() {
-		return this.login;
+		return this.username;
 	}
 	
 	public String getPassword() {
