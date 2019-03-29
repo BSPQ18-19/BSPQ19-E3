@@ -3,6 +3,7 @@ package es.deusto.server;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -10,6 +11,7 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
+import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 import es.deusto.server.*;
 
@@ -40,26 +42,66 @@ public class Server extends UnicastRemoteObject implements IServer {
 		
 	}
 
-	public static void main(String[] args) {
-		if (args.length != 3) {
-			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
-			System.exit(0);
-		}
 
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new SecurityManager());
-		}
-
-		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
-
-		try {
-			IServer objServer = new Server();
-			Naming.rebind(name, objServer);
-			System.out.println("Server '" + name + "' active and waiting...");
-			
-		} catch (Exception e) {
-			System.err.println("Hello exception: " + e.getMessage());
-			e.printStackTrace();
-		}
+	@Override
+	public User logIn() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public void logOut() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User signIn() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Article readArticle() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean createArticle() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Article> searchArticleTitle() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Article> searchArticleCategory() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteArticle() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean editArticle() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Article> viewTopArticle() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }
