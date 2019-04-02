@@ -24,9 +24,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	protected Server() throws RemoteException {
 		super();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		this.pm = pmf.getPersistenceManager();
-		this.tx = pm.currentTransaction();
+		//PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		//this.pm = pmf.getPersistenceManager();
+		//this.tx = pm.currentTransaction();
 	}
 	
 	protected void finalize () throws Throwable {
@@ -37,9 +37,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	
-	public void registerUser(String login, String password) {
+	public Boolean registerUser(String login, String password) {
 		//Register User
-		
+		System.out.println("Registering");
+		return false;
 	}
 
 
@@ -102,6 +103,38 @@ public class Server extends UnicastRemoteObject implements IServer {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Boolean SayHello() throws RemoteException {
+		// TODO Auto-generated method stub
+		System.out.println("Hello");
+		return true;
+	}
 	
 	
+	public static void main(String[] args) {
+		if (args.length != 3) {
+			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
+			System.exit(0);
+		}
+
+		if (System.getSecurityManager() == null) {
+			System.setSecurityManager(new SecurityManager());
+		}
+
+		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
+
+		try {
+			IServer objServer = new Server();
+			Naming.rebind(name, objServer);
+			System.out.println("Server '" + name + "' active and waiting...");
+			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
+			java.io.BufferedReader stdin = new java.io.BufferedReader ( inputStreamReader );
+			@SuppressWarnings("unused")
+			String line  = stdin.readLine();
+		} catch (Exception e) {
+			System.err.println("Hello exception: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 }

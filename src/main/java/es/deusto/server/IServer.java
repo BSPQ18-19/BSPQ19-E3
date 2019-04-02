@@ -9,7 +9,7 @@ import es.deusto.server.jdo.User;
 public interface IServer extends Remote {
 	
 	
-	void registerUser(String login, String password) throws RemoteException;
+	Boolean registerUser(String login, String password) throws RemoteException;
 	User logIn() throws RemoteException;
 	void logOut() throws RemoteException;
 	User signIn()  throws RemoteException;
@@ -20,6 +20,6 @@ public interface IServer extends Remote {
 	Boolean deleteArticle() throws RemoteException;
 	Boolean editArticle() throws RemoteException;
 	ArrayList<Article> viewTopArticle() throws RemoteException;
-	
+	Boolean SayHello() throws RemoteException;
 
 } 
