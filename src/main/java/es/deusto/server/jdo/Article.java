@@ -1,12 +1,12 @@
 package es.deusto.server.jdo;
 
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class Article {
 	
-	@PrimaryKey
 	public String title = "";
 	public String body = "";
 	public int visits = 0;

@@ -1,11 +1,19 @@
-Clean and compile:
 mvn clean compile
 
+Create Datanucleus schema:
+  mvn datanucleus:schema-create
+
+To start the registry
+  start rmiregistry -J-Djava.rmi.server.useCodebaseOnly=false
+
 Launch server:
-mvn exec:java -Pserver
+  mvn exec:java -Pserver
 
 Launch client:
-mvn exec:java -Pclient
+  mvn exec:java -Pclient
 
-Launch MySQL:
-mysqld --console --explicit_defaults_for_timestamp --default-time-zone=+00:00
+ 
+
+Run the command: "mvn datanucleus:schema-delete"
+   This deletes the schema for this sample. See note for 4 also.
+  

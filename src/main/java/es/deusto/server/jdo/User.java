@@ -5,9 +5,10 @@ import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class User {
+	
 	@PrimaryKey
-	public String username=null;
-	public String password=null;
+	public String username;
+	public String password;
 	
 	
 	public User(String username, String password) {
