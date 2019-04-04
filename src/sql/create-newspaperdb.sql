@@ -1,4 +1,3 @@
-/* TO-DO */
 /* DELETE 'newspaperDB' database*/
 DROP SCHEMA IF EXISTS newspaperDB;
 /* DELETE USER 'spq' AT LOCAL SERVER*/
