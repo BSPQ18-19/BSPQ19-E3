@@ -10,8 +10,7 @@ public interface IServer extends Remote {
 	
 	
 	Boolean registerUser(String login, String password) throws RemoteException;
-	User logIn() throws RemoteException;
-	void logOut() throws RemoteException;
+	User logIn(String user, String pass) throws RemoteException;
 	User signIn()  throws RemoteException;
 	Article readArticle() throws RemoteException;
 	Boolean createArticle() throws RemoteException;

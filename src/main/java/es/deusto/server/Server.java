@@ -33,7 +33,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		if (tx.isActive()) {
             tx.rollback();
         }
-        pm.close();
+        //pm.close();
 	}
 
 	
@@ -43,17 +43,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return false;
 	}
 
-
 	@Override
-	public User logIn() throws RemoteException {
+	public User logIn(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void logOut() throws RemoteException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -137,4 +130,5 @@ public class Server extends UnicastRemoteObject implements IServer {
 			e.printStackTrace();
 		}
 	}
+
 }
