@@ -35,7 +35,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	public Boolean registerUser(String login, String password) {
 
-
 		tx.begin();
         System.out.println("Checking whether the user already exits or not: '" + login +"'");
 		User user = null;
@@ -107,18 +106,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public ArrayList<Article> searchArticleTitle() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Article> searchArticleCategory() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Boolean deleteArticle() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
@@ -131,8 +118,68 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
+	public ArrayList<Article> searchArticleTitle() throws RemoteException {
+		
+		try{
+			tx.begin();
+			
+			System.out.println("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
+			Query<User> q = pm.newQuery("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
+			q.setUnique(true);
+			ArrayList<Article> art = q.executeResultList(Article.class);
+			//ArrayList<Article> art = (ArrayList<Article>)q.execute();
+			
+			System.out.println("Article: " + art);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+	}
+
+	@Override
+	public ArrayList<Article> searchArticleCategory() throws RemoteException {
+		
+		try{
+			tx.begin();
+		
+			System.out.println("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
+			Query<User> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
+			q.setUnique(true);
+			q.executeResultList(Article.class)
+			ArrayList<Article> arts = q.executeResultList(Article.class);
+			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
+			
+			System.out.println("Articles: " + arts);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+	}
+	
+	@Override
 	public ArrayList<Article> viewTopArticle() throws RemoteException {
-		// TODO Auto-generated method stub
+		try{
+			tx.begin();
+		
+			System.out.println("SELECT FROM " + Article.class.getTitle() + " WHERE visits <= 1000\"");
+			Query<User> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE visits <= 1000\"");
+			q.setUnique(true);
+			q.setOrdering("Visits ascending");
+			ArrayList<Article> arts = q.executeResultList(Article.class);
+			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
+			
+			System.out.println("Articles: " + arts);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+	}
 		return null;
 	}
 
