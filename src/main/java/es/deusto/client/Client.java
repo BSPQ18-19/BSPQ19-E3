@@ -1,6 +1,7 @@
 package es.deusto.client;
 
 import es.deusto.server.IServer;
+import es.deusto.server.jdo.User;
 
 /**
  * Hello world!
@@ -22,8 +23,10 @@ public class Client
 			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			IServer objHello = (IServer) java.rmi.Naming.lookup(name);
 			// Register to be allowed to send messages
-			objHello.registerUser("dipina", "dipina");
-			System.out.println("* Message coming from the server: '" + objHello.SayHello());
+			//objHello.registerUser("dipina", "dipina");
+			User user = objHello.logIn("dipina", "dipina");
+			System.out.println(user.username);
+			//System.out.println("* Message coming from the server: '" + objHello.SayHello());
 			
 		} catch (Exception e) {
 			System.err.println("RMI Example exception: " + e.getMessage());

@@ -1,25 +1,26 @@
 package es.deusto.server.jdo;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class Article {
+public class Article implements Serializable{
 	
+	@PrimaryKey
 	public String title = "";
 	public String body = "";
 	public int visits = 0;
 	public String category = "";
-	public Admin author;
 	
-	public Article(String title, String body, int visits, String category, Admin author) {
+	public Article(String title, String body, int visits, String category, Admin autho) {
 		super();
 		this.title = title;
 		this.body = body;
 		this.visits = visits;
 		this.category = category;
-		this.author = author;
 	}
 
 	public String getTitle() {
@@ -53,14 +54,5 @@ public class Article {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
-	public Admin getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(Admin author) {
-		this.author = author;
-	}
-	
 	
 }

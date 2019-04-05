@@ -1,10 +1,12 @@
 package es.deusto.server.jdo;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class User {
+public class User implements Serializable{
 	
 	@PrimaryKey
 	public String username;

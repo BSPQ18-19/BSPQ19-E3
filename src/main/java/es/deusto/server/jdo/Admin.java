@@ -11,6 +11,7 @@ import javax.jdo.annotations.Persistent;
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
 public class Admin extends User{
 	
+
 	public ArrayList<Article> ownArticles= new ArrayList<Article>();
 	
 	public Admin(String username, String password, ArrayList<Article> articles) {
