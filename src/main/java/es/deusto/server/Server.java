@@ -116,11 +116,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 
 	@Override
-	public Boolean deleteArticle() throws RemoteException {
+	public Boolean deleteArticle(Article art) throws RemoteException {
 		try{
 			tx.begin();
-			Article art1 = pm.getObjectById(Article.class, article.getTitle());
-			pm.deletePersistent(art1);
+			pm.deletePersistent(art);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
