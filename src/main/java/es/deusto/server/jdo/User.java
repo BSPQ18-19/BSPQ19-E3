@@ -11,11 +11,13 @@ public class User implements Serializable{
 	@PrimaryKey
 	public String username;
 	public String password;
+	public String email;
 	
 	
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+		this.email = email;
 		
 	}
 	
@@ -32,7 +34,9 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	
+	public String getEmail() {
+		return this.email;
+	}
 	 
 }
 
