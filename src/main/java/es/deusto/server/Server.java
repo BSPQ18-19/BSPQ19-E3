@@ -127,7 +127,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-		return TRUE;
+		return true;
 	}
 	
 	@Override
