@@ -12,7 +12,7 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
-
+import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 
@@ -104,16 +104,62 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public Boolean createArticle() throws RemoteException {
+	public Boolean createArticle(String title, String body, int visits, String category, Admin autho) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+		tx.begin();
+		//Use the SearchArticleTitle method here to check if the title is already in use.
+        System.out.println("Checking whether the article title is already in use: ''");
+        //Whether it's in use or not is reflected in the titleUsed boolean
+		boolean titleUsed = false;
+		if (titleUsed == true) {
+			System.out.println("The title: " + title + " it's already in use, the transaction wasn't successful");
+		} else {
+			System.out.println("Creating a new article with title: " + title);
+			System.out.println("Body: " + body);
+			System.out.println("Number of visits: " + visits);
+			System.out.println("Categorized as: " + category);
+			Article article = new Article(title, body, visits, category, autho);
+			pm.makePersistent(article);	
+			System.out.println("New article with title: " + title + " created successfully");
+		}
+		tx.commit();
+    }
+    finally
+    {
+        if (tx.isActive())
+        {
+            tx.rollback();
+        }
+
+    }
+
+    return true;
 	}
 	
 	@Override
-		public Boolean editArticle() throws RemoteException {
-			// TODO Auto-generated method stub
-			return null;
+		public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody) throws RemoteException {
+		// It's made so you can only change the articles title and body, we can make it more complex later.
+		
+		//Need to find the article with the method SearchArticleTitle(art)
+		//Needs to be changed once SerachArticleTitle method is ready
+			
+		try {
+		tx.begin();
+		if (changeTitle == true) {
+			art.setTitle(newTitle);
 		}
+		if (changeBody == true) {
+			art.setBody(newBody);
+		}
+		tx.commit();
+		} finally {
+			if(tx.isActive()) {
+				tx.rollback();
+			}
+		}
+		 return true;
+	}
 
 	@Override
 	public Boolean deleteArticle(Article art) throws RemoteException {
