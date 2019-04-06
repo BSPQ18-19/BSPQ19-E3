@@ -40,34 +40,32 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public Boolean registerUser(String login, String password) {
 
 		tx.begin();
-        System.out.println("Checking whether the user already exits or not: '" + login +"'");
+		System.out.println("Checking whether the user already exits or not: '" + login +"'");
 		User user = null;
+
 		try {
 			user = pm.getObjectById(User.class, login);
+			System.out.println("User: " + user);
+			if (user != null) {
+				System.out.println("Setting password user: " + user);
+				user.setPassword(password);
+				System.out.println("Password set user: " + user);
+			} else {
+				System.out.println("Creating user: " + user);
+				user = new User(login, password);
+				pm.makePersistent(user);					 
+				System.out.println("User created: " + user);
+			}
+			tx.commit();
 		} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
 			System.out.println("Exception launched: " + jonfe.getMessage());
-		
-		System.out.println("User: " + user);
-		if (user != null) {
-			System.out.println("Setting password user: " + user);
-			user.setPassword(password);
-			System.out.println("Password set user: " + user);
-		} else {
-			System.out.println("Creating user: " + user);
-			user = new User(login, password);
-			pm.makePersistent(user);					 
-			System.out.println("User created: " + user);
-		}
-		tx.commit();
-    }
-    finally
-    {
-        if (tx.isActive())
-        {
-            tx.rollback();
-        }
+		} finally {
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
 
-    }
+		}
 
     return true;
 	}
@@ -179,79 +177,81 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 	
 	@Override
-	public ArrayList<Article> searchArticleTitle() throws RemoteException {
+	public ArrayList<Article> searchArticleTitle(ArrayList<Article> art) throws RemoteException {
 		
-		try{
-			tx.begin();
-			
-			System.out.println("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
-			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
-			q.setUnique(true);
-			ArrayList<Article> art = q.executeResultList(Article.class);
-			//ArrayList<Article> art = (ArrayList<Article>)q.execute();
-			
-			System.out.println("Article: " + art);
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		}
+//		try{
+//			tx.begin();
+//			System.out.println("SELECT FROM " + Article.class + " WHERE title == \"" + art.getTitle());
+//			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE title == \"" + art.getTitle());
+//			q.setUnique(true);
+//			ArrayList<Article> article = (ArrayList<Article>) q.executeResultList(Article.class);
+//			//ArrayList<Article> art = (ArrayList<Article>)q.execute();
+//			
+//			System.out.println("Article: " + article);
+//			tx.commit();
+//		} finally {
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
+//		}
+		return art;
 	}
 
 	@Override
-	public ArrayList<Article> searchArticleCategory() throws RemoteException {
+	public ArrayList<Article> searchArticleCategory(ArrayList<Article> art) throws RemoteException {
 		
-		try{
-			tx.begin();
-		
-			System.out.println("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
-			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
-			q.setUnique(true);
-			q.executeResultList(Article.class)
-			ArrayList<Article> arts = q.executeResultList(Article.class);
-			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-			
-			System.out.println("Articles: " + arts);
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		}
+//		try{
+//			tx.begin();
+//		
+//			System.out.println("SELECT FROM " + Article.class + " WHERE category == \"" + art.getCategory());
+//			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE category == \"" + art.getCategory());
+//			q.setUnique(true);
+//			q.executeResultList(Article.class);
+//			ArrayList<Article> arts = (ArrayList<Article>) q.executeResultList(Article.class);
+//			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
+//			
+//			System.out.println("Articles: " + arts);
+//			tx.commit();
+//		} finally {
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
+//		}
+		return art;
 	}
 	
-	public ArrayList<Article> searchArticleAuthor() throws RemoteException {
-			
-			try{
-				tx.begin();
-			
-				System.out.println("SELECT FROM " + Admin.class.getOwnArticles() + " WHERE author == \"" + Admin.class.getLogin() );
-				Query<Article> q = pm.newQuery("SELECT FROM " + Admin.class.getOwnArticles() + " WHERE author == \"" + Admin.class.getLogin());
-				q.setUnique(true);
-				q.executeResultList(Admin.class.getOwnArticles())
-				ArrayList<Article> ownArticles = q.executeResultList(Admin.class.getOwnArticles());
-				//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-				System.out.println("Articles: " + ownArticles);
-				tx.commit();
-			} finally {
-				if (tx.isActive()) {
-					tx.rollback();
-				}
-			}
-		}
+	public ArrayList<Article> searchArticleAuthor(ArrayList<Article> art) throws RemoteException {
+
+//		try{
+//			tx.begin();
+//
+//			System.out.println("SELECT FROM " + Admin.class + " WHERE author == \"" + adm.getLogin() );
+//			Query<Article> q = pm.newQuery("SELECT FROM " + Admin.class + " WHERE author == \"" + adm.getLogin());
+//			q.setUnique(true);
+//			//q.executeResultList(Admin.class);
+//			ArrayList<Article> ownArticles = q.executeResultList(adm.getOwnArticles());
+//			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
+//			System.out.println("Articles: " + ownArticles);
+//			tx.commit();
+//		} finally {
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
+//		}
+		return art;
 	}
+
 	
 	@Override
-	public ArrayList<Article> viewTopArticle() throws RemoteException {
+	public ArrayList<Article> viewTopArticle(ArrayList<Article> art) throws RemoteException {
 		try{
 			tx.begin();
 		
-			System.out.println("SELECT FROM " + Article.class.getTitle() + " WHERE visits <= 1000\"");
-			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE visits <= 1000\"");
+			System.out.println("SELECT FROM " + Article.class + " WHERE visits <= 1000\"");
+			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE visits <= 1000\"");
 			q.setUnique(true);
 			q.setOrdering("Visits ascending");
-			ArrayList<Article> arts = q.executeResultList(Article.class);
+			ArrayList<Article> arts = (ArrayList<Article>) q.executeResultList(Article.class);
 			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
 			
 			System.out.println("Articles: " + arts);
@@ -261,8 +261,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-	}
-		return null;
+		return art;
 	}
 
 	@Override
