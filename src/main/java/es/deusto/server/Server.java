@@ -1,6 +1,8 @@
 package es.deusto.server;
 
 import java.rmi.Naming;
+
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
-import es.deusto.bspq18.e6.DeustoBox.Server.jdo.data.DMessage;
+
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 
