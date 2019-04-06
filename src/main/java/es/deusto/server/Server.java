@@ -46,7 +46,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			user = pm.getObjectById(User.class, login);
 		} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
 			System.out.println("Exception launched: " + jonfe.getMessage());
-		}
+		
 		System.out.println("User: " + user);
 		if (user != null) {
 			System.out.println("Setting password user: " + user);
