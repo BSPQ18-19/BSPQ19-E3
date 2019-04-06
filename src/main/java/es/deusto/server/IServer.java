@@ -17,7 +17,7 @@ public interface IServer extends Remote {
 	ArrayList<Article> searchArticleTitle() throws RemoteException;
 	ArrayList<Article> searchArticleCategory() throws RemoteException;
 	ArrayList<Article> searchArticleAuthor() throws RemoteException;
-	Boolean deleteArticle(Article art) throws RemoteException;
+	Boolean deleteArticle(String title) throws RemoteException;
 	Boolean editArticle(Article e, String newTitle, boolean changeTitle, String newBody, boolean changeBody) throws RemoteException;
 	ArrayList<Article> viewTopArticle() throws RemoteException;
 	Boolean SayHello() throws RemoteException;

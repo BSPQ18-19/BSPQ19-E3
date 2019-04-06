@@ -162,10 +162,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public Boolean deleteArticle(Article art) throws RemoteException {
+	public Boolean deleteArticle(String title) throws RemoteException {
+		
+		//Use SearchArticleTitle method to find the one to delete, name article as "art" and remove commentaries.
+		
 		try{
 			tx.begin();
-			pm.deletePersistent(art);
+			//pm.deletePersistent(art);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
