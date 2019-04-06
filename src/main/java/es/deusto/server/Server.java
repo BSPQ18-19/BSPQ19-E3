@@ -9,6 +9,8 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
+
+import es.deusto.bspq18.e6.DeustoBox.Server.jdo.data.DMessage;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 
@@ -104,19 +106,28 @@ public class Server extends UnicastRemoteObject implements IServer {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+		public Boolean editArticle() throws RemoteException {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 	@Override
 	public Boolean deleteArticle() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			tx.begin();
+			Article art1 = pm.getObjectById(Article.class, article.getTitle());
+			pm.deletePersistent(art1);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+		return TRUE;
 	}
-
-	@Override
-	public Boolean editArticle() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public ArrayList<Article> searchArticleTitle() throws RemoteException {
 		
@@ -124,7 +135,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			tx.begin();
 			
 			System.out.println("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
-			Query<User> q = pm.newQuery("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
+			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class.getTitle() + " WHERE title == \"" + title);
 			q.setUnique(true);
 			ArrayList<Article> art = q.executeResultList(Article.class);
 			//ArrayList<Article> art = (ArrayList<Article>)q.execute();
@@ -145,7 +156,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			tx.begin();
 		
 			System.out.println("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
-			Query<User> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
+			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE category == \"" + category);
 			q.setUnique(true);
 			q.executeResultList(Article.class)
 			ArrayList<Article> arts = q.executeResultList(Article.class);
@@ -160,13 +171,34 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 	}
 	
+	public ArrayList<Article> searchArticleAuthor() throws RemoteException {
+			
+			try{
+				tx.begin();
+			
+				System.out.println("SELECT FROM " + Admin.class.getOwnArticles() + " WHERE author == \"" + Admin.class.getLogin() );
+				Query<Article> q = pm.newQuery("SELECT FROM " + Admin.class.getOwnArticles() + " WHERE author == \"" + Admin.class.getLogin());
+				q.setUnique(true);
+				q.executeResultList(Admin.class.getOwnArticles())
+				ArrayList<Article> ownArticles = q.executeResultList(Admin.class.getOwnArticles());
+				//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
+				System.out.println("Articles: " + ownArticles);
+				tx.commit();
+			} finally {
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+			}
+		}
+	}
+	
 	@Override
 	public ArrayList<Article> viewTopArticle() throws RemoteException {
 		try{
 			tx.begin();
 		
 			System.out.println("SELECT FROM " + Article.class.getTitle() + " WHERE visits <= 1000\"");
-			Query<User> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE visits <= 1000\"");
+			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class.getCategory() + " WHERE visits <= 1000\"");
 			q.setUnique(true);
 			q.setOrdering("Visits ascending");
 			ArrayList<Article> arts = q.executeResultList(Article.class);
