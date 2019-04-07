@@ -9,26 +9,36 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
-@Inheritance(strategy=InheritanceStrategy.COMPLETE_TABLE)
-public class Admin extends User{
-	
-	@Persistent(defaultFetchGroup="true")
+@Inheritance(strategy = InheritanceStrategy.COMPLETE_TABLE)
+public class Admin extends User {
+
+	@Persistent(defaultFetchGroup = "true")
 	@Join
-	public ArrayList<Article> ownArticles= new ArrayList<Article>();
-	
+	public ArrayList<Article> ownArticles = new ArrayList<Article>();
+
 	public Admin(String username, String password, String email, ArrayList<Article> articles) {
 		super(username, password, email);
-		this.ownArticles=articles;
+		this.ownArticles = articles;
 	}
+
 	public Admin(String username, String password, String email) {
 		super(username, password, email);
 	}
-	private Admin(){super();}
+
+	private Admin() {
+		super();
+	}
+
 	public void addArticle(Article article) {
 		ownArticles.add(article);
 	}
-	
-	
+
+	public void deleteArticle(Article article) {
+		if (ownArticles.contains(article)) {
+			ownArticles.remove(article);
+		}
+	}
+
 	public ArrayList<Article> getOwnArticles() {
 		return ownArticles;
 	}
@@ -36,5 +46,5 @@ public class Admin extends User{
 	public void setOwnArticles(ArrayList<Article> ownArticles) {
 		this.ownArticles = ownArticles;
 	}
-	
+
 }

@@ -133,38 +133,34 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public Boolean createArticle(String title, String body, int visits, String category, Admin autho)
-			throws RemoteException {
+	public Boolean createArticle(Article art, Admin autho) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
-			// Use the SearchArticleTitle method here to check if the title is already in
-			// use.
+
 			System.out.println("Checking whether the article title is already in use: ''");
-			// Whether it's in use or not is reflected in the titleUsed boolean
-			boolean titleUsed = false;
-			if (titleUsed == true) {
-				System.out.println("The title: " + title + " it's already in use, the transaction wasn't successful");
-			} else {
-				System.out.println("Creating a new article with title: " + title);
-				System.out.println("Body: " + body);
-				System.out.println("Number of visits: " + visits);
-				System.out.println("Categorized as: " + category);
-				Article article = new Article(title, body, visits, category);
+			try {
+				Article artDB = pm.getObjectById(Article.class, art.title);
+				System.out
+						.println("The title: " + art.title + " it's already in use, the transaction wasn't successful");
+				return false;
+			} catch (Exception e) {
+				System.out.println("Creating a new article with title: " + art.title);
+				System.out.println("Body: " + art.body);
+				System.out.println("Number of visits: " + art.visits);
+				System.out.println("Categorized as: " + art.category);
 				autho = pm.getObjectById(Admin.class, autho.username);
-				autho.addArticle(article);
-				System.out.println("Username: "+ autho.username + " pass: " + autho.password);
-				//DOESN'T SAVE AT BD WELL
-				System.out.println("New article with title: " + title + " created successfully");
+				autho.addArticle(art);
+				System.out.println("Username: " + autho.username + " pass: " + autho.password);
+				// DOESN'T SAVE AT BD WELL
+				System.out.println("New article with title: " + art.title + " created successfully");
 			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
-
 		}
-
 		return true;
 	}
 
@@ -195,11 +191,19 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public Boolean deleteArticle(Article art) throws RemoteException {
-
+	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
+		System.out.println("----------------------- DELETING ARTICLE -----------------------");
 		try {
 			tx.begin();
-			pm.deletePersistent(art);
+			try {
+				Article artDB = pm.getObjectById(Article.class, art.title);
+				autho = pm.getObjectById(Admin.class, autho.username);
+				System.out.println("Delete: " + artDB.title + " Admin: "+ autho.username);
+				autho.deleteArticle(artDB);
+				return true;
+			} catch (Exception e) {
+				System.out.println("The article doesn't exist");
+			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

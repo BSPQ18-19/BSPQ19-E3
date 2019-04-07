@@ -24,14 +24,20 @@ public class Client
 		try {
 			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			IServer objHello = (IServer) java.rmi.Naming.lookup(name);
-			// Register to be allowed to send messages
-			objHello.registerUser("Luis", "Luis","dipina@gmail.com");
-			objHello.registerUser("dipina", "dipina","dipina@gmail.com");
-			User user = objHello.logIn("dipina", "dipina");
-			Admin user1 = (Admin) objHello.logInAdmin("FDR", "FDR");
-			objHello.createArticle("adsa", "body", 123, "category", user1);
-			System.out.println(user1.username);
-			//System.out.println("* Message coming from the server: '" + objHello.SayHello());
+			//PROBE CLIENT
+			//Register user
+			objHello.registerUser("Luis", "Luis","luis@gmail.com"); // Luis is already in the DB so exceptions appears
+			objHello.registerUser("dipina", "dipina","dipina@gmail.com"); // Dipina is created in the DB
+			//LogIn
+			User user = objHello.logIn("dipina", "dipina");// Log In correctly
+			User user1 = objHello.logIn("USER", "USER"); // The user doesn't exists
+			Admin admin1 = (Admin) objHello.logInAdmin("FDR", "FDR"); // Log in correctly
+			//Articles Management
+			Article art = new Article("adsa", "body", 123, "category");
+			objHello.createArticle(art, admin1);
+			objHello.deleteArticle(art, admin1); //Doesn't works
+			
+			
 			
 		} catch (Exception e) {
 			System.err.println("RMI Example exception: " + e.getMessage());

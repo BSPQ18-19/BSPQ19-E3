@@ -14,11 +14,11 @@ public interface IServer extends Remote {
 	User logIn(String user, String pass) throws RemoteException;
 	Admin logInAdmin(String user, String pass) throws RemoteException;
 	Article readArticle() throws RemoteException;
-	Boolean createArticle(String title, String body, int visits, String category, Admin autho) throws RemoteException;
+	Boolean createArticle(Article art, Admin author) throws RemoteException;
 	ArrayList<Article> searchArticleTitle(ArrayList<Article> art) throws RemoteException;
 	ArrayList<Article> searchArticleCategory(ArrayList<Article> art) throws RemoteException;
 	ArrayList<Article> searchArticleAuthor(ArrayList<Article> art) throws RemoteException;
-	Boolean deleteArticle(Article art) throws RemoteException;
+	Boolean deleteArticle(Article art, Admin autho) throws RemoteException;
 	Boolean editArticle(Article e, String newTitle, boolean changeTitle, String newBody, boolean changeBody) throws RemoteException;
 	ArrayList<Article> viewTopArticle(ArrayList<Article> art) throws RemoteException;
 	Boolean SayHello() throws RemoteException;
