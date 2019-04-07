@@ -20,7 +20,7 @@ public class User implements Serializable{
 		this.email = email;
 	}
 	
-
+	protected User() {}
 	public String getLogin() {
 		return this.username;
 	}
@@ -36,6 +36,34 @@ public class User implements Serializable{
 	public String getEmail() {
 		return this.email;
 	}
-	 
+	
+    /**
+     * Implementation of equals method (JDO requirement).
+     **/
+    public boolean equals(User obj)
+    {
+        if (obj.username.equals(this.username))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Implementation of hashCode (JDO requirement)
+     */
+    public int hashCode ()
+    {
+        return this.username.hashCode() * this.password.hashCode();
+    }
+
+    /**
+     * Implementation of toString that outputs this object id's PK values.
+     * (JDO requirement).
+     **/
+    public String toString ()
+    {
+        return this.username + "::" + this.password;
+    }
 }
 

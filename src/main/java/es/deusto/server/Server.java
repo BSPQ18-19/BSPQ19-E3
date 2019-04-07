@@ -150,11 +150,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 				System.out.println("Body: " + body);
 				System.out.println("Number of visits: " + visits);
 				System.out.println("Categorized as: " + category);
+				Article article = new Article(title, body, visits, category);
+				autho = pm.getObjectById(Admin.class, autho.username);
+				autho.addArticle(article);
 				System.out.println("Username: "+ autho.username + " pass: " + autho.password);
-				//Admin n = logInAdmin(autho.username, autho.password);
-				Article article = new Article(title, body, visits, category, autho);
-				//n.addArticle(article);
-				pm.makePersistent(article);
 				//DOESN'T SAVE AT BD WELL
 				System.out.println("New article with title: " + title + " created successfully");
 			}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
@@ -11,7 +12,8 @@ import javax.jdo.annotations.Persistent;
 @Inheritance(strategy=InheritanceStrategy.COMPLETE_TABLE)
 public class Admin extends User{
 	
-
+	@Persistent(defaultFetchGroup="true")
+	@Join
 	public ArrayList<Article> ownArticles= new ArrayList<Article>();
 	
 	public Admin(String username, String password, String email, ArrayList<Article> articles) {
@@ -21,7 +23,7 @@ public class Admin extends User{
 	public Admin(String username, String password, String email) {
 		super(username, password, email);
 	}
-
+	private Admin(){super();}
 	public void addArticle(Article article) {
 		ownArticles.add(article);
 	}

@@ -64,13 +64,13 @@ public class DBTest {
 		 User paco = new User("Paco", "Paco", "paco@gmail.com");
 		 User luis = new User("Luis", "Luis", "luis@gmail.com");
 
-         Article art1 = new Article("Title1", "Body", 0, "Category", alberto);
-         Article art2 = new Article("Title2", "Body", 1, "Category", alberto);
-         Article art3 = new Article("Title3", "Body", 7, "Category", alberto);
-         Article art4 = new Article("Title4", "Body", 7, "Category", alberto);
-         Article art5 = new Article("Title5", "Body", 5, "Category", raul);
-         Article art6 = new Article("Title6", "Body", 2, "Category", raul);
-         Article art7 = new Article("Title7", "Body", 5, "Category", raul);
+         Article art1 = new Article("Title1", "Body", 0, "Category");
+         Article art2 = new Article("Title2", "Body", 1, "Category");
+         Article art3 = new Article("Title3", "Body", 7, "Category");
+         Article art4 = new Article("Title4", "Body", 7, "Category");
+         Article art5 = new Article("Title5", "Body", 5, "Category");
+         Article art6 = new Article("Title6", "Body", 2, "Category");
+         Article art7 = new Article("Title7", "Body", 5, "Category");
 
          alberto.addArticle(art1);
          alberto.addArticle(art2);
@@ -144,8 +144,8 @@ public class DBTest {
 	            tx.begin();
 	            System.out.println("Persisting users");
 				Admin Alberto = new Admin("FDR", "FDR", "alberto@gmail.com");
-	            Article art1 = new Article("Title1", "Body", 0, "Category", Alberto);
-	            Article art2 = new Article("Title2", "Body", 1, "Category", Alberto);
+	            Article art1 = new Article("Title1", "Body", 0, "Category");
+	            Article art2 = new Article("Title2", "Body", 1, "Category");
 	            Alberto.addArticle(art1);
 	            Alberto.addArticle(art2);
 				pm.makePersistent(Alberto);					 
