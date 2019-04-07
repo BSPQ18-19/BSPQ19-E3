@@ -8,18 +8,18 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
+@Inheritance(strategy=InheritanceStrategy.COMPLETE_TABLE)
 public class Admin extends User{
 	
 
 	public ArrayList<Article> ownArticles= new ArrayList<Article>();
 	
-	public Admin(String username, String password, ArrayList<Article> articles) {
-		super(username, password);
+	public Admin(String username, String password, String email, ArrayList<Article> articles) {
+		super(username, password, email);
 		this.ownArticles=articles;
 	}
-	public Admin(String username, String password) {
-		super(username, password);
+	public Admin(String username, String password, String email) {
+		super(username, password, email);
 	}
 
 	public void addArticle(Article article) {

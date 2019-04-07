@@ -21,7 +21,8 @@ public class DBTest {
 		 loadDB();
 		 
 		 //Delete data: Delete the data
-		 //deleteDB();		 		 		 
+		 //deleteDB();	
+		 
 	    }
 	 public static void deleteDB() {
 		  // Clean out the database
@@ -58,23 +59,23 @@ public class DBTest {
 		 PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		 System.out.println("Persisting users");
-		 Admin alberto = new Admin("FDR", "FDR");
-		 Admin raul = new Admin("Raul", "Sanchez");
-		 User paco = new User("Paco", "Paco");
-		 User luis = new User("Luis", "Luis");
+		 Admin alberto = new Admin("FDR", "FDR", "alberto@gmail.com");
+		 Admin raul = new Admin("Raul", "Sanchez", "raul@gmail.com");
+		 User paco = new User("Paco", "Paco", "paco@gmail.com");
+		 User luis = new User("Luis", "Luis", "luis@gmail.com");
 
          Article art1 = new Article("Title1", "Body", 0, "Category", alberto);
          Article art2 = new Article("Title2", "Body", 1, "Category", alberto);
-         //Article art3 = new Article("Title3", "Body", 7, "Category", alberto);
-         //Article art4 = new Article("Title4", "Body", 7, "Category", alberto);
+         Article art3 = new Article("Title3", "Body", 7, "Category", alberto);
+         Article art4 = new Article("Title4", "Body", 7, "Category", alberto);
          Article art5 = new Article("Title5", "Body", 5, "Category", raul);
          Article art6 = new Article("Title6", "Body", 2, "Category", raul);
          Article art7 = new Article("Title7", "Body", 5, "Category", raul);
 
          alberto.addArticle(art1);
          alberto.addArticle(art2);
-         //alberto.addArticle(art3);
-         //alberto.addArticle(art4);
+         alberto.addArticle(art3);
+         alberto.addArticle(art4);
 
          raul.addArticle(art5);
          raul.addArticle(art6);
@@ -87,9 +88,7 @@ public class DBTest {
 				pm.makePersistent(paco);
 				pm.makePersistent(luis);
 				pm.makePersistent(alberto);
-				pm.makePersistent(raul);
-           
-	            
+				pm.makePersistent(raul);    
 	            tx.commit();
 	        }finally
 	        {
@@ -97,11 +96,8 @@ public class DBTest {
 	                tx.rollback();
 	            }
 	            pm.close();
-	        }
-		
-		
-	        System.out.println("");
-			
+	        }	
+	        System.out.println("");		
 	 }
 	 public static void basicTestDB() {
 		// Create a PersistenceManagerFactory for this datastore
@@ -147,7 +143,7 @@ public class DBTest {
 	        {	
 	            tx.begin();
 	            System.out.println("Persisting users");
-				Admin Alberto = new Admin("FDR", "FDR");
+				Admin Alberto = new Admin("FDR", "FDR", "alberto@gmail.com");
 	            Article art1 = new Article("Title1", "Body", 0, "Category", Alberto);
 	            Article art2 = new Article("Title2", "Body", 1, "Category", Alberto);
 	            Alberto.addArticle(art1);

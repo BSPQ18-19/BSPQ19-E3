@@ -10,8 +10,9 @@ import es.deusto.server.jdo.User;
 public interface IServer extends Remote {
 	
 	
-	Boolean registerUser(String login, String password) throws RemoteException;
+	Boolean registerUser(String login, String password, String email) throws RemoteException;
 	User logIn(String user, String pass) throws RemoteException;
+	Admin logInAdmin(String user, String pass) throws RemoteException;
 	Article readArticle() throws RemoteException;
 	Boolean createArticle(String title, String body, int visits, String category, Admin autho) throws RemoteException;
 	ArrayList<Article> searchArticleTitle(ArrayList<Article> art) throws RemoteException;

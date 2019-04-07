@@ -14,11 +14,10 @@ public class User implements Serializable{
 	public String email;
 	
 	
-	public User(String username, String password) {
+	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		
 	}
 	
 

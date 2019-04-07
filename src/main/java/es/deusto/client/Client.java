@@ -1,6 +1,8 @@
 package es.deusto.client;
 
 import es.deusto.server.IServer;
+import es.deusto.server.jdo.Admin;
+import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 
 /**
@@ -23,9 +25,12 @@ public class Client
 			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			IServer objHello = (IServer) java.rmi.Naming.lookup(name);
 			// Register to be allowed to send messages
-			//objHello.registerUser("dipina", "dipina");
+			objHello.registerUser("Luis", "Luis","dipina@gmail.com");
+			objHello.registerUser("dipina", "dipina","dipina@gmail.com");
 			User user = objHello.logIn("dipina", "dipina");
-			System.out.println(user.username);
+			Admin user1 = (Admin) objHello.logInAdmin("FDR", "FDR");
+			objHello.createArticle("adsa", "body", 123, "category", user1);
+			System.out.println(user1.username);
 			//System.out.println("* Message coming from the server: '" + objHello.SayHello());
 			
 		} catch (Exception e) {
