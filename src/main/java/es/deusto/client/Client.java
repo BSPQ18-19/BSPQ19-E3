@@ -34,9 +34,11 @@ public class Client
 			Admin admin1 = (Admin) objHello.logInAdmin("FDR", "FDR"); // Log in correctly
 			//Articles Management
 			Article art = new Article("adsa", "body", 123, "category");
+			Article art1 = new Article("DOESNT EXIST", "body", 123, "category");
 			objHello.createArticle(art, admin1);
+			objHello.deleteArticle(art1, admin1); //Doesn't works
 			objHello.deleteArticle(art, admin1); //Doesn't works
-			
+
 			
 			
 		} catch (Exception e) {

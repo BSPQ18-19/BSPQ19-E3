@@ -193,6 +193,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
 		System.out.println("----------------------- DELETING ARTICLE -----------------------");
+		Boolean delete = false;
 		try {
 			tx.begin();
 			try {
@@ -200,9 +201,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 				autho = pm.getObjectById(Admin.class, autho.username);
 				System.out.println("Delete: " + artDB.title + " Admin: "+ autho.username);
 				autho.deleteArticle(artDB);
-				return true;
+				delete = true;
 			} catch (Exception e) {
 				System.out.println("The article doesn't exist");
+				delete=  false;
 			}
 			tx.commit();
 		} finally {
@@ -210,7 +212,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-		return true;
+		return delete;
 	}
 
 	@Override
