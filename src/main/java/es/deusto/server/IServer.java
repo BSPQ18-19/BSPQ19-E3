@@ -15,7 +15,7 @@ public interface IServer extends Remote {
 	Admin logInAdmin(String user, String pass) throws RemoteException;
 	Article readArticle() throws RemoteException;
 	Boolean createArticle(Article art, Admin author) throws RemoteException;
-	ArrayList<Article> searchArticleTitle(String title) throws RemoteException;
+	Article searchArticleTitle(String title) throws RemoteException;
 	ArrayList<Article> searchArticleCategory(String category) throws RemoteException;
 	ArrayList<Article> searchArticleAuthor(String author) throws RemoteException;
 	Boolean deleteArticle(Article art, Admin autho) throws RemoteException;

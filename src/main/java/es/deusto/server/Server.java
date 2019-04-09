@@ -216,24 +216,20 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public ArrayList<Article> searchArticleTitle(String title) throws RemoteException {
-		Article art = null;
+	public Article searchArticleTitle(String title) throws RemoteException {
+			Article artDB = null;	
 		try{
 			tx.begin();
-			System.out.println("SELECT FROM " + Article.class + " WHERE title == \"" + title);
-			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE title == \"" + title);
-			q.setUnique(true);
-			art = (Article) q.executeResultList(Article.class);
-			//ArrayList<Article> art = (ArrayList<Article>)q.execute();
-			
-			System.out.println("Article: " + art);
+			artDB = pm.getObjectById(Article.class, title);			
 			tx.commit();
+		}catch (Exception e) {
+			System.out.println("Doesnt work");
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 		}
-		return null;
+		return artDB;
 		
 	}
 
@@ -243,13 +239,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		try{
 			tx.begin();
 		
-			System.out.println("SELECT FROM " + Article.class + " WHERE category == \"" + category);
-			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE category == \"" + category);
-			q.setUnique(true);
-			q.executeResultList(Article.class);
-			arts = (ArrayList<Article>) q.executeResultList(Article.class);
-			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-			
+			System.out.println("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
+			Query q = pm.newQuery("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
+			arts = (ArrayList<Article>) q.execute();			
 			System.out.println("Articles: " + arts);
 			tx.commit();
 		} finally {
@@ -257,6 +249,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
+		System.out.println(arts.size());
 		return arts;
 	}
 

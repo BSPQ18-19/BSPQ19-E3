@@ -1,5 +1,7 @@
 package es.deusto.client;
 
+import org.datanucleus.store.types.wrappers.ArrayList;
+
 import es.deusto.server.IServer;
 import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
@@ -26,7 +28,7 @@ public class Client
 			IServer objHello = (IServer) java.rmi.Naming.lookup(name);
 			//PROBE CLIENT
 			//Register user
-			objHello.registerUser("Luis", "Luis","luis@gmail.com"); // Luis is already in the DB so exceptions appears
+			/*objHello.registerUser("Luis", "Luis","luis@gmail.com"); // Luis is already in the DB so exceptions appears
 			objHello.registerUser("dipina", "dipina","dipina@gmail.com"); // Dipina is created in the DB
 			//LogIn
 			User user = objHello.logIn("dipina", "dipina");// Log In correctly
@@ -36,10 +38,14 @@ public class Client
 			Article art = new Article("adsa", "body", 123, "category");
 			Article art1 = new Article("DOESNT EXIST", "body", 123, "category");
 			objHello.createArticle(art, admin1);
-			objHello.deleteArticle(art1, admin1); //Doesn't works
-			objHello.deleteArticle(art, admin1); //Doesn't works
-
-			
+			objHello.deleteArticle(art1, admin1); 
+			//objHello.deleteArticle(art, admin1); //Doesn't works
+			//SEARCHES
+			//art1 = objHello.searchArticleTitle("adsa");
+			//System.out.println("Output: " + art1.getTitle());*/
+			ArrayList<Article> arts = (ArrayList<Article>) objHello.searchArticleCategory("Category");
+			System.out.println("--------------------------------------------------");
+			System.out.println("Output: " + arts.get(0).getTitle());
 			
 		} catch (Exception e) {
 			System.err.println("RMI Example exception: " + e.getMessage());
