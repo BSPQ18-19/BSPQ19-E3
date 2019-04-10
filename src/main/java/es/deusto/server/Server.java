@@ -22,20 +22,34 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private PersistenceManager pm = null;
 	private Transaction tx = null;
 
+	/**
+	 * The constructor of the class (Persistence manager, transaction...)
+	 * @throws RemoteException
+	 */
 	protected Server() throws RemoteException {
 		super();
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();
 	}
-
+	
+	/**
+	 * To finalize the transaction
+	 */
 	protected void finalize() throws Throwable {
 		if (tx.isActive()) {
 			tx.rollback();
 		}
 		// pm.close();
 	}
-
+	
+	/**
+	 * Register a user in the DB
+	 * @param login The username of the person
+	 * @param password The password of the person
+	 * @param email The email of the person
+	 * @return Returns a Boolean, if the transaction works well returns true
+	 */
 	public Boolean registerUser(String login, String password, String email) {
 
 		tx.begin();
@@ -65,7 +79,12 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return true;
 	}
 
-	@Override
+	/**
+	 * To log in a USER
+	 * @param user The username of the person
+	 * @param pass the password of that person
+	 * @return Returns the user of that person
+	 */
 	public User logIn(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("----------------------- LOG IN -----------------------");
@@ -95,7 +114,12 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return user1;
 	}
 
-	@Override
+	/**
+	 * To log in a ADMIN
+	 * @param user The username of the person
+	 * @param pass the password of that person
+	 * @return Returns the admin of that person
+	 */
 	public Admin logInAdmin(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("----------------------- LOG IN ADMIN -----------------------");
@@ -124,15 +148,19 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 		return user1;
 	}
-
-	@Override
+	
+	/**
+	 * 
+	 */
 	public Article readArticle() throws RemoteException {
 		// TODO Auto-generated method stub
 
 		return null;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public Boolean createArticle(Article art, Admin autho) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
@@ -164,7 +192,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return true;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody)
 			throws RemoteException {
 		// It's made so you can only change the articles title and body, we can make it
@@ -190,7 +220,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return true;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
 		System.out.println("----------------------- DELETING ARTICLE -----------------------");
 		Boolean delete = false;
@@ -214,8 +246,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 		return delete;
 	}
-
-	@Override
+	
+	/**
+	 * 
+	 */
 	public Article searchArticleTitle(String title) throws RemoteException {
 			Article artDB = null;	
 		try{
@@ -233,7 +267,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public ArrayList<Article> searchArticleCategory(String category) throws RemoteException {
 		ArrayList<Article> arts = null;
 		try{
@@ -252,7 +288,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println(arts.size());
 		return arts;
 	}
-
+	
+	/**
+	 * 
+	 */
 	public ArrayList<Article> searchArticleAuthor(String author) throws RemoteException {
 		ArrayList<Article> ownArticles = null;
 		try{
@@ -274,7 +313,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return ownArticles;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public ArrayList<Article> viewTopArticle(ArrayList<Article> art) throws RemoteException {
 		try {
 			tx.begin();
@@ -296,7 +337,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return art;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public Boolean SayHello() throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("Connected");
