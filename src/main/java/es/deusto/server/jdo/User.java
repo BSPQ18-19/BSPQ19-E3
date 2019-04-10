@@ -13,7 +13,12 @@ public class User implements Serializable{
 	public String password;
 	public String email;
 	
-	
+	/**
+	 * 
+	 * @param The name of the User
+	 * @param The password that will use for login
+	 * @param The email of that person
+	 */
 	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
@@ -21,25 +26,44 @@ public class User implements Serializable{
 	}
 	
 	protected User() {}
+	
+	/**
+	 * 
+	 * @return Gets you the username of this user
+	 */
 	public String getLogin() {
 		return this.username;
 	}
 	
+	/**
+	 * 
+	 * @return Gets you the password of this user
+	 */
 	public String getPassword() {
 		return this.password;
 	}
 	
+	/**
+	 * 
+	 * @param Set a new password of the user
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	/**
+	 * 
+	 * @return Set a new email for the user
+	 */
 	public String getEmail() {
 		return this.email;
 	}
 	
     /**
-     * Implementation of equals method (JDO requirement).
-     **/
+     * Compare two users if they are the same
+     * @param A user to compare
+     * @return Return if the two user are equals
+     */
     public boolean equals(User obj)
     {
         if (obj.username.equals(this.username))
@@ -49,18 +73,17 @@ public class User implements Serializable{
         return false;
     }
 
-    /**
-     * Implementation of hashCode (JDO requirement)
-     */
+   /**
+    * Hashcode for the user
+    */
     public int hashCode ()
     {
         return this.username.hashCode() * this.password.hashCode();
     }
-
+    
     /**
-     * Implementation of toString that outputs this object id's PK values.
-     * (JDO requirement).
-     **/
+     * Method to print the user
+     */
     public String toString ()
     {
         return this.username + "::" + this.password;
