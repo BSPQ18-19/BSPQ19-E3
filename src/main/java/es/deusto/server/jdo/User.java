@@ -15,9 +15,9 @@ public class User implements Serializable{
 	
 	/**
 	 * 
-	 * @param The name of the User
-	 * @param The password that will use for login
-	 * @param The email of that person
+	 * @param username The name of the User
+	 * @param password The password that will use for login
+	 * @param email The email of that person
 	 */
 	public User(String username, String password, String email) {
 		this.username = username;
@@ -45,7 +45,7 @@ public class User implements Serializable{
 	
 	/**
 	 * 
-	 * @param Set a new password of the user
+	 * @param password Set a new password of the user
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -61,7 +61,7 @@ public class User implements Serializable{
 	
     /**
      * Compare two users if they are the same
-     * @param A user to compare
+     * @param obj A user to compare
      * @return Return if the two user are equals
      */
     public boolean equals(User obj)

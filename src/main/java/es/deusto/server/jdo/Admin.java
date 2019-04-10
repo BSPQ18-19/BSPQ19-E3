@@ -18,10 +18,10 @@ public class Admin extends User {
 
 	/**
 	 * Creates an Admin with her articles
-	 * @param The username of the admin
-	 * @param The password of the admin
-	 * @param The email of the admin
-	 * @param The articles of the admin
+	 * @param username The username of the admin
+	 * @param password The password of the admin
+	 * @param email The email of the admin
+	 * @param articles The articles of the admin
 	 */
 	public Admin(String username, String password, String email, ArrayList<Article> articles) {
 		super(username, password, email);
@@ -29,9 +29,9 @@ public class Admin extends User {
 	}
 	/**
 	 * Creates an Admin with zero articles
-	 * @param The username of the admin
-	 * @param The password of the admin
-	 * @param The email of the admin
+	 * @param username The username of the admin
+	 * @param password The password of the admin
+	 * @param email The email of the admin
 	 */
 	public Admin(String username, String password, String email) {
 		super(username, password, email);
@@ -43,7 +43,7 @@ public class Admin extends User {
 	
 	/**
 	 * 
-	 * @param To add an article for the Admin
+	 * @param article To add an article for the Admin
 	 */
 	public void addArticle(Article article) {
 		if (!ownArticles.contains(article)) {
@@ -53,7 +53,7 @@ public class Admin extends User {
 	
 	/**
 	 * 
-	 * @param To delete an article
+	 * @param article To delete an article
 	 */
 	public void deleteArticle(Article article) {
 		if (ownArticles.contains(article)) {
@@ -71,7 +71,7 @@ public class Admin extends User {
 	
 	/**
 	 * 
-	 * @param To set articles
+	 * @param ownArticles To set articles
 	 */
 	public void setOwnArticles(ArrayList<Article> ownArticles) {
 		this.ownArticles = ownArticles;

@@ -21,10 +21,10 @@ public class Article implements Serializable {
 
 	/**
 	 * Constructor where you can also set the visits
-	 * @param The title for the article
-	 * @param The body of the article
-	 * @param How many visits the article have
-	 * @param The category of the article
+	 * @param title The title for the article
+	 * @param body The body of the article
+	 * @param visits How many visits the article have
+	 * @param category The category of the article
 	 */
 	public Article(String title, String body, int visits, String category) {
 		super();
@@ -36,10 +36,9 @@ public class Article implements Serializable {
 
 	/**
 	 * Constructor for a new article where you can't set the visits (Visits == 0)
-	 * @param The title for the article
-	 * @param The body of the article
-	 * @param How many visits the article has
-	 * @param The category of the article
+	 * @param title The title for the article
+	 * @param body The body of the article
+	 * @param category The category of the article
 	 */
 	public Article(String title, String body, String category) {
 		super();
@@ -62,7 +61,7 @@ public class Article implements Serializable {
 
 	/**
 	 * 
-	 * @param To set a new title
+	 * @param title To set a new title
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -78,7 +77,7 @@ public class Article implements Serializable {
 	
 	/**
 	 * 
-	 * @param Set the new body of the article
+	 * @param body Set the new body of the article
 	 */
 	public void setBody(String body) {
 		this.body = body;
@@ -94,7 +93,7 @@ public class Article implements Serializable {
 	
 	/**
 	 * 
-	 * @param To set how many visits the article has
+	 * @param visits To set how many visits the article has
 	 */
 	public void setVisits(int visits) {
 		this.visits = visits;
@@ -110,7 +109,7 @@ public class Article implements Serializable {
 	
 	/**
 	 * 
-	 * @param To set a new category of the article
+	 * @param category To set a new category of the article
 	 */
 	public void setCategory(String category) {
 		this.category = category;
@@ -118,7 +117,7 @@ public class Article implements Serializable {
 
 	/**
 	 * Compare two articles
-	 * @param The article to compare with
+	 * @param obj The article to compare with
 	 * @return If they are equal or not
 	 */
 	public boolean equals(Article obj) {
