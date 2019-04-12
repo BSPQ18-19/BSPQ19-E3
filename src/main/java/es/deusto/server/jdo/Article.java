@@ -26,7 +26,7 @@ public class Article implements Serializable {
 	 * @param visits How many visits the article have
 	 * @param category The category of the article
 	 */
-	public Article(String title, String body, int visits, String category) {
+	public Article(String title, String body, String category, int visits) {
 		super();
 		this.title = title;
 		this.body = body;

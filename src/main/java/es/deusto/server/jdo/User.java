@@ -45,6 +45,15 @@ public class User implements Serializable{
 	
 	/**
 	 * 
+	 * @param user Set a new username of the user
+	 */
+	public void setUsername(String user) {
+		this.username = user;
+	}
+	
+	
+	/**
+	 * 
 	 * @param password Set a new password of the user
 	 */
 	public void setPassword(String password) {
