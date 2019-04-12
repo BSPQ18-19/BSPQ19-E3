@@ -159,7 +159,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**
-	 * 
+	 * To create an article
+	 * @param Article the article to create
+	 * @param Admin the admin that is creating the article
+	 * @return boolean true(created) false(not created)
 	 */
 	public Boolean createArticle(Article art, Admin autho) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -193,35 +196,63 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**
+	 * To edit an article
+	 * @param Article, the one to edit that must be searched in db
+	 * @param String newTitle, the new title that must be given to the article
+	 * @param boolean changeTitle, whether the title must be changed or not
+	 * @param String newBody, the new body that must be given to the article
+	 * @param boolean changeBody, whether the body must be changed or not
+	 * @param Admin, the one that is editing the article
+	 * @return boolean true(edited) false(not edited)
 	 * 
 	 */
-	public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody)
+	public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody, Admin autho)
 			throws RemoteException {
 		// It's made so you can only change the articles title and body, we can make it
 		// more complex later.
-
-		// Need to find the article with the method SearchArticleTitle(art)
-		// Needs to be changed once SerachArticleTitle method is ready
-
+		
 		try {
 			tx.begin();
+			System.out.println("Searching for the article to edit in the db...");
+		try {
+			Article artDB = pm.getObjectById(Article.class, art.title);
+			
 			if (changeTitle == true) {
-				art.setTitle(newTitle);
+				System.out.println("Changing the title...");
+				artDB.setTitle(newTitle);
 			}
 			if (changeBody == true) {
-				art.setBody(newBody);
+				System.out.println("Changing the body...");
+				artDB.setBody(newBody);
 			}
+			//Deleting the old article in the db
+			System.out.println("Deleting old article in the db...");
+			deleteArticle(art, autho);
+			//Save the new article in the db
+			System.out.println("Saving edited article in the db...");
+			autho = pm.getObjectById(Admin.class, autho.username);
+			autho.addArticle(artDB);
+			
+			return true;
+			
+		}catch (Exception e) {
+				System.out.println("---The article does not exist in the db, so it cannot be edited---");
+			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
-	 * 
+	 * To delete an existing article
+	 * @param Article, the one to be deleted that must be searched in the db
+	 * @param Admin, the one that is deleting the article
+	 * @return boolean true(deleted) false(not deleted)
 	 */
 	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
 		System.out.println("----------------------- DELETING ARTICLE -----------------------");
