@@ -7,7 +7,11 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-
+/**
+ * The class fot he administrator.
+ * @author albertofdr
+ *
+ */
 @PersistenceCapable
 @Inheritance(strategy = InheritanceStrategy.COMPLETE_TABLE)
 public class Admin extends User {
