@@ -11,6 +11,8 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
+import org.apache.log4j.Logger;
+
 import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
@@ -21,6 +23,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private int cont = 0;
 	private PersistenceManager pm = null;
 	private Transaction tx = null;
+
+	static Logger logger = Logger.getLogger(Server.class.getName());
 
 	/**
 	 * The constructor of the class (Persistence manager, transaction...)
@@ -51,23 +55,20 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @return Returns a Boolean, if the transaction works well returns true
 	 */
 	public Boolean registerUser(String login, String password, String email) throws RemoteException {
-
+		logger.info("Register for the user: " + login);
 		tx.begin();
-		System.out.println("----------------------- REGISTER USER -----------------------");
-		System.out.println("Checking whether the user already exits or not: '" + login + "'");
 		User user = null;
 
 		try {
 			user = pm.getObjectById(User.class, login);
 			// If the user exists:
-			System.out.println("Trying to create a user that already exists: " + user.username);
+			logger.info("Trying to create a user that already exists");
 			tx.commit();
 		} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
 			// The user doesn't exist
-			System.out.println("Creating user: " + login);
 			user = new User(login, password, email);
 			pm.makePersistent(user);
-			System.out.println("User created: " + user.username);
+			logger.info("User created successfully");
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -87,20 +88,17 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 */
 	public User logIn(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("----------------------- LOG IN -----------------------");
+		logger.info("LogIn for the user: " + user);
 		User user1 = null;
 		try {
-			System.out.println("Log in user: " + user);
 			tx.begin();
-			System.out.println("SELECT FROM " + User.class.getName() + " WHERE username == '" + user + "'"
-					+ " AND password == '" + pass + "'");
 			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == '" + user + "'"
 					+ " && password == '" + pass + "'");
 			query.setUnique(true);
 			user1 = (User) query.execute();
 			tx.commit();
 		} catch (Exception e) {
-			System.out.println("Exception thrown during retrieval of Extent : " + e.getMessage());
+			logger.info("Exception thrown during retrieval of Extent : " + e.getMessage());
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
@@ -109,7 +107,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		if (user == null) {
 
 		} else {
-			System.out.println("Correctly login");
+			logger.info("LogIn successfull");
 		}
 		return user1;
 	}
@@ -122,20 +120,18 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 */
 	public Admin logInAdmin(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("----------------------- LOG IN ADMIN -----------------------");
+		logger.info("LogInAdmin for the user: " + user);
 		Admin user1 = null;
 		try {
-			System.out.println("Log in user: " + user);
 			tx.begin();
-			System.out.println("SELECT FROM " + Admin.class.getName() + " WHERE username == '" + user + "'"
-					+ " AND password == '" + pass + "'");
+			
 			Query<?> query = pm.newQuery("SELECT FROM " + Admin.class.getName() + " WHERE username == '" + user + "'"
 					+ " && password == '" + pass + "'");
 			query.setUnique(true);
 			user1 = (Admin) query.execute();
 			tx.commit();
 		} catch (Exception e) {
-			System.out.println("Exception thrown during retrieval of Extent : " + e.getMessage());
+			logger.info("Exception thrown during retrieval of Extent : " + e.getMessage());
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
@@ -144,7 +140,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		if (user == null) {
 
 		} else {
-			System.out.println("Correctly login");
+			logger.info("LogInAdmin successfull");
 		}
 		return user1;
 	}

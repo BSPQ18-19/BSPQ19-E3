@@ -28,8 +28,8 @@ public class Client
 			IServer objHello = (IServer) java.rmi.Naming.lookup(name);
 			//PROBE CLIENT
 			//Register user
-			/*objHello.registerUser("Luis", "Luis","luis@gmail.com"); // Luis is already in the DB so exceptions appears
-			objHello.registerUser("dipina", "dipina","dipina@gmail.com"); // Dipina is created in the DB
+			objHello.registerUser("Luis", "Luis","luis@gmail.com"); // Luis is already in the DB so exceptions appears
+			/*objHello.registerUser("dipina", "dipina","dipina@gmail.com"); // Dipina is created in the DB
 			//LogIn
 			User user = objHello.logIn("dipina", "dipina");// Log In correctly
 			User user1 = objHello.logIn("USER", "USER"); // The user doesn't exists
@@ -43,9 +43,9 @@ public class Client
 			//SEARCHES
 			//art1 = objHello.searchArticleTitle("adsa");
 			//System.out.println("Output: " + art1.getTitle());*/
-			ArrayList<Article> arts = (ArrayList<Article>) objHello.searchArticleCategory("Category");
-			System.out.println("--------------------------------------------------");
-			System.out.println("Output: " + arts.get(0).getTitle());
+			//ArrayList<Article> arts = (ArrayList<Article>) objHello.searchArticleCategory("Category");
+			//System.out.println("--------------------------------------------------");
+			//System.out.println("Output: " + arts.get(0).getTitle());
 			
 		} catch (Exception e) {
 			System.err.println("RMI Example exception: " + e.getMessage());
