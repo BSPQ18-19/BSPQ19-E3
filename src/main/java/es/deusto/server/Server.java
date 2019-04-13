@@ -50,7 +50,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @param email The email of the person
 	 * @return Returns a Boolean, if the transaction works well returns true
 	 */
-	public Boolean registerUser(String login, String password, String email) {
+	public Boolean registerUser(String login, String password, String email) throws RemoteException {
 
 		tx.begin();
 		System.out.println("----------------------- REGISTER USER -----------------------");

@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple App.
+ * Unit test for the data of the app.
  */
 public class DataTest extends TestCase {
 	private Article art;
