@@ -1,12 +1,12 @@
-/* DELETE 'newspaperDB' database*/
-DROP SCHEMA IF EXISTS newspaperDB;
+/* DELETE 'newspaperdb' database*/
+DROP SCHEMA IF EXISTS newspaperdb;
 /* DELETE USER 'spq' AT LOCAL SERVER*/
 DROP USER IF EXISTS 'spq'@'localhost';
 
-/* CREATE 'messagesDB' DATABASE */
-CREATE SCHEMA newspaperDB;
+/* CREATE 'messagesdb' DATABASE */
+CREATE SCHEMA newspaperdb;
 
 /* CREATE THE USER 'spq' AT LOCAL SERVER WITH PASSWORD 'spq' */
 CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY 'spq';
 
-GRANT ALL ON newspaperDB.* TO 'spq'@'localhost';
+GRANT ALL ON newspaperdb.* TO 'spq'@'localhost';
