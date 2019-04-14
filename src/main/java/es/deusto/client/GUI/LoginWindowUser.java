@@ -10,24 +10,32 @@ import javax.swing.JTextField;
 import es.deusto.server.Server;
 import es.deusto.server.jdo.User;
 
+
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 
 
 
-public class LoginWindow extends JFrame{
+
+public class LoginWindowUser extends JFrame{
 	
 	private JTextField textUser;
 	private JTextField textPass;
 	
-	public LoginWindow() {
+	private MainWindow MainWindow;
+	public LoginWindowUser(MainWindow mainWindow) {
+		
+		MainWindow= mainWindow;
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -57,13 +65,12 @@ public class LoginWindow extends JFrame{
 		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_4.setLayout(gbl_panel_4);
 		
-		// user and pass
-		JLabel lblUsername = new JLabel("Username");
-		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
-		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUsername.gridx = 3;
-		gbc_lblUsername.gridy = 3;
-		panel_4.add(lblUsername, gbc_lblUsername);
+		JLabel label_2 = new JLabel("Username");
+		GridBagConstraints gbc_label_2 = new GridBagConstraints();
+		gbc_label_2.insets = new Insets(0, 0, 5, 5);
+		gbc_label_2.gridx = 3;
+		gbc_label_2.gridy = 3;
+		panel_4.add(label_2, gbc_label_2);
 		
 		JLabel lblPassword = new JLabel("Password");
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
@@ -90,6 +97,7 @@ public class LoginWindow extends JFrame{
 		panel_4.add(textPass, gbc_textPass);
 		textPass.setColumns(10);
 		
+
 		//login
 		
 		JButton btnLogin = new JButton("Login");
@@ -107,6 +115,7 @@ public class LoginWindow extends JFrame{
 			}
 		});
 		panel_2.add(btnRegister);
+		
 		
 	}
 }
