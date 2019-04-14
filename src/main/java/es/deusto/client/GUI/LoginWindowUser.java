@@ -33,7 +33,7 @@ public class LoginWindowUser extends JFrame{
 	private JTextField textPass;
 	
 	private MainWindow MainWindow;
-	public LoginWindowUser(MainWindow mainWindow) {
+	public LoginWindowUser(MainWindow mainWindow, int tipo) {
 		
 		MainWindow= mainWindow;
 		getContentPane().setLayout(new BorderLayout(0, 0));
