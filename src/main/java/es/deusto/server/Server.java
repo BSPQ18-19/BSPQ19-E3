@@ -83,7 +83,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * To log in a USER
 	 * @param user The username of the person
-	 * @param pass the password of that person
+	 * @param pass the p				logger.info("---The article does not exist in the db, so it cannot be edited---");
+assword of that person
 	 * @return Returns the user of that person
 	 */
 	public User logIn(String user, String pass) throws RemoteException {
@@ -122,7 +123,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 		// TODO Auto-generated method stub
 		logger.info("LogInAdmin for the user: " + user);
 		Admin user1 = null;
-		try {
+		try {				logger.info("---The article does not exist in the db, so it cannot be edited---");
+
 			tx.begin();
 			
 			Query<?> query = pm.newQuery("SELECT FROM " + Admin.class.getName() + " WHERE username == '" + user + "'"
@@ -164,23 +166,21 @@ public class Server extends UnicastRemoteObject implements IServer {
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
-
-			System.out.println("Checking whether the article title is already in use: ''");
+			logger.info("Checking whether the article title is already in use: " + art);
 			try {
 				Article artDB = pm.getObjectById(Article.class, art.title);
-				System.out
-						.println("The title: " + art.title + " it's already in use, the transaction wasn't successful");
+				logger.info("The title: " + art.title + " it's already in use, the transaction wasn't successful");
 				return false;
 			} catch (Exception e) {
-				System.out.println("Creating a new article with title: " + art.title);
-				System.out.println("Body: " + art.body);
-				System.out.println("Number of visits: " + art.visits);
-				System.out.println("Categorized as: " + art.category);
+				logger.info("Creating a new article with title: " + art.title);
+				logger.info("Body: " + art.body);
+				logger.info("Number of visits: " + art.visits);
+				logger.info("Categorized as: " + art.category);
 				autho = pm.getObjectById(Admin.class, autho.username);
 				autho.addArticle(art);
-				System.out.println("Username: " + autho.username + " pass: " + autho.password);
-				// DOESN'T SAVE AT BD WELL
-				System.out.println("New article with title: " + art.title + " created successfully");
+				logger.info("Username: " + autho.username + " pass: " + autho.password);
+				logger.info("New article with title: " + art.title + " created successfully");
+
 			}
 			tx.commit();
 		} finally {
@@ -209,30 +209,30 @@ public class Server extends UnicastRemoteObject implements IServer {
 		
 		try {
 			tx.begin();
-			System.out.println("Searching for the article to edit in the db...");
+			logger.info("Searching for the article to edit in the db...");
 		try {
 			Article artDB = pm.getObjectById(Article.class, art.title);
 			
 			if (changeTitle == true) {
-				System.out.println("Changing the title...");
+				logger.info("Changing the title...");
 				artDB.setTitle(newTitle);
 			}
 			if (changeBody == true) {
-				System.out.println("Changing the body...");
+				logger.info("Changing the body...");
 				artDB.setBody(newBody);
 			}
 			//Deleting the old article in the db
-			System.out.println("Deleting old article in the db...");
+			logger.info("Deleting old article in the db...");
 			deleteArticle(art, autho);
 			//Save the new article in the db
-			System.out.println("Saving edited article in the db...");
+			logger.info("Saving edited article in the db...");
 			autho = pm.getObjectById(Admin.class, autho.username);
 			autho.addArticle(artDB);
 			
 			return true;
 			
 		}catch (Exception e) {
-				System.out.println("---The article does not exist in the db, so it cannot be edited---");
+				logger.info("---The article does not exist in the db, so it cannot be edited---");
 			}
 			
 			tx.commit();
@@ -251,18 +251,17 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @return boolean true(deleted) false(not deleted)
 	 */
 	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
-		System.out.println("----------------------- DELETING ARTICLE -----------------------");
+		logger.info("Deleting the article: " +  art);
 		Boolean delete = false;
 		try {
 			tx.begin();
 			try {
 				Article artDB = pm.getObjectById(Article.class, art.title);
 				autho = pm.getObjectById(Admin.class, autho.username);
-				System.out.println("Delete: " + artDB.title + " Admin: "+ autho.username);
 				autho.deleteArticle(artDB);
 				delete = true;
 			} catch (Exception e) {
-				System.out.println("The article doesn't exist");
+				logger.info("The article doesn't exist");
 				delete=  false;
 			}
 			tx.commit();
@@ -279,12 +278,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 */
 	public Article searchArticleTitle(String title) throws RemoteException {
 			Article artDB = null;	
+			logger.info("SearchArticleTitle: " + title);
 		try{
 			tx.begin();
 			artDB = pm.getObjectById(Article.class, title);			
 			tx.commit();
 		}catch (Exception e) {
-			System.out.println("Doesnt work");
+			logger.info("SearchArticleTitle: There is no a article with that title");
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
@@ -301,11 +301,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		ArrayList<Article> arts = null;
 		try{
 			tx.begin();
-		
-			System.out.println("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
+			logger.info("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
 			Query q = pm.newQuery("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
-			arts = (ArrayList<Article>) q.execute();			
-			System.out.println("Articles: " + arts);
+			arts = (ArrayList<Article>) q.execute();
+			logger.info("Articles: " + arts);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -323,14 +322,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 		ArrayList<Article> ownArticles = null;
 		try{
 			tx.begin();
-
-			System.out.println("SELECT FROM " + Admin.class + " WHERE author == \"" + author );
+			logger.info("SELECT FROM " + Admin.class + " WHERE author == \"" + author );
 			Query<Article> q = pm.newQuery("SELECT FROM " + Admin.class + " WHERE author == \"" + author);
 			q.setUnique(true);
 			//q.executeResultList(Admin.class);
 			ownArticles = (ArrayList<Article>) q.executeResultList(Article.class);
 			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-			System.out.println("Articles: " + ownArticles);
+			logger.info("Articles: " + ownArticles);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -346,15 +344,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public ArrayList<Article> viewTopArticle(ArrayList<Article> art) throws RemoteException {
 		try {
 			tx.begin();
-
-			System.out.println("SELECT FROM " + Article.class + " WHERE visits >= 1000\"");
+			logger.info("SELECT FROM " + Article.class + " WHERE visits >= 1000\"");
 			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE visits >= 1000\"");
 			q.setUnique(true);
 			q.setOrdering("Visits ascending");
 			ArrayList<Article> arts = (ArrayList<Article>) q.executeResultList(Article.class);
 			// ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-
-			System.out.println("Articles: " + arts);
+			logger.info("Articles: " + arts);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -369,7 +365,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 */
 	public Boolean SayHello() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("Connected");
+		logger.info("Connected");
 		return true;
 	}
 

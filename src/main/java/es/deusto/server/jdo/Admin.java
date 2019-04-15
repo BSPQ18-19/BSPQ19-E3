@@ -8,7 +8,7 @@ import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 /**
- * The class fot he administrator.
+ * The class for the administrator.
  * @author albertofdr
  *
  */

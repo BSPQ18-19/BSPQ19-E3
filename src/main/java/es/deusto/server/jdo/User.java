@@ -5,6 +5,11 @@ import java.io.Serializable;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
+/**
+ * The class for the normal user.
+ * @author albertofdr
+ *
+ */
 @PersistenceCapable
 public class User implements Serializable{
 	
