@@ -163,6 +163,11 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>es/deusto/server/jdo/DB*</exclude>
+					</excludes>
+				</configuration>
 				<reportSets>
 					<reportSet>
 						<reports>
