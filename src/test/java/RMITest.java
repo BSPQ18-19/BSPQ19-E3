@@ -1,4 +1,4 @@
-package es.deusto.server;
+
 
 import static org.junit.Assert.assertTrue;
 
@@ -12,11 +12,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.deusto.client.Client;
-
+import es.deusto.server.IServer;
+import es.deusto.server.Server;
 import junit.framework.JUnit4TestAdapter;
 
 public class RMITest {
-	private String[] arg = {"127.0.0.1", "1099", "TestNewspaperRMI"};
+	/*private String[] arg = {"127.0.0.1", "1099", "TestNewspaperRMI"};
 	private static String cwd = RMITest.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 	private static Thread rmiRegistryThread = null;
 	private static Thread rmiServerThread = null;
@@ -57,7 +58,7 @@ public class RMITest {
 				//System.setProperty("java.rmi.server.codebase", "file:D:\\Deusto\\SoftwareProcessQuality\\HOWTOS\\Maven\\DonationObserverRMI\\target\\classes\\");
 				System.setProperty("java.rmi.server.codebase", "file:" + cwd);
 				System.setProperty("java.security.policy", "target\\classes\\security\\java.policy");
-
+				
 				if (System.getSecurityManager() == null) {
 					System.setSecurityManager(new SecurityManager());
 				}
@@ -121,5 +122,5 @@ public class RMITest {
 			ie.printStackTrace();
 		}
 		//System.exit(0);
-	}
+	}*/
 }

@@ -34,7 +34,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * 
 	 * @throws RemoteException
 	 */
-	protected Server() throws RemoteException {
+	public Server() throws RemoteException {
 		super();
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		this.pm = pmf.getPersistenceManager();

@@ -35,7 +35,7 @@ public class Client {
 			client.connection(name);
 			client.menu();
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.error(e);
 		}
 	}
 
