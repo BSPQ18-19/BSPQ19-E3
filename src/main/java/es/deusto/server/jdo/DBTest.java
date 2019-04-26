@@ -1,7 +1,6 @@
 package es.deusto.server.jdo;
 
 import java.util.Iterator;
-
 import javax.jdo.Extent;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -64,13 +63,13 @@ public class DBTest {
 		 User paco = new User("Paco", "Paco", "paco@gmail.com");
 		 User luis = new User("Luis", "Luis", "luis@gmail.com");
 
-         Article art1 = new Article("Title1", "Body", "Category", 0);
-         Article art2 = new Article("Title2", "Body", "Category", 1);
-         Article art3 = new Article("Title3", "Body", "Category", 7);
-         Article art4 = new Article("Title4", "Body", "Category", 7);
-         Article art5 = new Article("Title5", "Body", "Category", 5);
-         Article art6 = new Article("Title6", "Body", "Category", 2);
-         Article art7 = new Article("Title7", "Body", "Category", 5);
+         Article art1 = new Article("Title1", "Body", "Category", 0, alberto);
+         Article art2 = new Article("Title2", "Body", "Category", 1, alberto);
+         Article art3 = new Article("Title3", "Body", "Category", 7, alberto);
+         Article art4 = new Article("Title4", "Body", "Category", 7, alberto);
+         Article art5 = new Article("Title5", "Body", "Category", 5, raul);
+         Article art6 = new Article("Title6", "Body", "Category", 2, raul);
+         Article art7 = new Article("Title7", "Body", "Category", 5, raul);
 
          alberto.addArticle(art1);
          alberto.addArticle(art2);
@@ -90,6 +89,8 @@ public class DBTest {
 				pm.makePersistent(alberto);
 				pm.makePersistent(raul);    
 	            tx.commit();
+	        }catch (Exception e) {
+	        	System.out.println(e);
 	        }finally
 	        {
 	            if (tx.isActive()){
@@ -144,8 +145,8 @@ public class DBTest {
 	            tx.begin();
 	            System.out.println("Persisting users");
 				Admin Alberto = new Admin("FDR", "FDR", "alberto@gmail.com");
-	            Article art1 = new Article("Title1", "Body", "Category");
-	            Article art2 = new Article("Title2", "Body", "Category", 1);
+	            Article art1 = new Article("Title1", "Body", "Category", Alberto);
+	            Article art2 = new Article("Title2", "Body", "Category", 1, Alberto);
 	            Alberto.addArticle(art1);
 	            Alberto.addArticle(art2);
 				pm.makePersistent(Alberto);					 

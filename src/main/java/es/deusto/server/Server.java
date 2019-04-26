@@ -5,9 +5,12 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
+import javax.jdo.Extent;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
@@ -28,6 +31,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	/**
 	 * The constructor of the class (Persistence manager, transaction...)
+	 * 
 	 * @throws RemoteException
 	 */
 	protected Server() throws RemoteException {
@@ -36,7 +40,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();
 	}
-	
+
 	/**
 	 * To finalize the transaction
 	 */
@@ -46,12 +50,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 		// pm.close();
 	}
-	
+
 	/**
 	 * Register a user in the DB
-	 * @param login The username of the person
+	 * 
+	 * @param login    The username of the person
 	 * @param password The password of the person
-	 * @param email The email of the person
+	 * @param email    The email of the person
 	 * @return Returns a Boolean, if the transaction works well returns true
 	 */
 	public Boolean registerUser(String login, String password, String email) throws RemoteException {
@@ -82,9 +87,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	/**
 	 * To log in a USER
+	 * 
 	 * @param user The username of the person
-	 * @param pass the p				logger.info("---The article does not exist in the db, so it cannot be edited---");
-assword of that person
+	 * @param pass the p logger.info("---The article does not exist in the db, so it
+	 *             cannot be edited---"); assword of that person
 	 * @return Returns the user of that person
 	 */
 	public User logIn(String user, String pass) throws RemoteException {
@@ -115,6 +121,7 @@ assword of that person
 
 	/**
 	 * To log in a ADMIN
+	 * 
 	 * @param user The username of the person
 	 * @param pass the password of that person
 	 * @return Returns the admin of that person
@@ -123,10 +130,9 @@ assword of that person
 		// TODO Auto-generated method stub
 		logger.info("LogInAdmin for the user: " + user);
 		Admin user1 = null;
-		try {				logger.info("---The article does not exist in the db, so it cannot be edited---");
-
+		try {
 			tx.begin();
-			
+
 			Query<?> query = pm.newQuery("SELECT FROM " + Admin.class.getName() + " WHERE username == '" + user + "'"
 					+ " && password == '" + pass + "'");
 			query.setUnique(true);
@@ -140,26 +146,39 @@ assword of that person
 			}
 		}
 		if (user == null) {
-
+			logger.info("---The admin does not exist ---");
 		} else {
 			logger.info("LogInAdmin successfull");
 		}
 		return user1;
 	}
-	
+
 	/**
 	 * 
 	 */
-	public Article readArticle() throws RemoteException {
+	public Article readArticle(String Title) throws RemoteException {
 		// TODO Auto-generated method stub
-
-		return null;
+		Article art = null;
+		try {
+			tx.begin();
+			logger.info("Reading the article: " + Title);
+			art = pm.getObjectById(Article.class, Title);
+			tx.commit();
+		} catch (Exception e) {
+			logger.error("Error reading the article");
+		}finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+		return art;
 	}
 
 	/**
 	 * To create an article
+	 * 
 	 * @param Article the article to create
-	 * @param Admin the admin that is creating the article
+	 * @param Admin   the admin that is creating the article
 	 * @return boolean true(created) false(not created)
 	 */
 	public Boolean createArticle(Article art, Admin autho) throws RemoteException {
@@ -170,6 +189,7 @@ assword of that person
 			try {
 				Article artDB = pm.getObjectById(Article.class, art.title);
 				logger.info("The title: " + art.title + " it's already in use, the transaction wasn't successful");
+				tx.commit();
 				return false;
 			} catch (Exception e) {
 				logger.info("Creating a new article with title: " + art.title);
@@ -177,64 +197,78 @@ assword of that person
 				logger.info("Number of visits: " + art.visits);
 				logger.info("Categorized as: " + art.category);
 				autho = pm.getObjectById(Admin.class, autho.username);
-				autho.addArticle(art);
-				logger.info("Username: " + autho.username + " pass: " + autho.password);
+				//autho.setPassword("FDR");
+				//autho.setUsername("FDR1");
+				logger.info(autho.toString());
 				logger.info("New article with title: " + art.title + " created successfully");
+				tx.commit();
+				tx.begin();
+				pm.makePersistent(autho);
+				tx.commit();
 
 			}
-			tx.commit();
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
+		}
+		
+		
+		try {
+			tx.begin();
+			tx.commit();
+
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return true;
 	}
 
 	/**
 	 * To edit an article
-	 * @param Article, the one to edit that must be searched in db
+	 * 
+	 * @param        Article, the one to edit that must be searched in db
 	 * @param String newTitle, the new title that must be given to the article
-	 * @param boolean changeTitle, whether the title must be changed or not
+	 * @param        boolean changeTitle, whether the title must be changed or not
 	 * @param String newBody, the new body that must be given to the article
-	 * @param boolean changeBody, whether the body must be changed or not
-	 * @param Admin, the one that is editing the article
+	 * @param        boolean changeBody, whether the body must be changed or not
+	 * @param        Admin, the one that is editing the article
 	 * @return boolean true(edited) false(not edited)
 	 * 
 	 */
-	public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody, Admin autho)
-			throws RemoteException {
+	public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody,
+			Admin autho) throws RemoteException {
 		// It's made so you can only change the articles title and body, we can make it
 		// more complex later.
-		
+
 		try {
 			tx.begin();
 			logger.info("Searching for the article to edit in the db...");
-		try {
-			Article artDB = pm.getObjectById(Article.class, art.title);
-			
-			if (changeTitle == true) {
-				logger.info("Changing the title...");
-				artDB.setTitle(newTitle);
-			}
-			if (changeBody == true) {
-				logger.info("Changing the body...");
-				artDB.setBody(newBody);
-			}
-			//Deleting the old article in the db
-			logger.info("Deleting old article in the db...");
-			deleteArticle(art, autho);
-			//Save the new article in the db
-			logger.info("Saving edited article in the db...");
-			autho = pm.getObjectById(Admin.class, autho.username);
-			autho.addArticle(artDB);
-			
-			return true;
-			
-		}catch (Exception e) {
+			try {
+				Article artDB = pm.getObjectById(Article.class, art.title);
+
+				if (changeTitle == true) {
+					logger.info("Changing the title...");
+					artDB.setTitle(newTitle);
+				}
+				if (changeBody == true) {
+					logger.info("Changing the body...");
+					artDB.setBody(newBody);
+				}
+				// Deleting the old article in the db
+				logger.info("Deleting old article in the db...");
+				deleteArticle(art, autho);
+				// Save the new article in the db
+				logger.info("Saving edited article in the db...");
+				autho = pm.getObjectById(Admin.class, autho.username);
+				autho.addArticle(artDB);
+
+				return true;
+
+			} catch (Exception e) {
 				logger.info("---The article does not exist in the db, so it cannot be edited---");
 			}
-			
+
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -246,12 +280,13 @@ assword of that person
 
 	/**
 	 * To delete an existing article
+	 * 
 	 * @param Article, the one to be deleted that must be searched in the db
 	 * @param Admin, the one that is deleting the article
 	 * @return boolean true(deleted) false(not deleted)
 	 */
 	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
-		logger.info("Deleting the article: " +  art);
+		logger.info("Deleting the article: " + art);
 		Boolean delete = false;
 		try {
 			tx.begin();
@@ -262,7 +297,7 @@ assword of that person
 				delete = true;
 			} catch (Exception e) {
 				logger.info("The article doesn't exist");
-				delete=  false;
+				delete = false;
 			}
 			tx.commit();
 		} finally {
@@ -272,18 +307,18 @@ assword of that person
 		}
 		return delete;
 	}
-	
+
 	/**
 	 * 
 	 */
 	public Article searchArticleTitle(String title) throws RemoteException {
-			Article artDB = null;	
-			logger.info("SearchArticleTitle: " + title);
-		try{
+		Article artDB = null;
+		logger.info("SearchArticleTitle: " + title);
+		try {
 			tx.begin();
-			artDB = pm.getObjectById(Article.class, title);			
+			artDB = pm.getObjectById(Article.class, title);
 			tx.commit();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			logger.info("SearchArticleTitle: There is no a article with that title");
 		} finally {
 			if (tx.isActive()) {
@@ -291,7 +326,7 @@ assword of that person
 			}
 		}
 		return artDB;
-		
+
 	}
 
 	/**
@@ -299,7 +334,7 @@ assword of that person
 	 */
 	public ArrayList<Article> searchArticleCategory(String category) throws RemoteException {
 		ArrayList<Article> arts = null;
-		try{
+		try {
 			tx.begin();
 			logger.info("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
 			Query q = pm.newQuery("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
@@ -314,20 +349,20 @@ assword of that person
 		System.out.println(arts.size());
 		return arts;
 	}
-	
+
 	/**
 	 * 
 	 */
 	public ArrayList<Article> searchArticleAuthor(String author) throws RemoteException {
 		ArrayList<Article> ownArticles = null;
-		try{
+		try {
 			tx.begin();
-			logger.info("SELECT FROM " + Admin.class + " WHERE author == \"" + author );
+			logger.info("SELECT FROM " + Admin.class + " WHERE author == \"" + author);
 			Query<Article> q = pm.newQuery("SELECT FROM " + Admin.class + " WHERE author == \"" + author);
 			q.setUnique(true);
-			//q.executeResultList(Admin.class);
+			// q.executeResultList(Admin.class);
 			ownArticles = (ArrayList<Article>) q.executeResultList(Article.class);
-			//ArrayList<Article> arts = (ArrayList<Article>)q.execute();
+			// ArrayList<Article> arts = (ArrayList<Article>)q.execute();
 			logger.info("Articles: " + ownArticles);
 			tx.commit();
 		} finally {
@@ -361,12 +396,75 @@ assword of that person
 	}
 
 	/**
+	 * Returns the articles that see the user when enters
 	 * 
+	 * @return Returns the articles that the user will see in the timeline
 	 */
-	public Boolean SayHello() throws RemoteException {
-		// TODO Auto-generated method stub
-		logger.info("Connected");
-		return true;
+	public ArrayList<Article> getFirstArticles() {
+		ArrayList<Article> artDB = new ArrayList<Article>();
+		logger.info("Get the first articles");
+		try {
+			tx.begin();
+			Extent<Article> e = pm.getExtent(Article.class, true);
+			Iterator<Article> iter = e.iterator();
+			while (iter.hasNext()) {
+				artDB.add((Article) iter.next());
+			}
+			tx.commit();
+		} catch (Exception e) {
+			logger.info("getFirstArticle: There is no first articles " + e);
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+		return artDB;
+	}
+
+	public static void loadDB() {
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		logger.info("Persisting data in the database...");
+		Admin alberto = new Admin("FDR", "FDR", "alberto@gmail.com");
+		Admin raul = new Admin("Raul", "Sanchez", "raul@gmail.com");
+		User paco = new User("Paco", "Paco", "paco@gmail.com");
+		User luis = new User("Luis", "Luis", "luis@gmail.com");
+
+		Article art1 = new Article("Title1", "Body", "Category", 0, alberto);
+		Article art2 = new Article("Title2", "Body", "Category", 1, alberto);
+		Article art3 = new Article("Title3", "Body", "Category", 7, alberto);
+		Article art4 = new Article("Title4", "Body", "Category", 7, alberto);
+		Article art5 = new Article("Title5", "Body", "Category", 5, raul);
+		Article art6 = new Article("Title6", "Body", "Category", 2, raul);
+		Article art7 = new Article("Title7", "Body", "Category", 5, raul);
+
+		alberto.addArticle(art1);
+		alberto.addArticle(art2);
+		alberto.addArticle(art3);
+		alberto.addArticle(art4);
+
+		raul.addArticle(art5);
+		raul.addArticle(art6);
+		raul.addArticle(art7);
+
+		try {
+			tx.begin();
+			pm.makePersistent(paco);
+			pm.makePersistent(luis);
+			pm.makePersistent(alberto);
+			pm.makePersistent(raul);
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		System.out.println("");
+		logger.debug("Persisting data in the DB succeeded");
 	}
 
 	public static void main(String[] args) {
@@ -384,6 +482,7 @@ assword of that person
 		try {
 			IServer objServer = new Server();
 			Naming.rebind(name, objServer);
+			// loadDB();
 			System.out.println("Server '" + name + "' active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader(System.in);
 			java.io.BufferedReader stdin = new java.io.BufferedReader(inputStreamReader);

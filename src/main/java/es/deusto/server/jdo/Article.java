@@ -3,6 +3,7 @@ package es.deusto.server.jdo;
 import java.io.Serializable;
 
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 /**
@@ -13,16 +14,12 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Article implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	@PrimaryKey
 	public String title = "";
 	public String body = "";
 	public int visits = 0;
 	public String category = "";
-
+	public Admin admin = null;
 	/**
 	 * Constructor where you can also set the visits
 	 * @param title The title for the article
@@ -30,12 +27,13 @@ public class Article implements Serializable {
 	 * @param visits How many visits the article have
 	 * @param category The category of the article
 	 */
-	public Article(String title, String body, String category, int visits) {
+	public Article(String title, String body, String category, int visits, Admin admin) {
 		super();
 		this.title = title;
 		this.body = body;
 		this.visits = visits;
 		this.category = category;
+		this.admin = admin;
 	}
 
 	/**
@@ -44,12 +42,13 @@ public class Article implements Serializable {
 	 * @param body The body of the article
 	 * @param category The category of the article
 	 */
-	public Article(String title, String body, String category) {
+	public Article(String title, String body, String category, Admin admin) {
 		super();
 		this.title = title;
 		this.body = body;
 		this.visits = 0;
 		this.category = category;
+		this.admin = admin;
 	}
 	
 	private Article() {

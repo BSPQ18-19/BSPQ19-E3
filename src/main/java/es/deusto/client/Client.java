@@ -1,8 +1,13 @@
 package es.deusto.client;
 
-import org.datanucleus.store.types.wrappers.ArrayList;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.apache.log4j.Logger;
 
 import es.deusto.server.IServer;
+import es.deusto.server.Server;
 import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
@@ -11,8 +16,10 @@ import es.deusto.server.jdo.User;
  * Hello world!
  *
  */
-public class Client 
-{
+public class Client {
+	static Logger logger = Logger.getLogger(Client.class.getName());
+	IServer server;
+
 	public static void main(String[] args) {
 		if (args.length != 3) {
 			System.out.println("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
@@ -22,31 +29,139 @@ public class Client
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
 		}
-
 		try {
 			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
-			IServer objHello = (IServer) java.rmi.Naming.lookup(name);
-			//PROBE CLIENT
-			//Register user
-			objHello.registerUser("Luis", "Luis","luis@gmail.com"); // Luis is already in the DB so exceptions appears
-			/*objHello.registerUser("dipina", "dipina","dipina@gmail.com"); // Dipina is created in the DB
-			//LogIn
-			User user = objHello.logIn("dipina", "dipina");// Log In correctly
-			User user1 = objHello.logIn("USER", "USER"); // The user doesn't exists
-			Admin admin1 = (Admin) objHello.logInAdmin("FDR", "FDR"); // Log in correctly
-			//Articles Management
-			Article art = new Article("adsa", "body", 123, "category");
-			Article art1 = new Article("DOESNT EXIST", "body", 123, "category");
-			objHello.createArticle(art, admin1);
-			objHello.deleteArticle(art1, admin1); 
-			//objHello.deleteArticle(art, admin1); //Doesn't works
-			//SEARCHES
-			//art1 = objHello.searchArticleTitle("adsa");
-			//System.out.println("Output: " + art1.getTitle());*/
-			//ArrayList<Article> arts = (ArrayList<Article>) objHello.searchArticleCategory("Category");
-			//System.out.println("--------------------------------------------------");
-			//System.out.println("Output: " + arts.get(0).getTitle());
-			
+			Client client = new Client();
+			client.connection(name);
+			client.menu();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void connection(String name) {
+		try {
+			this.server = (IServer) java.rmi.Naming.lookup(name);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+
+	private void menu() {
+		try {
+			int option = 0;
+			do {
+				Scanner scan = new Scanner(System.in);
+				logger.info("Select an option: ");
+				logger.info("1) LogIn User");
+				logger.info("2) Register User");
+				logger.info("3) LogIn Admin");
+				logger.info("4) Exit");
+				option = scan.nextInt();
+				scan.nextLine();
+				if (option == 1 || option == 2 || option == 3) {
+					String username;
+					String pass;
+					switch (option) {
+					case 1:
+						// LogIn User
+						logger.info("Username: ");
+						username = scan.nextLine();
+						logger.info("Password: ");
+						pass = scan.nextLine();
+						logger.info("LogIn: " + username + " : " + pass);
+						User user = server.logIn(username, pass);
+						if (user != null) {
+							logger.info("LogIn successful");
+							ArrayList<Article> articles = (ArrayList<Article>) server.getFirstArticles();
+							if (articles.size() > 0 && articles != null) {
+								logger.debug("Size of the articles: " + articles.size());
+								for (int m = 0; m < 10 && m < articles.size(); m++) {
+									logger.info(articles.get(m).getTitle());
+								}
+							} else {
+								logger.info("There is no first articles");
+							}
+
+						} else {
+							logger.info("LogIn error");
+
+						}
+						break;
+					case 2:
+						// Register user
+						logger.info("User: ");
+						username = scan.nextLine();
+						logger.info("Password: ");
+						pass = scan.nextLine();
+						logger.info("Email: ");
+						String email = scan.nextLine();
+						if (server.registerUser(username, pass, email)) {
+							logger.info("Register successful");
+						} else {
+							logger.info("Register error");
+						}
+						break;
+					case 3:
+						// LogIn admin
+						logger.info("Admin username: ");
+						username = scan.nextLine();
+						logger.info("Password: ");
+						pass = scan.nextLine();
+						Admin adm = server.logInAdmin(username, pass);
+						if (adm != null) {
+							logger.info("LogIn Admin successful");
+							int option2 = 0;
+							do {
+								logger.info("Options: ");
+								logger.info("1) Create article");
+								logger.info("2) Eliminate article");
+								logger.info("3) Edit article");
+								logger.info("3) LogOut");
+								option2 = scan.nextInt();
+								scan.nextLine();
+								if (option2 == 1 || option2 == 2 || option2 == 3) {
+									switch (option2) {
+									case 1:
+										// Create article
+										logger.info("Creating article...");
+										logger.info("Title: ");
+										String title = scan.nextLine();
+										logger.info("Body of the article: ");
+										String body = scan.nextLine();
+										logger.info("Category: ");
+										String category = scan.nextLine();
+										Article art = new Article(title, body, category, adm);
+										server.createArticle(art, adm);
+									case 2:
+										// Eliminate article
+									case 3:
+										// Edit article
+									}
+
+								} else if (option2 == 4) {
+									logger.info("Logging out...");
+								} else {
+									logger.info("Option error");
+								}
+
+							} while (option2 != 4);
+
+						} else {
+							logger.info("LogIn Admin error");
+						}
+						break;
+					}
+
+				} else if (option == 4) {
+					logger.info("Exiting from application");
+					break;
+				} else {
+					logger.info("Error in the option");
+				}
+
+			} while (option != 4);
+
 		} catch (Exception e) {
 			System.err.println("RMI Example exception: " + e.getMessage());
 			e.printStackTrace();

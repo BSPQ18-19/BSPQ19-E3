@@ -185,7 +185,7 @@
 				<configuration>
 					<excludes>
 						<exclude>es/deusto/server/jdo/DB*</exclude>
-						<exclude>es/deusto/client/GUI/*</exclude>
+						<exclude>es/deusto/client/*</exclude>
 					</excludes>
 				</configuration>
 				<reportSets>

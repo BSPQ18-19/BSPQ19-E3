@@ -30,10 +30,7 @@ public class DataTest extends TestCase {
 	 */
 	public DataTest(String testName) {
 		super(testName);
-		art = new Article("Article1", "body", "category");
-		art2 = new Article("Article2", "body", "category", 123);
-		art3 = new Article("Article1", "body", "category");
-
+		
 		admin = new Admin("admin1", "password", "email");
 		admin2 = new Admin("admin2", "password", "email");
 		admin3 = new Admin("admin1", "password", "email");
@@ -41,6 +38,10 @@ public class DataTest extends TestCase {
 		user = new User("user1", "password", "email");
 		user2 = new User("user2", "password", "email");
 		user3 = new User("user1", "password", "email");
+
+		art = new Article("Article1", "body", "category", admin);
+		art2 = new Article("Article2", "body", "category", 123, admin2);
+		art3 = new Article("Article1", "body", "category", admin3);
 
 	}
 
