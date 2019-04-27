@@ -5,6 +5,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 
 import javax.jdo.PersistenceManager;
@@ -16,6 +18,8 @@ import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
 import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
@@ -26,7 +30,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private int cont = 0;
 	private PersistenceManager pm = null;
 	private Transaction tx = null;
-
+	// private ArrayList<Admin> admins = new ArrayList<Admin>();
 	static Logger logger = Logger.getLogger(Server.class.getName());
 
 	/**
@@ -111,10 +115,11 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-		if (user == null) {
 
-		} else {
+		if (user1 != null) {
 			logger.info("LogIn successfull");
+		} else {
+			logger.info("LogIn wrong");
 		}
 		return user1;
 	}
@@ -132,7 +137,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 		Admin user1 = null;
 		try {
 			tx.begin();
-
 			Query<?> query = pm.newQuery("SELECT FROM " + Admin.class.getName() + " WHERE username == '" + user + "'"
 					+ " && password == '" + pass + "'");
 			query.setUnique(true);
@@ -145,7 +149,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-		if (user == null) {
+		if (user1 == null) {
 			logger.info("---The admin does not exist ---");
 		} else {
 			logger.info("LogInAdmin successfull");
@@ -166,7 +170,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			tx.commit();
 		} catch (Exception e) {
 			logger.error("Error reading the article");
-		}finally {
+		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
@@ -197,11 +201,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 				logger.info("Number of visits: " + art.visits);
 				logger.info("Categorized as: " + art.category);
 				autho = pm.getObjectById(Admin.class, autho.username);
-				//autho.setPassword("FDR");
-				//autho.setUsername("FDR1");
+				pm.deletePersistent(autho);
+				// autho.setPassword("FDR");
+				// autho.setUsername("FDR1");
 				logger.info(autho.toString());
 				logger.info("New article with title: " + art.title + " created successfully");
 				tx.commit();
+				autho.setUsername("FDR1");
 				tx.begin();
 				pm.makePersistent(autho);
 				tx.commit();
@@ -212,8 +218,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-		
-		
+
 		try {
 			tx.begin();
 			tx.commit();
@@ -294,6 +299,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				Article artDB = pm.getObjectById(Article.class, art.title);
 				autho = pm.getObjectById(Admin.class, autho.username);
 				autho.deleteArticle(artDB);
+				pm.deletePersistent(artDB);
 				delete = true;
 			} catch (Exception e) {
 				logger.info("The article doesn't exist");
@@ -354,20 +360,24 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * 
 	 */
 	public ArrayList<Article> searchArticleAuthor(String author) throws RemoteException {
-		ArrayList<Article> ownArticles = null;
+		ArrayList<Article> ownArticles = new ArrayList<Article>();
+		ArrayList<Article> artDB = new ArrayList<Article>();
 		try {
 			tx.begin();
-			logger.info("SELECT FROM " + Admin.class + " WHERE author == \"" + author);
-			Query<Article> q = pm.newQuery("SELECT FROM " + Admin.class + " WHERE author == \"" + author);
-			q.setUnique(true);
-			// q.executeResultList(Admin.class);
-			ownArticles = (ArrayList<Article>) q.executeResultList(Article.class);
-			// ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-			logger.info("Articles: " + ownArticles);
+			Extent<Article> e = pm.getExtent(Article.class, true);
+			Iterator<Article> iter = e.iterator();
+			while (iter.hasNext()) {
+				artDB.add((Article) iter.next());
+			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
+			}
+		}
+		for (int i = 0; i < artDB.size(); i++) {
+			if(artDB.get(i).getAdmin().getLogin().equals(author)) {
+				ownArticles.add(artDB.get(i));
 			}
 		}
 		return ownArticles;
@@ -376,23 +386,41 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * 
 	 */
-	public ArrayList<Article> viewTopArticle(ArrayList<Article> art) throws RemoteException {
+	public ArrayList<Article> viewTopArticle() throws RemoteException {
+		ArrayList<Article> artDB = new ArrayList<Article>();
+		ArrayList<Integer> visits = new ArrayList<Integer>();
 		try {
 			tx.begin();
-			logger.info("SELECT FROM " + Article.class + " WHERE visits >= 1000\"");
-			Query<Article> q = pm.newQuery("SELECT FROM " + Article.class + " WHERE visits >= 1000\"");
-			q.setUnique(true);
-			q.setOrdering("Visits ascending");
-			ArrayList<Article> arts = (ArrayList<Article>) q.executeResultList(Article.class);
-			// ArrayList<Article> arts = (ArrayList<Article>)q.execute();
-			logger.info("Articles: " + arts);
+			Extent<Article> e = pm.getExtent(Article.class, true);
+			Iterator<Article> iter = e.iterator();
+			while (iter.hasNext()) {
+				artDB.add((Article) iter.next());
+			}
 			tx.commit();
+		} catch (Exception e) {
+			logger.info("getFirstArticle: There is no first articles " + e);
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 		}
-		return art;
+		for (int i = 0; i < artDB.size(); i++) {
+			if (!visits.contains(artDB.get(i).getVisits())) {
+				visits.add(artDB.get(i).getVisits());
+			}
+		}
+		// Sort by visits
+		Collections.sort(visits, Collections.reverseOrder());
+
+		ArrayList<Article> artTop = new ArrayList<Article>();
+		for (int n = 0; n < visits.size() && artTop.size() < 5; n++) {
+			for (int m = 0; m < artDB.size() && artTop.size() < 5; m++) {
+				if (artDB.get(m).getVisits() == visits.get(n)) {
+					artTop.add(artDB.get(m));
+				}
+			}
+		}
+		return artTop;
 	}
 
 	/**

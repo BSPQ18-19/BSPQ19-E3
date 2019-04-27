@@ -141,6 +141,14 @@ public class Article implements Serializable {
 	 * Method to print the article
 	 */
 	public String toString() {
-		return this.title + "::" + this.body;
+		return this.title + "\n" + this.body + "\n" + "Category: " + this.category + " Visits: "+ this.visits;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 }
