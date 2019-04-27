@@ -241,11 +241,11 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @return boolean true(edited) false(not edited)
 	 * 
 	 */
-	public Boolean editArticle(Article art, String newTitle, boolean changeTitle, String newBody, boolean changeBody,
+	public Boolean editArticle(Article art, String newTitle, String newBody, 
 			Admin autho) throws RemoteException {
 		// It's made so you can only change the articles title and body, we can make it
 		// more complex later.
-
+		/*
 		try {
 			tx.begin();
 			logger.info("Searching for the article to edit in the db...");
@@ -279,7 +279,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
-		}
+		}*/
 		return false;
 	}
 
@@ -340,7 +340,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 */
 	public ArrayList<Article> searchArticleCategory(String category) throws RemoteException {
 		ArrayList<Article> arts = null;
-		try {
+		/*try {
 			tx.begin();
 			logger.info("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
 			Query q = pm.newQuery("SELECT FROM " + Article.class + " WHERE category == '" + category + "'");
@@ -352,7 +352,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				tx.rollback();
 			}
 		}
-		System.out.println(arts.size());
+		System.out.println(arts.size());*/
 		return arts;
 	}
 

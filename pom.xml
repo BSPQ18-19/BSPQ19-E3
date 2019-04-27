@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -139,12 +139,12 @@
 								<limit>
 									<counter>INSTRUCTION</counter>
 									<value>COVEREDRATIO</value>
-									<minimum>0.00</minimum>
+									<minimum>0.30</minimum>
 								</limit>
 								<limit>
 									<counter>BRANCH</counter>
 									<value>COVEREDRATIO</value>
-									<minimum>0.00</minimum>
+									<minimum>0.30</minimum>
 								</limit>
 							</limits>
 						</rule>

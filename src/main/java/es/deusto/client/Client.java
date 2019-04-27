@@ -49,7 +49,7 @@ public class Client {
 		}
 	}
 
-	private void menu() {
+	protected void menu() {
 		try {
 			int option = 0;
 			do {
@@ -127,7 +127,7 @@ public class Client {
 		}
 	}
 
-	private void firstArticles() throws RemoteException {
+	protected void firstArticles() throws RemoteException {
 		ArrayList<Article> articles = (ArrayList<Article>) server.getFirstArticles();
 		if (articles.size() > 0 && articles != null) {
 			logger.debug("Size of the articles: " + articles.size());
@@ -140,7 +140,7 @@ public class Client {
 		}
 	}
 
-	private void userActions() throws RemoteException {
+	protected void userActions() throws RemoteException {
 		int option = 0;
 		do {
 			logger.info("Options: ");
@@ -205,7 +205,7 @@ public class Client {
 		} while (option != 3);
 	}
 
-	private void adminActions(Admin adm) throws RemoteException {
+	protected void adminActions(Admin adm) throws RemoteException {
 		int option2 = 0;
 		ArrayList<Article> ownArticles;
 		do {
