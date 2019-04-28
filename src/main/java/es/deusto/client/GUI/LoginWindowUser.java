@@ -103,6 +103,16 @@ public class LoginWindowUser extends JFrame{
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//check if the user info is correct
+				String user =textUser.getText();
+				String pass= textPass.getText();
+				
+				
+				ArticleWindow articleWindow = new ArticleWindow();
+				articleWindow.dispose();
+				articleWindow.setVisible(true);
+				dispose();
+				
 			}
 		});
 		panel_2.add(btnLogin);
