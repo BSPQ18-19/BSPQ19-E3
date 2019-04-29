@@ -198,15 +198,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				logger.info("Number of visits: " + art.visits);
 				logger.info("Categorized as: " + art.category);
 				autho = pm.getObjectById(Admin.class, autho.username);
-				pm.deletePersistent(autho);
-				// autho.setPassword("FDR");
-				// autho.setUsername("FDR1");
-				logger.info(autho.toString());
-				logger.info("New article with title: " + art.title + " created successfully");
-				tx.commit();
-				autho.setUsername("FDR1");
-				tx.begin();
-				pm.makePersistent(autho);
+				autho.addArticle(art);
 				tx.commit();
 
 			}
