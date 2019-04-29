@@ -82,7 +82,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 			}
 
 		}
-		System.out.println("");
 		return true;
 	}
 
@@ -340,8 +339,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
-		}
-		System.out.println(arts.size());*/
+		}*/
 		return arts;
 	}
 
@@ -486,7 +484,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	public static void main(String[] args) {
 		if (args.length != 3) {
-			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
+			logger.info("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
 			System.exit(0);
 		}
 

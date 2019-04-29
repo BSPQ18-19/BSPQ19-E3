@@ -24,7 +24,7 @@ public class Client {
 
 	public static void main(String[] args) {
 		if (args.length != 3) {
-			System.out.println("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
+			logger.info("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
 			System.exit(0);
 		}
 
