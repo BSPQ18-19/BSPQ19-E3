@@ -18,7 +18,6 @@ import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
@@ -27,10 +26,8 @@ import es.deusto.server.jdo.User;
 public class Server extends UnicastRemoteObject implements IServer {
 
 	private static final long serialVersionUID = 1L;
-	private int cont = 0;
 	private PersistenceManager pm = null;
 	private Transaction tx = null;
-	// private ArrayList<Admin> admins = new ArrayList<Admin>();
 	static Logger logger = Logger.getLogger(Server.class.getName());
 
 	/**
@@ -63,7 +60,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @param email    The email of the person
 	 * @return Returns a Boolean, if the transaction works well returns true
 	 */
-	public Boolean registerUser(String login, String password, String email) throws RemoteException {
+	public synchronized Boolean registerUser(String login, String password, String email) throws RemoteException {
 		logger.info("Register for the user: " + login);
 		tx.begin();
 		User user = null;
@@ -97,7 +94,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 *             cannot be edited---"); assword of that person
 	 * @return Returns the user of that person
 	 */
-	public User logIn(String user, String pass) throws RemoteException {
+	public synchronized User logIn(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
 		logger.info("LogIn for the user: " + user);
 		User user1 = null;
@@ -131,7 +128,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @param pass the password of that person
 	 * @return Returns the admin of that person
 	 */
-	public Admin logInAdmin(String user, String pass) throws RemoteException {
+	public synchronized Admin logInAdmin(String user, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
 		logger.info("LogInAdmin for the user: " + user);
 		Admin user1 = null;
@@ -160,7 +157,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * 
 	 */
-	public Article readArticle(String Title) throws RemoteException {
+	public synchronized Article readArticle(String Title) throws RemoteException {
 		// TODO Auto-generated method stub
 		Article art = null;
 		try {
@@ -185,7 +182,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @param Admin   the admin that is creating the article
 	 * @return boolean true(created) false(not created)
 	 */
-	public Boolean createArticle(Article art, Admin autho) throws RemoteException {
+	public synchronized Boolean createArticle(Article art, Admin autho) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
@@ -241,7 +238,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @return boolean true(edited) false(not edited)
 	 * 
 	 */
-	public Boolean editArticle(Article art, String newTitle, String newBody, 
+	public synchronized Boolean editArticle(Article art, String newTitle, String newBody, 
 			Admin autho) throws RemoteException {
 		// It's made so you can only change the articles title and body, we can make it
 		// more complex later.
@@ -290,7 +287,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * @param Admin, the one that is deleting the article
 	 * @return boolean true(deleted) false(not deleted)
 	 */
-	public Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
+	public synchronized Boolean deleteArticle(Article art, Admin autho) throws RemoteException {
 		logger.info("Deleting the article: " + art);
 		Boolean delete = false;
 		try {
@@ -317,7 +314,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * 
 	 */
-	public Article searchArticleTitle(String title) throws RemoteException {
+	public synchronized Article searchArticleTitle(String title) throws RemoteException {
 		Article artDB = null;
 		logger.info("SearchArticleTitle: " + title);
 		try {
@@ -338,7 +335,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * 
 	 */
-	public ArrayList<Article> searchArticleCategory(String category) throws RemoteException {
+	public synchronized ArrayList<Article> searchArticleCategory(String category) throws RemoteException {
 		ArrayList<Article> arts = null;
 		/*try {
 			tx.begin();
@@ -359,7 +356,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * 
 	 */
-	public ArrayList<Article> searchArticleAuthor(String author) throws RemoteException {
+	public synchronized ArrayList<Article> searchArticleAuthor(String author) throws RemoteException {
 		ArrayList<Article> ownArticles = new ArrayList<Article>();
 		ArrayList<Article> artDB = new ArrayList<Article>();
 		try {
@@ -386,7 +383,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * 
 	 */
-	public ArrayList<Article> viewTopArticle() throws RemoteException {
+	public synchronized ArrayList<Article> viewTopArticle() throws RemoteException {
 		ArrayList<Article> artDB = new ArrayList<Article>();
 		ArrayList<Integer> visits = new ArrayList<Integer>();
 		try {
@@ -428,7 +425,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	 * 
 	 * @return Returns the articles that the user will see in the timeline
 	 */
-	public ArrayList<Article> getFirstArticles() {
+	public synchronized ArrayList<Article> getFirstArticles() {
 		ArrayList<Article> artDB = new ArrayList<Article>();
 		logger.info("Get the first articles");
 		try {

@@ -16,4 +16,7 @@ Launch client:
 
 Run the command: "mvn datanucleus:schema-delete"
    This deletes the schema for this sample. See note for 4 also.
+   
+Ignore contiperf, only execute JUnit tests
+	mvn test -DargLine="-Dcontiperf.active=false"
   

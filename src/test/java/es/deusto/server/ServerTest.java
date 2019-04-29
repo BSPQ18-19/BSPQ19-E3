@@ -44,93 +44,88 @@ import org.apache.log4j.PropertyConfigurator;
  * Unit test for the server part.
  */
 
-public class ServerTest
-{
+public class ServerTest {
 	private Server server;
-    private User user;
-    private Admin admin;
-	static Logger logger = Logger.getLogger(ServerTest.class.getName());
+	private User user;
+	private Admin admin;
 
-	@Rule public ContiPerfRule rule = new ContiPerfRule();
-	
-    /**
-     * @return the suite of tests being tested
-     */
+	@Rule
+	public ContiPerfRule rule = new ContiPerfRule();
+
+	/**
+	 * @return the suite of tests being tested
+	 */
 	public static junit.framework.Test suite() {
-        return new JUnit4TestAdapter(ServerTest.class);
-    }
-    
-    @Before public void setUp(){
-        user = new User("usernameTest2", "password", "email@gmail.com");
-        admin = new Admin("FDR", "FDR", "alberto@gmail.com");
-        
-        try {
+		return new JUnit4TestAdapter(ServerTest.class);
+	}
+
+	@Before
+	public void setUp() {
+		user = new User("usernameTest2", "password", "email@gmail.com");
+		admin = new Admin("FDR", "FDR", "alberto@gmail.com");
+
+		try {
 			server = new Server();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-
-    /**
-     * Rigourous Test :-)
-     * @throws RemoteException 
-     * @throws InterruptedException 
-     */
-    @org.junit.Test 
-    @PerfTest
-	@Required(max = 600)
-    public void testArticlesManagement() throws RemoteException, InterruptedException
-    {
-    
-    assertTrue(server.readArticle("NOEXIST") == null);
-    assertEquals("Title1",server.readArticle("Title1").getTitle());
-    
-    assertFalse(server.createArticle(new Article("Title1", "body", "category", admin), admin));
-    assertFalse(server.deleteArticle(new Article("NOEXIST", "body", "category", admin), admin));
-    
-    assertEquals("Title1", server.searchArticleTitle("Title1").getTitle());
-    assertEquals(3, server.searchArticleAuthor("Raul").size());
-    
-    ArrayList<Article> top = server.viewTopArticle();
-    assertEquals(5, top.size());
-    for (int i = 1; i < top.size()-1; i++) {
-		assertTrue(top.get(i-1).getVisits() == top.get(i).getVisits() || top.get(i-1).getVisits() > top.get(i).getVisits());
 	}
-    
-    assertTrue(server.getFirstArticles().size() != 0);
-    server.searchArticleCategory("Sport");
-    server.editArticle(new Article("Title1", "body", "category", admin), "Title1", "body", admin);
-    }
-    
-    @org.junit.Test 
-    @PerfTest(invocations = 100, threads = 2)
-   	@Required(max = 500, average = 30)
-    public void getFirstArticles() throws RemoteException, InterruptedException
-    {
 
-    }
-    
-    
-    @org.junit.Test
-	@PerfTest(invocations = 10000)
-	@Required(max = 400, average = 20)
-	public void testLogInUser() throws RemoteException {
-		assertTrue(server.logIn("usernameTest2", "password").equals(user));
-	    assertTrue(server.logIn("usernameFalse", "password") == null);
+	@org.junit.Test
+	@PerfTest(invocations = 1000, threads = 10)
+	@Required(max = 800)
+	public void testLogInUser() throws RemoteException, InterruptedException {
+		assertTrue(server.logIn("usernameTest2", "password").username.equals(user.username));
+		assertTrue((server.logIn("usernameFalse", "password") == null));
 	}
-    
-    @org.junit.Test
-   	@PerfTest(invocations = 10000)
-   	@Required(max = 550, average = 30)
-   	public void testLogInAdmin() throws RemoteException {
-   	    assertTrue(admin.equals(server.logInAdmin(admin.username, admin.password)));
-   	    assertTrue(server.logInAdmin("NOEXIST", "NOEXIST") == null);
-   	}
-    @org.junit.Test
-    @PerfTest(invocations = 10000, threads = 1)
-	@Required(max = 500, average = 30)
-   	public void testRegister() throws RemoteException {
-    	assertTrue(server.registerUser("usernameTest2", "password", "email@gmail.com"));
-   	}
+
+	@org.junit.Test
+	@PerfTest(invocations = 1000, threads = 10)
+	@Required(max = 800, average = 50)
+	public void testLogInAdmin() throws RemoteException {
+		assertTrue(admin.equals(server.logInAdmin(admin.username, admin.password)));
+		assertTrue(server.logInAdmin("NOEXIST", "NOEXIST") == null);
+	}
+
+	@org.junit.Test
+	@PerfTest(invocations = 1000, threads = 10)
+	@Required(max = 200, average = 20)
+	public void testRegister() throws RemoteException, InterruptedException {
+		assertTrue(server.registerUser("usernameTest2", "password", "email@gmail.com"));
+	}
+
+	@org.junit.Test
+	@PerfTest(invocations = 100, threads = 10)
+	@Required(max = 550, average = 140)
+	public void testArticlesManagement() throws RemoteException, InterruptedException {
+
+		assertTrue(server.readArticle("NOEXIST") == null);
+		assertEquals("Title1", server.readArticle("Title1").getTitle());
+
+		assertFalse(server.createArticle(new Article("Title1", "body", "category", admin), admin));
+		assertFalse(server.deleteArticle(new Article("NOEXIST", "body", "category", admin), admin));
+
+		assertEquals("Title1", server.searchArticleTitle("Title1").getTitle());
+		assertEquals(3, server.searchArticleAuthor("Raul").size());
+
+		ArrayList<Article> top = server.viewTopArticle();
+		assertEquals(5, top.size());
+		for (int i = 1; i < top.size() - 1; i++) {
+			assertTrue(top.get(i - 1).getVisits() == top.get(i).getVisits()
+					|| top.get(i - 1).getVisits() > top.get(i).getVisits());
+		}
+
+		assertTrue(server.getFirstArticles().size() != 0);
+		server.searchArticleCategory("Sport");
+		server.editArticle(new Article("Title1", "body", "category", admin), "Title1", "body", admin);
+	}
+
+	@org.junit.Test
+	@PerfTest(invocations = 1000, threads = 10)
+	@Required(max = 550, average = 80)
+	public void getFirstArticles() throws RemoteException, InterruptedException {
+		server.getFirstArticles();
+	}
+
 }
