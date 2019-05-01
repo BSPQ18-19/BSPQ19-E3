@@ -82,7 +82,7 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 800, average = 50)
+	@Required(max = 850, average = 60)
 	public void testLogInAdmin() throws RemoteException {
 		assertTrue(admin.equals(server.logInAdmin(admin.username, admin.password)));
 		assertTrue(server.logInAdmin("NOEXIST", "NOEXIST") == null);
@@ -97,7 +97,7 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 100, threads = 10)
-	@Required(max = 550, average = 140)
+	@Required(max = 800, average = 140)
 	public void testArticlesManagement() throws RemoteException, InterruptedException {
 
 		assertTrue(server.readArticle("NOEXIST") == null);

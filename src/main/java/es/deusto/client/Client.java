@@ -185,8 +185,7 @@ public class Client {
 							top.get(optionRead).setVisits(top.get(optionRead).getVisits() + 1);
 						} else if (option3 == 2) {
 							firstArticles();
-						}
-						else if (option3 == 3) {
+						} else if (option3 == 3) {
 							option = 3;
 							logger.info("Logging out...");
 						} else {
@@ -217,7 +216,7 @@ public class Client {
 			logger.info("5) LogOut");
 			option2 = scan.nextInt();
 			scan.nextLine();
-			if (option2 == 1 || option2 == 2 || option2 == 3 || option2==4) {
+			if (option2 == 1 || option2 == 2 || option2 == 3 || option2 == 4) {
 				switch (option2) {
 				case 1:
 					// Create article
@@ -236,13 +235,13 @@ public class Client {
 					logger.info("Eliminating article...");
 					ownArticles = server.searchArticleAuthor(adm.username);
 					if (ownArticles.size() > 0 && ownArticles != null) {
-						//You have own articles
+						// You have own articles
 						logger.debug("Size of the articles: " + ownArticles.size());
 						logger.info("Your articles");
 						for (int m = 0; m < 10 && m < ownArticles.size(); m++) {
 							logger.info("Article " + m + ":" + ownArticles.get(m).getTitle());
 						}
-						//Options with our own articles, Read or Select Deleting article
+						// Options with our own articles, Read or Select Deleting article
 						int optionEliminate;
 						do {
 							optionEliminate = 0;
@@ -252,13 +251,13 @@ public class Client {
 							logger.info("3) Exit the Eliminating article option");
 							optionEliminate = scan.nextInt();
 							scan.nextLine();
-							if (optionEliminate == 1 || optionEliminate == 2 ) {
-								if(optionEliminate == 1) {
+							if (optionEliminate == 1 || optionEliminate == 2) {
+								if (optionEliminate == 1) {
 									logger.info("Select the article you want to read (Example: 1,2,3...): ");
 									int optionRead = scan.nextInt();
 									scan.nextLine();
 									logger.info(ownArticles.get(optionRead).toString());
-								}else {
+								} else {
 									logger.info("Your articles");
 									for (int m = 0; m < 10 && m < ownArticles.size(); m++) {
 										logger.info("Article " + m + ":" + ownArticles.get(m).getTitle());
@@ -269,15 +268,15 @@ public class Client {
 									Boolean okey = server.deleteArticle(ownArticles.get(optionDelete), adm);
 									logger.info("The process of deleting the article: " + okey);
 								}
-							}else {
+							} else {
 								logger.info("Exiting the Eliminating article option...");
 							}
-						}while(optionEliminate != 3);
+						} while (optionEliminate != 3);
 					} else {
-						//You dont have articles
+						// You dont have articles
 						logger.info("You don't have articles");
 					}
-					break;	
+					break;
 				case 3:
 					// Edit article
 					break;
@@ -285,14 +284,14 @@ public class Client {
 					// See yours articles
 					ownArticles = server.searchArticleAuthor(adm.username);
 					if (ownArticles.size() > 0 && ownArticles != null) {
-						//You have own articles
+						// You have own articles
 						logger.debug("Size of the articles: " + ownArticles.size());
 						logger.info("Your articles");
 						for (int m = 0; m < 10 && m < ownArticles.size(); m++) {
 							logger.info("Article " + m + ":" + ownArticles.get(m).getTitle());
 						}
-					}else {
-						//You dont have articles
+					} else {
+						// You dont have articles
 						logger.info("You don't have articles");
 					}
 					break;
