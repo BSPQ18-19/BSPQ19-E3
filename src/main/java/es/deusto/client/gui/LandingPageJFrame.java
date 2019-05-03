@@ -26,8 +26,8 @@ public class LandingPageJFrame extends JFrame {
                 //Open login modal box
                 LoginJDialog loginJDialog = new LoginJDialog();
                 loginJDialog.pack();
+                loginJDialog.setLocationRelativeTo(panelMain);
                 loginJDialog.setVisible(true);
-                loginJDialog.setLocationRelativeTo(null);
             }
         });
         buttonRegister.addActionListener(new ActionListener() {
