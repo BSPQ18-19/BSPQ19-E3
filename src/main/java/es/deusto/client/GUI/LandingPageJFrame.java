@@ -1,4 +1,4 @@
-package es.deusto.client.gui;
+package es.deusto.client.GUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,7 +39,11 @@ public class LandingPageJFrame extends JFrame {
         buttonAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //Open login modal box
+                LoginJDialog loginAdminJDialog = new LoginJDialog();
+                loginAdminJDialog.pack();
+                loginAdminJDialog.setLocationRelativeTo(panelMain);
+                loginAdminJDialog.setVisible(true);
             }
         });
     }

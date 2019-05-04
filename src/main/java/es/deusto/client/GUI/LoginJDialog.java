@@ -1,4 +1,4 @@
-package es.deusto.client.gui;
+package es.deusto.client.GUI;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -7,6 +7,11 @@ public class LoginJDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JPasswordField passwordField;
+    private JTextField usernameField;
+    private JLabel loginLabel;
+    private JLabel labelUser;
+    private JLabel labelPassword;
 
     public LoginJDialog() {
         setContentPane(contentPane);
