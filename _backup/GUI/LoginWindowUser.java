@@ -1,4 +1,4 @@
-package es.deusto.client.GUI;
+package es.deusto.client.view;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

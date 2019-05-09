@@ -63,6 +63,12 @@
 			<version>2.3.4</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.intellij/forms_rt -->
+		<dependency>
+			<groupId>com.intellij</groupId>
+			<artifactId>forms_rt</artifactId>
+			<version>7.0.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -192,7 +198,8 @@
 					<excludes>
 						<exclude>es/deusto/server/jdo/DB*</exclude>
 						<exclude>es/deusto/client/*</exclude>
-						<exclude>es/deusto/client/GUI/*</exclude>
+						<exclude>es/deusto/client/wiev/*</exclude>
+						<exclude>es/deusto/client/controller/*</exclude>
 					</excludes>
 				</configuration>
 				<reportSets>
