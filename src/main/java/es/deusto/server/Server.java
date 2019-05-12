@@ -185,7 +185,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
-			logger.info("Checking whether the article title is already in use: " + art);
+			logger.info("Checking whether the article title is already in use: " + art.title);
 			try {
 				Article artDB = pm.getObjectById(Article.class, art.title);
 				logger.info("The title: " + art.title + " it's already in use, the transaction wasn't successful");
@@ -197,6 +197,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 				logger.info("Number of visits: " + art.visits);
 				logger.info("Categorized as: " + art.category);
 				autho = pm.getObjectById(Admin.class, autho.username);
+				art.setAdmin(autho);
+				pm.makePersistent(art);
 				autho.addArticle(art);
 				tx.commit();
 

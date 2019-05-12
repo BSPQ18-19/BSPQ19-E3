@@ -145,12 +145,12 @@
 								<limit>
 									<counter>INSTRUCTION</counter>
 									<value>COVEREDRATIO</value>
-									<minimum>0.30</minimum>
+									<minimum>0.50</minimum>
 								</limit>
 								<limit>
 									<counter>BRANCH</counter>
 									<value>COVEREDRATIO</value>
-									<minimum>0.30</minimum>
+									<minimum>0.50</minimum>
 								</limit>
 							</limits>
 						</rule>
@@ -195,7 +195,8 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<configuration>
-					<excludes>
+					<excludes>				
+						<exclude>javax/jdo/**</exclude>
 						<exclude>es/deusto/server/jdo/DB*</exclude>
 						<exclude>es/deusto/client/*</exclude>
 						<exclude>es/deusto/client/wiev/*</exclude>
