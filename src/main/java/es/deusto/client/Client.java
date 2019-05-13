@@ -1,6 +1,7 @@
 package es.deusto.client;
 
 import es.deusto.client.controller.LandingPageController;
+import es.deusto.client.service.RMIService;
 
 import javax.swing.*;
 /**
@@ -12,7 +13,7 @@ public class Client {
         //Logger logger = ClientLogger.getLogger();
 
         if (args.length != 3) {
-            //logger.info("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
+            System.out.println("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
             System.exit(0);
         }
 
@@ -26,6 +27,9 @@ public class Client {
         //Always run GUI code on the event dispatch thread (lambda syntax)
         SwingUtilities.invokeLater(Client::run);
         //logger.info("Client initialization finished");
+
+        Client client = new Client();
+        client.setService(args[0], Integer.parseInt(args[1]), args[2]);
     }
 
     private static void run() {
@@ -33,4 +37,12 @@ public class Client {
         LandingPageController landingPage = new LandingPageController();
         landingPage.showLandingPageWindow();
     }
+
+    private RMIService service = null;
+
+    private void setService(String IP, Integer PORT, String SERVER_NAME) {
+        service = RMIService.getService();
+        service.setService(IP, PORT, SERVER_NAME);
+    }
+
 }
