@@ -18,4 +18,7 @@ public class RMIService {
     public static RMIService getService() {
         return service;
     }
+    public IServer getServer() {
+        return server;
+    }
 }

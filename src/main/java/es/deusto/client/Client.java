@@ -24,12 +24,12 @@ public class Client {
             System.setSecurityManager(new SecurityManager());
         }
 
+        Client client = new Client();
+        client.setService(args[0], Integer.parseInt(args[1]), args[2]);
+
         //Always run GUI code on the event dispatch thread (lambda syntax)
         SwingUtilities.invokeLater(Client::run);
         //logger.info("Client initialization finished");
-
-        Client client = new Client();
-        client.setService(args[0], Integer.parseInt(args[1]), args[2]);
     }
 
     private static void run() {

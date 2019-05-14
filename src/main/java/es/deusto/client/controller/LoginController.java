@@ -1,5 +1,6 @@
 package es.deusto.client.controller;
 
+import es.deusto.client.model.Login;
 import es.deusto.client.view.LoginJDialog;
 
 import javax.swing.*;
@@ -14,9 +15,16 @@ public class LoginController {
     private JPasswordField passwordField;
     private JTextField usernameField;
 
+    private Login loginModel = null;
+
     public LoginController() {
         initComponents();
         initListeners();
+        initModel();
+    }
+
+    private void initModel() {
+        loginModel = new Login();
     }
 
     private void initComponents() {
@@ -45,8 +53,11 @@ public class LoginController {
     }
 
     private void onOK() {
-        // add your code here
-        login.dispose();
+        String username = usernameField.getText();
+        char[] password = passwordField.getPassword();
 
+        loginModel.login(username, password);
+
+        login.dispose();
     }
 }
