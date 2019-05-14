@@ -17,6 +17,7 @@
 		<server.Name>newspaperServer</server.Name>
 		<policy.file>${basedir}/src/main/resources/security/java.policy</policy.file>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
+		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
 	</properties>
 
 	<!-- search for the latest version of dependencies in http://mvnrepository.com -->
@@ -151,7 +152,14 @@
 					</rules>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>com.soebes.maven.plugins.dmg</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -189,7 +197,7 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<configuration>
-					<excludes>				
+					<excludes>
 						<exclude>javax/jdo/**</exclude>
 						<exclude>es/deusto/server/jdo/DB*</exclude>
 						<exclude>es/deusto/client/*</exclude>

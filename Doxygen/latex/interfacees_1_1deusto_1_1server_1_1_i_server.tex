@@ -1,0 +1,184 @@
+\hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server}{}\section{es.\+deusto.\+server.\+I\+Server Interface Reference}
+\label{interfacees_1_1deusto_1_1server_1_1_i_server}\index{es.\+deusto.\+server.\+I\+Server@{es.\+deusto.\+server.\+I\+Server}}
+
+
+Inheritance diagram for es.\+deusto.\+server.\+I\+Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{interfacees_1_1deusto_1_1server_1_1_i_server__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for es.\+deusto.\+server.\+I\+Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{interfacees_1_1deusto_1_1server_1_1_i_server__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Boolean \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a3b0fbbc1c934b8e527ecfed69e497155}{register\+User} (String login, String password, String email)  throws Remote\+Exception
+\item 
+\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_user}{User} \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ae6b27c8714c2e2eadc9a55bccb0543fc}{log\+In} (String user, String pass)  throws Remote\+Exception
+\item 
+\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a65588c309522410e6a6d9c27d80821a7}{log\+In\+Admin} (String user, String pass)  throws Remote\+Exception
+\item 
+\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a1f02a5aa0628909b5464141923f5d1d2}{read\+Article} (String title)  throws Remote\+Exception
+\item 
+Boolean \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a74b3203c5a8d94e91004df0dc84ca386}{create\+Article} (\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} art, \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} author)  throws Remote\+Exception
+\item 
+\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab2c4bd97c628b735feedcf16e6aeb6b8}{search\+Article\+Title} (String title)  throws Remote\+Exception
+\item 
+Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab08ccd2295e983571cf50431d273393a}{search\+Article\+Category} (String category)  throws Remote\+Exception
+\item 
+Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a92b587f25a7043b24d44f326d1c7b7ae}{search\+Article\+Author} (String author)  throws Remote\+Exception
+\item 
+Boolean \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ac96e072eb8a660ebcd5e535cb1324e64}{delete\+Article} (\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} art, \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} autho)  throws Remote\+Exception
+\item 
+Boolean \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab5c4258f62146d90a064604891cedf2f}{edit\+Article} (\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} e, String new\+Title, String new\+Body, \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} autho)  throws Remote\+Exception
+\item 
+Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab1b33472017b55ae84bf849430db5f1b}{view\+Top\+Article} ()  throws Remote\+Exception
+\item 
+Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a27b2a5526387404d63d7fc6d0415acd4}{get\+First\+Articles} ()  throws Remote\+Exception
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file I\+Server.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_a74b3203c5a8d94e91004df0dc84ca386}\label{interfacees_1_1deusto_1_1server_1_1_i_server_a74b3203c5a8d94e91004df0dc84ca386}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!create\+Article@{create\+Article}}
+\index{create\+Article@{create\+Article}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{create\+Article()}{createArticle()}}
+{\footnotesize\ttfamily Boolean es.\+deusto.\+server.\+I\+Server.\+create\+Article (\begin{DoxyParamCaption}\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}}]{art,  }\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin}}]{author }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a58363d9c2c5c5d1e085e22deeeebf833}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_ac96e072eb8a660ebcd5e535cb1324e64}\label{interfacees_1_1deusto_1_1server_1_1_i_server_ac96e072eb8a660ebcd5e535cb1324e64}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!delete\+Article@{delete\+Article}}
+\index{delete\+Article@{delete\+Article}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{delete\+Article()}{deleteArticle()}}
+{\footnotesize\ttfamily Boolean es.\+deusto.\+server.\+I\+Server.\+delete\+Article (\begin{DoxyParamCaption}\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}}]{art,  }\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin}}]{autho }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_ad9d8810833b631866924dc481801614a}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_ab5c4258f62146d90a064604891cedf2f}\label{interfacees_1_1deusto_1_1server_1_1_i_server_ab5c4258f62146d90a064604891cedf2f}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!edit\+Article@{edit\+Article}}
+\index{edit\+Article@{edit\+Article}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{edit\+Article()}{editArticle()}}
+{\footnotesize\ttfamily Boolean es.\+deusto.\+server.\+I\+Server.\+edit\+Article (\begin{DoxyParamCaption}\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}}]{e,  }\item[{String}]{new\+Title,  }\item[{String}]{new\+Body,  }\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin}}]{autho }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a2c4455392fb9fb404d425110b5905c6a}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_a27b2a5526387404d63d7fc6d0415acd4}\label{interfacees_1_1deusto_1_1server_1_1_i_server_a27b2a5526387404d63d7fc6d0415acd4}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!get\+First\+Articles@{get\+First\+Articles}}
+\index{get\+First\+Articles@{get\+First\+Articles}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{get\+First\+Articles()}{getFirstArticles()}}
+{\footnotesize\ttfamily Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+I\+Server.\+get\+First\+Articles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a64dfcee7821b0cc581367c1b21d9f97f}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_ae6b27c8714c2e2eadc9a55bccb0543fc}\label{interfacees_1_1deusto_1_1server_1_1_i_server_ae6b27c8714c2e2eadc9a55bccb0543fc}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!log\+In@{log\+In}}
+\index{log\+In@{log\+In}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{log\+In()}{logIn()}}
+{\footnotesize\ttfamily \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_user}{User} es.\+deusto.\+server.\+I\+Server.\+log\+In (\begin{DoxyParamCaption}\item[{String}]{user,  }\item[{String}]{pass }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a5a570da0fbfec7afdf56bd3648fc904f}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_a65588c309522410e6a6d9c27d80821a7}\label{interfacees_1_1deusto_1_1server_1_1_i_server_a65588c309522410e6a6d9c27d80821a7}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!log\+In\+Admin@{log\+In\+Admin}}
+\index{log\+In\+Admin@{log\+In\+Admin}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{log\+In\+Admin()}{logInAdmin()}}
+{\footnotesize\ttfamily \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} es.\+deusto.\+server.\+I\+Server.\+log\+In\+Admin (\begin{DoxyParamCaption}\item[{String}]{user,  }\item[{String}]{pass }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a654d408d0865f8e3f2c931da9e90283a}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_a1f02a5aa0628909b5464141923f5d1d2}\label{interfacees_1_1deusto_1_1server_1_1_i_server_a1f02a5aa0628909b5464141923f5d1d2}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!read\+Article@{read\+Article}}
+\index{read\+Article@{read\+Article}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{read\+Article()}{readArticle()}}
+{\footnotesize\ttfamily \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} es.\+deusto.\+server.\+I\+Server.\+read\+Article (\begin{DoxyParamCaption}\item[{String}]{title }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_ac3af6f09e37d0b86743f8f46e39acdad}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_a3b0fbbc1c934b8e527ecfed69e497155}\label{interfacees_1_1deusto_1_1server_1_1_i_server_a3b0fbbc1c934b8e527ecfed69e497155}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!register\+User@{register\+User}}
+\index{register\+User@{register\+User}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{register\+User()}{registerUser()}}
+{\footnotesize\ttfamily Boolean es.\+deusto.\+server.\+I\+Server.\+register\+User (\begin{DoxyParamCaption}\item[{String}]{login,  }\item[{String}]{password,  }\item[{String}]{email }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a0ab63e5bc49a52ff84f7d6859161b683}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_a92b587f25a7043b24d44f326d1c7b7ae}\label{interfacees_1_1deusto_1_1server_1_1_i_server_a92b587f25a7043b24d44f326d1c7b7ae}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!search\+Article\+Author@{search\+Article\+Author}}
+\index{search\+Article\+Author@{search\+Article\+Author}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{search\+Article\+Author()}{searchArticleAuthor()}}
+{\footnotesize\ttfamily Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+I\+Server.\+search\+Article\+Author (\begin{DoxyParamCaption}\item[{String}]{author }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a5f04113ce0c895e13e1bde76d7b41eb8}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_ab08ccd2295e983571cf50431d273393a}\label{interfacees_1_1deusto_1_1server_1_1_i_server_ab08ccd2295e983571cf50431d273393a}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!search\+Article\+Category@{search\+Article\+Category}}
+\index{search\+Article\+Category@{search\+Article\+Category}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{search\+Article\+Category()}{searchArticleCategory()}}
+{\footnotesize\ttfamily Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+I\+Server.\+search\+Article\+Category (\begin{DoxyParamCaption}\item[{String}]{category }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_ab2729689bb71bd707881b563cdf2a006}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_ab2c4bd97c628b735feedcf16e6aeb6b8}\label{interfacees_1_1deusto_1_1server_1_1_i_server_ab2c4bd97c628b735feedcf16e6aeb6b8}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!search\+Article\+Title@{search\+Article\+Title}}
+\index{search\+Article\+Title@{search\+Article\+Title}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{search\+Article\+Title()}{searchArticleTitle()}}
+{\footnotesize\ttfamily \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} es.\+deusto.\+server.\+I\+Server.\+search\+Article\+Title (\begin{DoxyParamCaption}\item[{String}]{title }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_a56ae654d89e8113c79615077ed4a6e24}{es.\+deusto.\+server.\+Server}.
+
+\mbox{\Hypertarget{interfacees_1_1deusto_1_1server_1_1_i_server_ab1b33472017b55ae84bf849430db5f1b}\label{interfacees_1_1deusto_1_1server_1_1_i_server_ab1b33472017b55ae84bf849430db5f1b}} 
+\index{es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}!view\+Top\+Article@{view\+Top\+Article}}
+\index{view\+Top\+Article@{view\+Top\+Article}!es\+::deusto\+::server\+::\+I\+Server@{es\+::deusto\+::server\+::\+I\+Server}}
+\subsubsection{\texorpdfstring{view\+Top\+Article()}{viewTopArticle()}}
+{\footnotesize\ttfamily Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+I\+Server.\+view\+Top\+Article (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+
+
+Implemented in \hyperlink{classes_1_1deusto_1_1server_1_1_server_ada6d55bcd79444de821eaeb6b21c44b8}{es.\+deusto.\+server.\+Server}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/es/deusto/server/\hyperlink{_i_server_8java}{I\+Server.\+java}\end{DoxyCompactItemize}
