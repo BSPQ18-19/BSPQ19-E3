@@ -90,14 +90,14 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 500, average = 20)
+	@Required(max = 1000, average = 20)
 	public void testRegister() throws RemoteException, InterruptedException {
 		assertTrue(server.registerUser("usernameTest2", "password", "email@gmail.com"));
 	}
 
 	@org.junit.Test
 	@PerfTest(invocations = 100, threads = 10)
-	@Required(max = 800, average = 300)
+	@Required(max = 1000, average = 300)
 	public void testArticlesManagement() throws RemoteException, InterruptedException {
 
 		assertTrue(server.readArticle("NOEXIST") == null);
@@ -123,7 +123,7 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 550, average = 80)
+	@Required(max = 1000, average = 80)
 	public void getFirstArticles() throws RemoteException, InterruptedException {
 		server.getFirstArticles();
 	}
