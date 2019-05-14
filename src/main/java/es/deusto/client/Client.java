@@ -1,24 +1,25 @@
 package es.deusto.client;
 
+import es.deusto.client.logger.LoggerClient;
+import org.apache.log4j.Logger;
 import es.deusto.client.controller.LandingPageController;
 import es.deusto.client.service.RMIService;
 
 import javax.swing.*;
 /**
- * Java Swing GUI Application with IntelliJ IDEA IDE replacing Alberto console version
+ * Client main class in network application (client-server paradigm)
+ * Java Swing GUI Application with IntelliJ IDEA IDE insted of Alberto console version from previous commits.
  * @author Petr & Alberto
  */
 public class Client {
-    public static void main(String[] args) { //throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-        //Logger logger = ClientLogger.getLogger();
+
+    public static void main(String[] args) {
+        Logger LOGGER = LoggerClient.getLogger();
 
         if (args.length != 3) {
-            System.out.println("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
+            LOGGER.fatal("Use: java [policy] [codebase] Client.Client [host] [port] [server]");
             System.exit(0);
         }
-
-        //Change default look for app - it doesn't work, IDK
-        //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
@@ -29,7 +30,7 @@ public class Client {
 
         //Always run GUI code on the event dispatch thread (lambda syntax)
         SwingUtilities.invokeLater(Client::run);
-        //logger.info("Client initialization finished");
+        LOGGER.info("Client initialization finished");
     }
 
     private static void run() {
@@ -38,10 +39,8 @@ public class Client {
         landingPage.showLandingPageWindow();
     }
 
-    private RMIService service = null;
-
     private void setService(String IP, Integer PORT, String SERVER_NAME) {
-        service = RMIService.getService();
+        RMIService service = RMIService.getService();
         service.setService(IP, PORT, SERVER_NAME);
     }
 
