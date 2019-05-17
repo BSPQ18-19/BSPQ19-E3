@@ -198,10 +198,8 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
-						<exclude>javax/jdo/**</exclude>
 						<exclude>es/deusto/server/jdo/DB*</exclude>
-						<exclude>es/deusto/client/*</exclude>
-						<exclude>es/deusto/client/GUI/*</exclude>
+						<exclude>es/deusto/client/**</exclude>
 					</excludes>
 				</configuration>
 				<reportSets>
