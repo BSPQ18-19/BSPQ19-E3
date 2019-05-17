@@ -12,6 +12,5 @@ var classes_1_1deusto_1_1server_1_1_server =
     [ "registerUser", "classes_1_1deusto_1_1server_1_1_server.html#a0ab63e5bc49a52ff84f7d6859161b683", null ],
     [ "searchArticleAuthor", "classes_1_1deusto_1_1server_1_1_server.html#a5f04113ce0c895e13e1bde76d7b41eb8", null ],
     [ "searchArticleCategory", "classes_1_1deusto_1_1server_1_1_server.html#ab2729689bb71bd707881b563cdf2a006", null ],
-    [ "searchArticleTitle", "classes_1_1deusto_1_1server_1_1_server.html#a56ae654d89e8113c79615077ed4a6e24", null ],
     [ "viewTopArticle", "classes_1_1deusto_1_1server_1_1_server.html#ada6d55bcd79444de821eaeb6b21c44b8", null ]
 ];

@@ -1,0 +1,396 @@
+\hypertarget{classes_1_1deusto_1_1server_1_1_server}{}\section{es.\+deusto.\+server.\+Server Class Reference}
+\label{classes_1_1deusto_1_1server_1_1_server}\index{es.\+deusto.\+server.\+Server@{es.\+deusto.\+server.\+Server}}
+
+
+Inheritance diagram for es.\+deusto.\+server.\+Server\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{classes_1_1deusto_1_1server_1_1_server__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for es.\+deusto.\+server.\+Server\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classes_1_1deusto_1_1server_1_1_server__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classes_1_1deusto_1_1server_1_1_server_a84f78162a65dd737f224eb2f94c43023}{Server} ()  throws Remote\+Exception 
+\item 
+synchronized Boolean \hyperlink{classes_1_1deusto_1_1server_1_1_server_a0ab63e5bc49a52ff84f7d6859161b683}{register\+User} (String login, String password, String email)  throws Remote\+Exception 
+\item 
+synchronized \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_user}{User} \hyperlink{classes_1_1deusto_1_1server_1_1_server_a5a570da0fbfec7afdf56bd3648fc904f}{log\+In} (String user, String pass)  throws Remote\+Exception 
+\item 
+synchronized \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} \hyperlink{classes_1_1deusto_1_1server_1_1_server_a654d408d0865f8e3f2c931da9e90283a}{log\+In\+Admin} (String user, String pass)  throws Remote\+Exception 
+\item 
+synchronized \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} \hyperlink{classes_1_1deusto_1_1server_1_1_server_ac3af6f09e37d0b86743f8f46e39acdad}{read\+Article} (String Title)  throws Remote\+Exception 
+\item 
+synchronized Boolean \hyperlink{classes_1_1deusto_1_1server_1_1_server_a58363d9c2c5c5d1e085e22deeeebf833}{create\+Article} (\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} art, \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} autho)  throws Remote\+Exception 
+\item 
+synchronized Boolean \hyperlink{classes_1_1deusto_1_1server_1_1_server_a2c4455392fb9fb404d425110b5905c6a}{edit\+Article} (\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} art, String new\+Title, String new\+Body, \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} autho)  throws Remote\+Exception 
+\item 
+synchronized Boolean \hyperlink{classes_1_1deusto_1_1server_1_1_server_ad9d8810833b631866924dc481801614a}{delete\+Article} (\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} art, \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} autho)  throws Remote\+Exception 
+\item 
+synchronized Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{classes_1_1deusto_1_1server_1_1_server_ab2729689bb71bd707881b563cdf2a006}{search\+Article\+Category} (String category)  throws Remote\+Exception 
+\item 
+synchronized Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{classes_1_1deusto_1_1server_1_1_server_a5f04113ce0c895e13e1bde76d7b41eb8}{search\+Article\+Author} (String author)  throws Remote\+Exception 
+\item 
+synchronized Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{classes_1_1deusto_1_1server_1_1_server_ada6d55bcd79444de821eaeb6b21c44b8}{view\+Top\+Article} ()  throws Remote\+Exception 
+\item 
+synchronized Array\+List$<$ \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} $>$ \hyperlink{classes_1_1deusto_1_1server_1_1_server_a64dfcee7821b0cc581367c1b21d9f97f}{get\+First\+Articles} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classes_1_1deusto_1_1server_1_1_server_a0517d84248cdc6489471f9e274b6d983}{load\+DB} ()
+\item 
+static void \hyperlink{classes_1_1deusto_1_1server_1_1_server_a750bb0d7dbd89246a3602f2e20d03fb5}{main} (String\mbox{[}$\,$\mbox{]} args)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classes_1_1deusto_1_1server_1_1_server_a168b866b961a3d54b38834db9b52ca80}{finalize} ()  throws Throwable 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is the server class wich communicates with the clients and register the user or the articles in the DB. \begin{DoxyAuthor}{Author}
+Alberto 
+\end{DoxyAuthor}
+
+
+Definition at line 37 of file Server.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a84f78162a65dd737f224eb2f94c43023}\label{classes_1_1deusto_1_1server_1_1_server_a84f78162a65dd737f224eb2f94c43023}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!Server@{Server}}
+\index{Server@{Server}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{Server()}{Server()}}
+{\footnotesize\ttfamily es.\+deusto.\+server.\+Server.\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+The constructor of the class (Persistence manager, transaction...)
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Remote\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 49 of file Server.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a58363d9c2c5c5d1e085e22deeeebf833}\label{classes_1_1deusto_1_1server_1_1_server_a58363d9c2c5c5d1e085e22deeeebf833}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!create\+Article@{create\+Article}}
+\index{create\+Article@{create\+Article}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{create\+Article()}{createArticle()}}
+{\footnotesize\ttfamily synchronized Boolean es.\+deusto.\+server.\+Server.\+create\+Article (\begin{DoxyParamCaption}\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}}]{art,  }\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin}}]{autho }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+To create an article
+
+
+\begin{DoxyParams}{Parameters}
+{\em Article} & the article to create \\
+\hline
+{\em Admin} & the admin that is creating the article \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean true(created) false(not created) 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a74b3203c5a8d94e91004df0dc84ca386}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 197 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_ad9d8810833b631866924dc481801614a}\label{classes_1_1deusto_1_1server_1_1_server_ad9d8810833b631866924dc481801614a}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!delete\+Article@{delete\+Article}}
+\index{delete\+Article@{delete\+Article}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{delete\+Article()}{deleteArticle()}}
+{\footnotesize\ttfamily synchronized Boolean es.\+deusto.\+server.\+Server.\+delete\+Article (\begin{DoxyParamCaption}\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}}]{art,  }\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin}}]{autho }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+To delete an existing article
+
+
+\begin{DoxyParams}{Parameters}
+{\em Article,the} & one to be deleted that must be searched in the db \\
+\hline
+{\em Admin,the} & one that is deleting the article \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean true(deleted) false(not deleted) 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ac96e072eb8a660ebcd5e535cb1324e64}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 296 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a2c4455392fb9fb404d425110b5905c6a}\label{classes_1_1deusto_1_1server_1_1_server_a2c4455392fb9fb404d425110b5905c6a}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!edit\+Article@{edit\+Article}}
+\index{edit\+Article@{edit\+Article}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{edit\+Article()}{editArticle()}}
+{\footnotesize\ttfamily synchronized Boolean es.\+deusto.\+server.\+Server.\+edit\+Article (\begin{DoxyParamCaption}\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}}]{art,  }\item[{String}]{new\+Title,  }\item[{String}]{new\+Body,  }\item[{\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin}}]{autho }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+To edit an article
+
+
+\begin{DoxyParams}{Parameters}
+{\em Article,the} & one to edit that must be searched in db \\
+\hline
+{\em String} & new\+Title, the new title that must be given to the article \\
+\hline
+{\em boolean} & change\+Title, whether the title must be changed or not \\
+\hline
+{\em String} & new\+Body, the new body that must be given to the article \\
+\hline
+{\em boolean} & change\+Body, whether the body must be changed or not \\
+\hline
+{\em Admin,the} & one that is editing the article \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean true(edited) false(not edited) 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab5c4258f62146d90a064604891cedf2f}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 247 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a168b866b961a3d54b38834db9b52ca80}\label{classes_1_1deusto_1_1server_1_1_server_a168b866b961a3d54b38834db9b52ca80}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!finalize@{finalize}}
+\index{finalize@{finalize}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{finalize()}{finalize()}}
+{\footnotesize\ttfamily void es.\+deusto.\+server.\+Server.\+finalize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Throwable\hspace{0.3cm}{\ttfamily [protected]}}
+
+To finalize the transaction 
+
+Definition at line 59 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a64dfcee7821b0cc581367c1b21d9f97f}\label{classes_1_1deusto_1_1server_1_1_server_a64dfcee7821b0cc581367c1b21d9f97f}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!get\+First\+Articles@{get\+First\+Articles}}
+\index{get\+First\+Articles@{get\+First\+Articles}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{get\+First\+Articles()}{getFirstArticles()}}
+{\footnotesize\ttfamily synchronized Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+Server.\+get\+First\+Articles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the articles that see the user when enters
+
+\begin{DoxyReturn}{Returns}
+Array\+List$<$\+Article$>$ Returns the articles that the user will see in the timeline 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a27b2a5526387404d63d7fc6d0415acd4}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 417 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a0517d84248cdc6489471f9e274b6d983}\label{classes_1_1deusto_1_1server_1_1_server_a0517d84248cdc6489471f9e274b6d983}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!load\+DB@{load\+DB}}
+\index{load\+DB@{load\+DB}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{load\+D\+B()}{loadDB()}}
+{\footnotesize\ttfamily static void es.\+deusto.\+server.\+Server.\+load\+DB (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+This method is used to enter the initial data for the Database, like users, articles, admins... 
+
+Definition at line 441 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a5a570da0fbfec7afdf56bd3648fc904f}\label{classes_1_1deusto_1_1server_1_1_server_a5a570da0fbfec7afdf56bd3648fc904f}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!log\+In@{log\+In}}
+\index{log\+In@{log\+In}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{log\+In()}{logIn()}}
+{\footnotesize\ttfamily synchronized \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_user}{User} es.\+deusto.\+server.\+Server.\+log\+In (\begin{DoxyParamCaption}\item[{String}]{user,  }\item[{String}]{pass }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+To log in a U\+S\+ER
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & The username of the person \\
+\hline
+{\em pass} & the p logger.\+info(\char`\"{}-\/-\/-\/\+The article does not exist in the db, so it
+            cannot be edited-\/-\/-\/\char`\"{}); assword of that person \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the user of that person 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ae6b27c8714c2e2eadc9a55bccb0543fc}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 107 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a654d408d0865f8e3f2c931da9e90283a}\label{classes_1_1deusto_1_1server_1_1_server_a654d408d0865f8e3f2c931da9e90283a}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!log\+In\+Admin@{log\+In\+Admin}}
+\index{log\+In\+Admin@{log\+In\+Admin}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{log\+In\+Admin()}{logInAdmin()}}
+{\footnotesize\ttfamily synchronized \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_admin}{Admin} es.\+deusto.\+server.\+Server.\+log\+In\+Admin (\begin{DoxyParamCaption}\item[{String}]{user,  }\item[{String}]{pass }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+To log in a A\+D\+M\+IN
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & The username of the person \\
+\hline
+{\em pass} & the password of that person \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the admin of that person 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a65588c309522410e6a6d9c27d80821a7}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 141 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a750bb0d7dbd89246a3602f2e20d03fb5}\label{classes_1_1deusto_1_1server_1_1_server_a750bb0d7dbd89246a3602f2e20d03fb5}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!main@{main}}
+\index{main@{main}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void es.\+deusto.\+server.\+Server.\+main (\begin{DoxyParamCaption}\item[{String \mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 487 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_ac3af6f09e37d0b86743f8f46e39acdad}\label{classes_1_1deusto_1_1server_1_1_server_ac3af6f09e37d0b86743f8f46e39acdad}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!read\+Article@{read\+Article}}
+\index{read\+Article@{read\+Article}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{read\+Article()}{readArticle()}}
+{\footnotesize\ttfamily synchronized \hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article} es.\+deusto.\+server.\+Server.\+read\+Article (\begin{DoxyParamCaption}\item[{String}]{Title }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+You send the title of an article which is the one that you want to read and returns the article. 
+\begin{DoxyParams}{Parameters}
+{\em String} & The title of the article \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Article Returns the article 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a1f02a5aa0628909b5464141923f5d1d2}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 172 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a0ab63e5bc49a52ff84f7d6859161b683}\label{classes_1_1deusto_1_1server_1_1_server_a0ab63e5bc49a52ff84f7d6859161b683}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!register\+User@{register\+User}}
+\index{register\+User@{register\+User}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{register\+User()}{registerUser()}}
+{\footnotesize\ttfamily synchronized Boolean es.\+deusto.\+server.\+Server.\+register\+User (\begin{DoxyParamCaption}\item[{String}]{login,  }\item[{String}]{password,  }\item[{String}]{email }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+Register a user in the DB
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & The username of the person \\
+\hline
+{\em password} & The password of the person \\
+\hline
+{\em email} & The email of the person \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a Boolean, if the transaction works well returns true 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a3b0fbbc1c934b8e527ecfed69e497155}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 74 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_a5f04113ce0c895e13e1bde76d7b41eb8}\label{classes_1_1deusto_1_1server_1_1_server_a5f04113ce0c895e13e1bde76d7b41eb8}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!search\+Article\+Author@{search\+Article\+Author}}
+\index{search\+Article\+Author@{search\+Article\+Author}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{search\+Article\+Author()}{searchArticleAuthor()}}
+{\footnotesize\ttfamily synchronized Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+Server.\+search\+Article\+Author (\begin{DoxyParamCaption}\item[{String}]{author }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+Search the articles of one author 
+\begin{DoxyParams}{Parameters}
+{\em String} & The name of the author we want to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array\+List$<$\+Article$>$ returns the list of articles of that author 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_a92b587f25a7043b24d44f326d1c7b7ae}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 347 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_ab2729689bb71bd707881b563cdf2a006}\label{classes_1_1deusto_1_1server_1_1_server_ab2729689bb71bd707881b563cdf2a006}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!search\+Article\+Category@{search\+Article\+Category}}
+\index{search\+Article\+Category@{search\+Article\+Category}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{search\+Article\+Category()}{searchArticleCategory()}}
+{\footnotesize\ttfamily synchronized Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+Server.\+search\+Article\+Category (\begin{DoxyParamCaption}\item[{String}]{category }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+Search the articles which have one category 
+\begin{DoxyParams}{Parameters}
+{\em String} & The category we want to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array\+List$<$\+Article$>$ returns the list of articles with that category 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab08ccd2295e983571cf50431d273393a}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 325 of file Server.\+java.
+
+\mbox{\Hypertarget{classes_1_1deusto_1_1server_1_1_server_ada6d55bcd79444de821eaeb6b21c44b8}\label{classes_1_1deusto_1_1server_1_1_server_ada6d55bcd79444de821eaeb6b21c44b8}} 
+\index{es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}!view\+Top\+Article@{view\+Top\+Article}}
+\index{view\+Top\+Article@{view\+Top\+Article}!es\+::deusto\+::server\+::\+Server@{es\+::deusto\+::server\+::\+Server}}
+\subsubsection{\texorpdfstring{view\+Top\+Article()}{viewTopArticle()}}
+{\footnotesize\ttfamily synchronized Array\+List$<$\hyperlink{classes_1_1deusto_1_1server_1_1jdo_1_1_article}{Article}$>$ es.\+deusto.\+server.\+Server.\+view\+Top\+Article (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Remote\+Exception}
+
+A method which search the most visited articles \begin{DoxyReturn}{Returns}
+Array\+List$<$\+Article$>$ returns the top articles 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacees_1_1deusto_1_1server_1_1_i_server_ab1b33472017b55ae84bf849430db5f1b}{es.\+deusto.\+server.\+I\+Server}.
+
+
+
+Definition at line 375 of file Server.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/albertofdr/git/\+B\+S\+P\+Q19-\/\+E3/src/main/java/es/deusto/server/\hyperlink{_server_8java}{Server.\+java}\end{DoxyCompactItemize}

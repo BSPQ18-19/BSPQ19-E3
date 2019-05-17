@@ -10,6 +10,5 @@ var interfacees_1_1deusto_1_1server_1_1_i_server =
     [ "registerUser", "interfacees_1_1deusto_1_1server_1_1_i_server.html#a3b0fbbc1c934b8e527ecfed69e497155", null ],
     [ "searchArticleAuthor", "interfacees_1_1deusto_1_1server_1_1_i_server.html#a92b587f25a7043b24d44f326d1c7b7ae", null ],
     [ "searchArticleCategory", "interfacees_1_1deusto_1_1server_1_1_i_server.html#ab08ccd2295e983571cf50431d273393a", null ],
-    [ "searchArticleTitle", "interfacees_1_1deusto_1_1server_1_1_i_server.html#ab2c4bd97c628b735feedcf16e6aeb6b8", null ],
     [ "viewTopArticle", "interfacees_1_1deusto_1_1server_1_1_i_server.html#ab1b33472017b55ae84bf849430db5f1b", null ]
 ];

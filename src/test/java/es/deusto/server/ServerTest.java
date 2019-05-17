@@ -106,7 +106,6 @@ public class ServerTest {
 		assertFalse(server.createArticle(new Article("Title1", "body", "category", admin), admin));
 		assertFalse(server.deleteArticle(new Article("NOEXIST", "body", "category", admin), admin));
 
-		assertEquals("Title1", server.searchArticleTitle("Title1").getTitle());
 		assertEquals(3, server.searchArticleAuthor("Raul").size());
 
 		ArrayList<Article> top = server.viewTopArticle();

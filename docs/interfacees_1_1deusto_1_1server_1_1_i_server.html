@@ -114,8 +114,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1f02a5aa0628909b5464141923f5d1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74b3203c5a8d94e91004df0dc84ca386"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a74b3203c5a8d94e91004df0dc84ca386">createArticle</a> (<a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> art, <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_admin.html">Admin</a> author)  throws RemoteException</td></tr>
 <tr class="separator:a74b3203c5a8d94e91004df0dc84ca386"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c4bd97c628b735feedcf16e6aeb6b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ab2c4bd97c628b735feedcf16e6aeb6b8">searchArticleTitle</a> (String title)  throws RemoteException</td></tr>
-<tr class="separator:ab2c4bd97c628b735feedcf16e6aeb6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab08ccd2295e983571cf50431d273393a"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ab08ccd2295e983571cf50431d273393a">searchArticleCategory</a> (String category)  throws RemoteException</td></tr>
 <tr class="separator:ab08ccd2295e983571cf50431d273393a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92b587f25a7043b24d44f326d1c7b7ae"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a92b587f25a7043b24d44f326d1c7b7ae">searchArticleAuthor</a> (String author)  throws RemoteException</td></tr>
@@ -131,7 +129,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_i_server_8java_source.html#l00011">11</a> of file <a class="el" href="_i_server_8java_source.html">IServer.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_server_8java_source.html#l00016">16</a> of file <a class="el" href="_i_server_8java_source.html">IServer.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a74b3203c5a8d94e91004df0dc84ca386"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74b3203c5a8d94e91004df0dc84ca386">&#9670;&nbsp;</a></span>createArticle()</h2>
@@ -158,6 +156,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>To create an article</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Article</td><td>the article to create </td></tr>
+    <tr><td class="paramname">Admin</td><td>the admin that is creating the article </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean true(created) false(not created) </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a58363d9c2c5c5d1e085e22deeeebf833">es.deusto.server.Server</a>.</p>
 
@@ -188,6 +195,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>To delete an existing article</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Article,the</td><td>one to be deleted that must be searched in the db </td></tr>
+    <tr><td class="paramname">Admin,the</td><td>one that is deleting the article </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean true(deleted) false(not deleted) </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#ad9d8810833b631866924dc481801614a">es.deusto.server.Server</a>.</p>
 
@@ -230,6 +246,19 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>To edit an article</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Article,the</td><td>one to edit that must be searched in db </td></tr>
+    <tr><td class="paramname">String</td><td>newTitle, the new title that must be given to the article </td></tr>
+    <tr><td class="paramname">boolean</td><td>changeTitle, whether the title must be changed or not </td></tr>
+    <tr><td class="paramname">String</td><td>newBody, the new body that must be given to the article </td></tr>
+    <tr><td class="paramname">boolean</td><td>changeBody, whether the body must be changed or not </td></tr>
+    <tr><td class="paramname">Admin,the</td><td>one that is editing the article </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean true(edited) false(not edited) </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a2c4455392fb9fb404d425110b5905c6a">es.deusto.server.Server</a>.</p>
 
@@ -249,6 +278,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns the articles that see the user when enters</p>
+<dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; Returns the articles that the user will see in the timeline </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a64dfcee7821b0cc581367c1b21d9f97f">es.deusto.server.Server</a>.</p>
 
@@ -279,6 +310,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>To log in a USER</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>The username of the person </td></tr>
+    <tr><td class="paramname">pass</td><td>the p logger.info("---The article does not exist in the db, so it
+            cannot be edited---"); assword of that person </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the user of that person </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a5a570da0fbfec7afdf56bd3648fc904f">es.deusto.server.Server</a>.</p>
 
@@ -309,6 +350,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>To log in a ADMIN</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>The username of the person </td></tr>
+    <tr><td class="paramname">pass</td><td>the password of that person </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the admin of that person </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a654d408d0865f8e3f2c931da9e90283a">es.deusto.server.Server</a>.</p>
 
@@ -329,6 +379,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>You send the title of an article which is the one that you want to read and returns the article. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">String</td><td>The title of the article </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Article Returns the article </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#ac3af6f09e37d0b86743f8f46e39acdad">es.deusto.server.Server</a>.</p>
 
@@ -365,6 +422,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Register a user in the DB</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">login</td><td>The username of the person </td></tr>
+    <tr><td class="paramname">password</td><td>The password of the person </td></tr>
+    <tr><td class="paramname">email</td><td>The email of the person </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a Boolean, if the transaction works well returns true </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a0ab63e5bc49a52ff84f7d6859161b683">es.deusto.server.Server</a>.</p>
 
@@ -385,6 +452,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Search the articles of one author </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">String</td><td>The name of the author we want to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; returns the list of articles of that author </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a5f04113ce0c895e13e1bde76d7b41eb8">es.deusto.server.Server</a>.</p>
 
@@ -405,28 +479,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Search the articles which have one category </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">String</td><td>The category we want to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; returns the list of articles with that category </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#ab2729689bb71bd707881b563cdf2a006">es.deusto.server.Server</a>.</p>
-
-</div>
-</div>
-<a id="ab2c4bd97c628b735feedcf16e6aeb6b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2c4bd97c628b735feedcf16e6aeb6b8">&#9670;&nbsp;</a></span>searchArticleTitle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> es.deusto.server.IServer.searchArticleTitle </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>title</em></td><td>)</td>
-          <td> throws RemoteException</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a56ae654d89e8113c79615077ed4a6e24">es.deusto.server.Server</a>.</p>
 
 </div>
 </div>
@@ -444,13 +505,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>A method which search the most visited articles </p><dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; returns the top articles </dd></dl>
 
 <p>Implemented in <a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#ada6d55bcd79444de821eaeb6b21c44b8">es.deusto.server.Server</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li>src/main/java/es/deusto/server/<a class="el" href="_i_server_8java_source.html">IServer.java</a></li>
+<li>/home/albertofdr/git/BSPQ19-E3/src/main/java/es/deusto/server/<a class="el" href="_i_server_8java_source.html">IServer.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

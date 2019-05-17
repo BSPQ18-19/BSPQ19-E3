@@ -2,7 +2,6 @@ var searchData=
 [
   ['searcharticleauthor',['searchArticleAuthor',['../interfacees_1_1deusto_1_1server_1_1_i_server.html#a92b587f25a7043b24d44f326d1c7b7ae',1,'es.deusto.server.IServer.searchArticleAuthor()'],['../classes_1_1deusto_1_1server_1_1_server.html#a5f04113ce0c895e13e1bde76d7b41eb8',1,'es.deusto.server.Server.searchArticleAuthor()']]],
   ['searcharticlecategory',['searchArticleCategory',['../interfacees_1_1deusto_1_1server_1_1_i_server.html#ab08ccd2295e983571cf50431d273393a',1,'es.deusto.server.IServer.searchArticleCategory()'],['../classes_1_1deusto_1_1server_1_1_server.html#ab2729689bb71bd707881b563cdf2a006',1,'es.deusto.server.Server.searchArticleCategory()']]],
-  ['searcharticletitle',['searchArticleTitle',['../interfacees_1_1deusto_1_1server_1_1_i_server.html#ab2c4bd97c628b735feedcf16e6aeb6b8',1,'es.deusto.server.IServer.searchArticleTitle()'],['../classes_1_1deusto_1_1server_1_1_server.html#a56ae654d89e8113c79615077ed4a6e24',1,'es.deusto.server.Server.searchArticleTitle()']]],
   ['server',['Server',['../classes_1_1deusto_1_1server_1_1_server.html',1,'es.deusto.server.Server'],['../classes_1_1deusto_1_1server_1_1_server.html#a84f78162a65dd737f224eb2f94c43023',1,'es.deusto.server.Server.Server()']]],
   ['server_2ejava',['Server.java',['../_server_8java.html',1,'']]],
   ['servertest',['ServerTest',['../classes_1_1deusto_1_1server_1_1_server_test.html',1,'es::deusto::server']]],

@@ -1,3 +1,8 @@
+/** @package es.deusto.client                                                                                                                  
+    @brief This is the brief documentation for the Java package es.deusto.client which is a package for the client logic
+    
+    This class is the first client which initialize the GUI
+*/
 package es.deusto.client;
 
 import java.rmi.RemoteException;

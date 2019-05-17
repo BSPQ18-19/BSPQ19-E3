@@ -123,8 +123,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2c4455392fb9fb404d425110b5905c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9d8810833b631866924dc481801614a"><td class="memItemLeft" align="right" valign="top">synchronized Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#ad9d8810833b631866924dc481801614a">deleteArticle</a> (<a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> art, <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_admin.html">Admin</a> autho)  throws RemoteException </td></tr>
 <tr class="separator:ad9d8810833b631866924dc481801614a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ae654d89e8113c79615077ed4a6e24"><td class="memItemLeft" align="right" valign="top">synchronized <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a56ae654d89e8113c79615077ed4a6e24">searchArticleTitle</a> (String title)  throws RemoteException </td></tr>
-<tr class="separator:a56ae654d89e8113c79615077ed4a6e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2729689bb71bd707881b563cdf2a006"><td class="memItemLeft" align="right" valign="top">synchronized ArrayList&lt; <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#ab2729689bb71bd707881b563cdf2a006">searchArticleCategory</a> (String category)  throws RemoteException </td></tr>
 <tr class="separator:ab2729689bb71bd707881b563cdf2a006"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f04113ce0c895e13e1bde76d7b41eb8"><td class="memItemLeft" align="right" valign="top">synchronized ArrayList&lt; <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classes_1_1deusto_1_1server_1_1_server.html#a5f04113ce0c895e13e1bde76d7b41eb8">searchArticleAuthor</a> (String author)  throws RemoteException </td></tr>
@@ -147,8 +145,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a168b866b961a3d54b38834db9b52ca80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00026">26</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<div class="textblock"><p>This is the server class wich communicates with the clients and register the user or the articles in the DB. </p><dl class="section author"><dt>Author</dt><dd>Alberto </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00037">37</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a84f78162a65dd737f224eb2f94c43023"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84f78162a65dd737f224eb2f94c43023">&#9670;&nbsp;</a></span>Server()</h2>
@@ -172,7 +171,7 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00038">38</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00049">49</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -214,7 +213,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a74b3203c5a8d94e91004df0dc84ca386">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00184">184</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00197">197</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -255,7 +254,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ac96e072eb8a660ebcd5e535cb1324e64">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00283">283</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00296">296</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -312,7 +311,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ab5c4258f62146d90a064604891cedf2f">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00234">234</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00247">247</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -340,7 +339,7 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>To finalize the transaction </p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00048">48</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00059">59</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -359,11 +358,11 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns the articles that see the user when enters</p>
-<dl class="section return"><dt>Returns</dt><dd>Returns the articles that the user will see in the timeline </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; Returns the articles that the user will see in the timeline </dd></dl>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a27b2a5526387404d63d7fc6d0415acd4">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00420">420</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00417">417</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -389,6 +388,7 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>This method is used to enter the initial data for the Database, like users, articles, admins... </p>
 
 <p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00441">441</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
@@ -432,7 +432,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ae6b27c8714c2e2eadc9a55bccb0543fc">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00096">96</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00107">107</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -473,7 +473,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a65588c309522410e6a6d9c27d80821a7">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00130">130</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00141">141</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -520,10 +520,17 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>You send the title of an article which is the one that you want to read and returns the article. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">String</td><td>The title of the article </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Article Returns the article </dd></dl>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a1f02a5aa0628909b5464141923f5d1d2">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00159">159</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00172">172</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -571,7 +578,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a3b0fbbc1c934b8e527ecfed69e497155">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00063">63</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00074">74</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -590,10 +597,17 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Search the articles of one author </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">String</td><td>The name of the author we want to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; returns the list of articles of that author </dd></dl>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#a92b587f25a7043b24d44f326d1c7b7ae">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00351">351</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00347">347</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -612,32 +626,17 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Search the articles which have one category </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">String</td><td>The category we want to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; returns the list of articles with that category </dd></dl>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ab08ccd2295e983571cf50431d273393a">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00331">331</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
-
-</div>
-</div>
-<a id="a56ae654d89e8113c79615077ed4a6e24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56ae654d89e8113c79615077ed4a6e24">&#9670;&nbsp;</a></span>searchArticleTitle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">synchronized <a class="el" href="classes_1_1deusto_1_1server_1_1jdo_1_1_article.html">Article</a> es.deusto.server.Server.searchArticleTitle </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>title</em></td><td>)</td>
-          <td> throws RemoteException</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ab2c4bd97c628b735feedcf16e6aeb6b8">es.deusto.server.IServer</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00310">310</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00325">325</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
@@ -655,15 +654,16 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>A method which search the most visited articles </p><dl class="section return"><dt>Returns</dt><dd>ArrayList&lt;Article&gt; returns the top articles </dd></dl>
 
 <p>Implements <a class="el" href="interfacees_1_1deusto_1_1server_1_1_i_server.html#ab1b33472017b55ae84bf849430db5f1b">es.deusto.server.IServer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00378">378</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_server_8java_source.html#l00375">375</a> of file <a class="el" href="_server_8java_source.html">Server.java</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/es/deusto/server/<a class="el" href="_server_8java_source.html">Server.java</a></li>
+<li>/home/albertofdr/git/BSPQ19-E3/src/main/java/es/deusto/server/<a class="el" href="_server_8java_source.html">Server.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

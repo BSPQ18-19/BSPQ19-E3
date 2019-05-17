@@ -1,3 +1,9 @@
+/** @package es.deusto.server                                                                                                                  
+    
+    This class is the server package contains the interface and the class of the server wich communicate with clients and the DB.
+*/
+
+
 package es.deusto.server;
 
 import java.rmi.Naming;
@@ -23,6 +29,11 @@ import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 
+/**
+ * This is the server class wich communicates with the clients and register the user or the articles in the DB.
+ * @author Alberto
+ *
+ */
 public class Server extends UnicastRemoteObject implements IServer {
 
 	private static final long serialVersionUID = 1L;
@@ -154,7 +165,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**
-	 * 
+	 * You send the title of an article which is the one that you want to read and returns the article.
+	 * @param String The title of the article
+	 * @return Article Returns the article
 	 */
 	public synchronized Article readArticle(String Title) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -305,28 +318,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**
-	 * 
-	 */
-	public synchronized Article searchArticleTitle(String title) throws RemoteException {
-		Article artDB = null;
-		logger.info("SearchArticleTitle: " + title);
-		try {
-			tx.begin();
-			artDB = pm.getObjectById(Article.class, title);
-			tx.commit();
-		} catch (Exception e) {
-			logger.info("SearchArticleTitle: There is no a article with that title");
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		}
-		return artDB;
-
-	}
-
-	/**
-	 * 
+	 * Search the articles which have one category
+	 * @param String The category we want to read
+	 * @return ArrayList<Article> returns the list of articles with that category 
 	 */
 	public synchronized ArrayList<Article> searchArticleCategory(String category) throws RemoteException {
 		ArrayList<Article> arts = null;
@@ -346,7 +340,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**
-	 * 
+	 * Search the articles of one author
+	 * @param String The name of the author we want to read
+	 * @return ArrayList<Article> returns the list of articles of that author 
 	 */
 	public synchronized ArrayList<Article> searchArticleAuthor(String author) throws RemoteException {
 		ArrayList<Article> ownArticles = new ArrayList<Article>();
@@ -373,7 +369,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**
-	 * 
+	 * A method which search the most visited articles
+	 * @return ArrayList<Article> returns the top articles 
 	 */
 	public synchronized ArrayList<Article> viewTopArticle() throws RemoteException {
 		ArrayList<Article> artDB = new ArrayList<Article>();
@@ -415,7 +412,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**
 	 * Returns the articles that see the user when enters
 	 * 
-	 * @return Returns the articles that the user will see in the timeline
+	 * @return ArrayList<Article> Returns the articles that the user will see in the timeline
 	 */
 	public synchronized ArrayList<Article> getFirstArticles() {
 		ArrayList<Article> artDB = new ArrayList<Article>();
@@ -437,7 +434,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 		return artDB;
 	}
-
+	
+	/**
+	 * This method is used to enter the initial data for the Database, like users, articles, admins...
+	 */
 	public static void loadDB() {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -483,7 +483,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println("");
 		logger.debug("Persisting data in the DB succeeded");
 	}
-
+	
 	public static void main(String[] args) {
 		if (args.length != 3) {
 			logger.info("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
