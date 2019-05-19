@@ -1,63 +1,117 @@
 package es.deusto.client.controller;
 
-import es.deusto.client.model.Login;
+import es.deusto.client.model.ClientModel;
 import es.deusto.client.view.LoginJDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LoginController {
     private LoginJDialog login;
     private JPanel contentPane;
+    private JLabel loginLabel;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JPasswordField passwordField;
-    private JTextField usernameField;
+    private JPasswordField passwordConfirmField;
+    private JLabel labelConfirmPassword;
+    private JTextField emailField;
+    private JLabel labelEmail;
 
-    private Login loginModel = null;
+    private ClientModel model;
+    private Integer mode;
 
-    public LoginController() {
+    LoginController(Integer mode) {
+        this.mode = mode;
+
         initComponents();
         initListeners();
         initModel();
     }
 
     private void initModel() {
-        loginModel = new Login();
+        model = ClientModel.getModel();
     }
 
     private void initComponents() {
         login = new LoginJDialog();
+
+        loginLabel = login.getLoginLabel();
 
         contentPane = login.getContentPane();
         buttonOK = login.getButtonOK();
         buttonCancel = login.getButtonCancel();
         passwordField = login.getPasswordField();
         usernameField = login.getUsernameField();
+
+        emailField = login.getEmailField();
+        labelEmail = login.getLabelEmail();
+        passwordConfirmField = login.getPasswordConfirmField();
+        labelConfirmPassword = login.getLabelConfirmPassword();
+
+        switch (mode) {
+            case 1:
+                loginLabel.setText("Register your user");
+                showRegisterFields();
+                break;
+            case 2:
+                loginLabel.setText("Login as admin");
+                hideRegisterFields();
+                break;
+            default:
+                loginLabel.setText("Login as user");
+                hideRegisterFields();
+        }
     }
 
-    public void showLoginWindow() {
+    void showLoginWindow() {
         //Show landing page
         login.setVisible(true);
     }
 
-    private void initListeners() {
-        buttonOK.addActionListener(e -> onOK());
-        buttonCancel.addActionListener(e -> onCancel());
+    private void showRegisterFields() {
+        passwordConfirmField.setVisible(true);
+        labelConfirmPassword.setVisible(true);
+        emailField.setVisible(true);
+        labelEmail.setVisible(true);
     }
 
-    private void onCancel() {
+    private void hideRegisterFields() {
+        passwordConfirmField.setVisible(false);
+        labelConfirmPassword.setVisible(false);
+        emailField.setVisible(false);
+        labelEmail.setVisible(false);
+    }
+
+    private void initListeners() {
+        buttonOK.addActionListener(this::onOK);
+        buttonCancel.addActionListener(this::onCancel);
+    }
+
+    private void onOK(ActionEvent actionEvent) {
+        String username = usernameField.getText();
+        char[] password = passwordField.getPassword();
+        String email = null;
+
+        if(mode == 1) {
+            email = emailField.getText();
+        }
+
+        try {
+            model.logIn(username, password, email, mode);
+            login.dispose();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(login, "Problem: " + ex.getMessage());
+        }
+    }
+
+    private void onCancel(ActionEvent actionEvent) {
         // add your code here
         login.dispose();
     }
 
-    private void onOK() {
-        String username = usernameField.getText();
-        char[] password = passwordField.getPassword();
-
-        loginModel.login(username, password);
-
-        login.dispose();
+    public LoginJDialog getLogin() {
+        return login;
     }
 }

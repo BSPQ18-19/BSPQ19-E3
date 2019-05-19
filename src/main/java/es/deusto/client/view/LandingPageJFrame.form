@@ -50,6 +50,7 @@
         </constraints>
         <properties>
           <text value="Articles"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="36ff0" class="javax.swing.JList" binding="listArticles">
@@ -58,7 +59,9 @@
             <preferred-size width="150" height="300"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
     </children>
   </grid>
