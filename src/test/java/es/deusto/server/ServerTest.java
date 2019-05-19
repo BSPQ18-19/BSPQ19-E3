@@ -101,9 +101,9 @@ public class ServerTest {
 	public void testArticlesManagement() throws RemoteException, InterruptedException {
 
 		assertTrue(server.readArticle("NOEXIST") == null);
-		assertEquals("Title1", server.readArticle("Title1").getTitle());
+		assertEquals("Title3", server.readArticle("Title3").getTitle());
 
-		assertFalse(server.createArticle(new Article("Title1", "body", "category", admin), admin));
+		assertFalse(server.createArticle(new Article("Title3", "body", "category", admin), admin));
 		assertFalse(server.deleteArticle(new Article("NOEXIST", "body", "category", admin), admin));
 
 		assertEquals(3, server.searchArticleAuthor("Raul").size());
@@ -121,8 +121,8 @@ public class ServerTest {
 	}
 
 	@org.junit.Test
-	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 1000, average = 80)
+	@PerfTest(invocations = 1000, threads = 10, duration = 5000)
+	@Required(max = 1000, average = 80, throughput = 10)
 	public void getFirstArticles() throws RemoteException, InterruptedException {
 		server.getFirstArticles();
 	}

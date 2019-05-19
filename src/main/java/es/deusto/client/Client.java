@@ -19,12 +19,12 @@ import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 
 /**
- * Hello world!
+ * The client class
  *
  */
 public class Client {
 	static Logger logger = Logger.getLogger(Client.class.getName());
-	IServer server;
+	public IServer server;
 	Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
