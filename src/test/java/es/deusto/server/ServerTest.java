@@ -74,7 +74,7 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 800)
+	@Required(max = 1000)
 	public void testLogInUser() throws RemoteException, InterruptedException {
 		assertTrue(server.logIn("usernameTest2", "password").username.equals(user.username));
 		assertTrue((server.logIn("usernameFalse", "password") == null));
@@ -82,7 +82,7 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 850, average = 60)
+	@Required(max = 1000, average = 60)
 	public void testLogInAdmin() throws RemoteException {
 		assertTrue(admin.equals(server.logInAdmin(admin.username, admin.password)));
 		assertTrue(server.logInAdmin("NOEXIST", "NOEXIST") == null);
@@ -90,23 +90,22 @@ public class ServerTest {
 
 	@org.junit.Test
 	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 200, average = 20)
+	@Required(max = 1000, average = 20)
 	public void testRegister() throws RemoteException, InterruptedException {
 		assertTrue(server.registerUser("usernameTest2", "password", "email@gmail.com"));
 	}
 
 	@org.junit.Test
 	@PerfTest(invocations = 100, threads = 10)
-	@Required(max = 800, average = 140)
+	@Required(max = 1000, average = 300)
 	public void testArticlesManagement() throws RemoteException, InterruptedException {
 
 		assertTrue(server.readArticle("NOEXIST") == null);
-		assertEquals("Title1", server.readArticle("Title1").getTitle());
+		assertEquals("Title3", server.readArticle("Title3").getTitle());
 
-		assertFalse(server.createArticle(new Article("Title1", "body", "category", admin), admin));
+		assertFalse(server.createArticle(new Article("Title3", "body", "category", admin), admin));
 		assertFalse(server.deleteArticle(new Article("NOEXIST", "body", "category", admin), admin));
 
-		assertEquals("Title1", server.searchArticleTitle("Title1").getTitle());
 		assertEquals(3, server.searchArticleAuthor("Raul").size());
 
 		ArrayList<Article> top = server.viewTopArticle();
@@ -122,8 +121,8 @@ public class ServerTest {
 	}
 
 	@org.junit.Test
-	@PerfTest(invocations = 1000, threads = 10)
-	@Required(max = 550, average = 80)
+	@PerfTest(invocations = 1000, threads = 10, duration = 5000)
+	@Required(max = 1000, average = 80, throughput = 10)
 	public void getFirstArticles() throws RemoteException, InterruptedException {
 		server.getFirstArticles();
 	}

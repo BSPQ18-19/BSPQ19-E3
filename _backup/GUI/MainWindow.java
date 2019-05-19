@@ -1,3 +1,8 @@
+/** @package es.deusto.client.GUI
+    @brief This is the brief documentation for the Java package es.deusto.client.GUI which is a package for the client GUI
+
+    This classes are the client GUI
+*/
 package es.deusto.client.view;
 
 import javax.swing.JFrame;
