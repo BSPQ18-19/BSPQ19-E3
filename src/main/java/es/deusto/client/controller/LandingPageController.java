@@ -3,13 +3,14 @@ package es.deusto.client.controller;
 import es.deusto.client.logger.LoggerClient;
 import es.deusto.client.model.ClientModel;
 import es.deusto.client.view.LandingPageJFrame;
-import es.deusto.client.view.LoginJDialog;
+import es.deusto.server.jdo.Article;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
 import java.awt.event.*;
+import java.util.ArrayList;
 
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class LandingPageController {
     private static ClientModel model = ClientModel.getModel();
@@ -23,6 +24,7 @@ public class LandingPageController {
 
     private Logger LOGGER;
     private LoginController login;
+    private ArticleController article;
     private Boolean userLoggedIn = false;
 
     public LandingPageController() {
@@ -47,26 +49,39 @@ public class LandingPageController {
     public void showLandingPageWindow() {
         //Show landing page
         landingPage.setVisible(true);
+
+        //When user don't log in
+        listArticles.setVisible(false);
+        labelArticles.setVisible(false);
     }
 
-    public void hideLogin() {
-        //buttonLoginUser.setVisible(false);
+    private void hideLogin() {
         buttonLoginUser.setText("Log out");
+
         buttonRegister.setVisible(false);
         buttonAdmin.setVisible(false);
+
+        listArticles.setVisible(true);
+        labelArticles.setVisible(true);
+
+        listArticles.setModel(model.getArticles());
     }
 
-    public void showLogin() {
-        //buttonLoginUser.setVisible(false);
+    private void showLogin() {
         buttonLoginUser.setText("Login");
+
         buttonRegister.setVisible(true);
         buttonAdmin.setVisible(true);
+
+        listArticles.setVisible(false);
+        labelArticles.setVisible(false);
     }
 
     private void initListeners() {
         buttonLoginUser.addActionListener(this::actionLoginUser);
         buttonRegister.addActionListener(this::actionRegister);
         buttonAdmin.addActionListener(this::actionAdmin);
+        listArticles.addListSelectionListener(this::actionArticle);
     }
 
     private void initModel() {
@@ -75,11 +90,14 @@ public class LandingPageController {
 
     private void actionLoginUser(ActionEvent e) {
         //Open login modal box
-        if (!model.isLoggedUser()) {
+        if (!model.isLogInUser()) {
             login = new LoginController(0);
 
             //Check after close window, if user is logged in
             login.getLogin().addHierarchyListener(this::hierarchyChanged);
+
+            //Load articles
+            model.getArticles();
 
             //Show modal box
             login.showLoginWindow();
@@ -114,8 +132,13 @@ public class LandingPageController {
         login.showLoginWindow();
     }
 
+    private void actionArticle(ListSelectionEvent listSelectionEvent) {
+        article = new ArticleController(listArticles.getSelectedValue().toString());
+        article.showArticleWindow();
+    }
+
     private void hierarchyChanged(HierarchyEvent e1) {
-        if (model.isLoggedUser() & !userLoggedIn) {
+        if (model.isLogInUser() & !userLoggedIn) {
             //Hide all option for log in
             hideLogin();
 

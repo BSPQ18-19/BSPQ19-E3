@@ -91,15 +91,17 @@ public class LoginController {
 
     private void onOK(ActionEvent actionEvent) {
         String username = usernameField.getText();
-        char[] password = passwordField.getPassword();
         String email = null;
+        char[] password = passwordField.getPassword();
+        char[] confirmation = null;
 
         if(mode == 1) {
             email = emailField.getText();
+            confirmation = passwordConfirmField.getPassword();
         }
 
         try {
-            model.logIn(username, password, email, mode);
+            model.logIn(username, password, email, confirmation, mode);
             login.dispose();
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(login, "Problem: " + ex.getMessage());

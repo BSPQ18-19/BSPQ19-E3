@@ -92,10 +92,13 @@ public class LandingPageJFrame extends JFrame {
         panelMain.add(comboBoxLanguage, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelArticles = new JLabel();
         labelArticles.setText("Articles");
-        labelArticles.setVisible(false);
+        labelArticles.setVisible(true);
         panelMain.add(labelArticles, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         listArticles = new JList();
-        listArticles.setVisible(false);
+        final DefaultListModel defaultListModel1 = new DefaultListModel();
+        listArticles.setModel(defaultListModel1);
+        listArticles.setSelectionMode(0);
+        listArticles.setVisible(true);
         panelMain.add(listArticles, new GridConstraints(2, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 300), null, 0, false));
     }
 
