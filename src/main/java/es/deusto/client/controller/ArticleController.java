@@ -11,10 +11,8 @@ public class ArticleController {
     private ArticleJDialog article;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField bodyField;
-    private JLabel titleLabel;
-    private JLabel bodyLabel;
-    private JTextField titleField;
+    private JTextArea bodyTextArea;
+    private JTextField textFieldTitle;
 
     private ClientModel model;
     private Article art;
@@ -26,8 +24,8 @@ public class ArticleController {
 
         art = model.getArticle(title);
 
-        titleField.setText(art.getTitle());
-        bodyField.setText(art.getBody());
+        textFieldTitle.setText(art.getTitle());
+        bodyTextArea.setText(art.getBody());
     }
 
     private void initModel() {
@@ -37,8 +35,8 @@ public class ArticleController {
     private void initComponents() {
         article = new ArticleJDialog();
 
-        titleField = article.getTitleField();
-        bodyField = article.getBodyField();
+        textFieldTitle = article.getTextFieldTitle();
+        bodyTextArea = article.getBodyTextArea();
         buttonCancel = article.getButtonCancel();
     }
 
