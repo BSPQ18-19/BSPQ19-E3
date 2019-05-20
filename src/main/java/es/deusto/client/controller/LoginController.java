@@ -65,7 +65,7 @@ public class LoginController {
         }
     }
 
-    void showLoginWindow() {
+    public void showLoginWindow() {
         //Show landing page
         login.setVisible(true);
     }

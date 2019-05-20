@@ -105,7 +105,8 @@ public class ArticleJDialog extends JDialog {
         bodyTextArea.setEditable(false);
         bodyTextArea.setEnabled(false);
         bodyTextArea.setLineWrap(true);
-        bodyTextArea.setText("This is the information repository for the compulsory subject Software Process and Quality. Here you will find the course material needed to follow the lectures, and to fulfill the requirements of your labs, assignments and team work. ");
+        bodyTextArea.setMargin(new Insets(2, 5, 2, 5));
+        bodyTextArea.setText("");
         bodyTextArea.setWrapStyleWord(true);
         contentPane.add(bodyTextArea, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         textFieldTitle = new JTextField();

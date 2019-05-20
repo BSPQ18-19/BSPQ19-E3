@@ -19,6 +19,7 @@ public class LandingPageController {
     private JButton buttonLoginUser;
     private JButton buttonRegister;
     private JButton buttonAdmin;
+    private JButton buttonCreateArticle;
     private JList listArticles;
     private JLabel labelArticles;
 
@@ -42,6 +43,7 @@ public class LandingPageController {
         buttonLoginUser = landingPage.getButtonLoginUser();
         buttonRegister = landingPage.getButtonRegister();
         buttonAdmin = landingPage.getButtonAdmin();
+        buttonCreateArticle = landingPage.getButtonCreateArticle();
         listArticles = landingPage.getListArticles();
         labelArticles = landingPage.getLabelArticles();
     }
@@ -53,6 +55,9 @@ public class LandingPageController {
         //When user don't log in
         listArticles.setVisible(false);
         labelArticles.setVisible(false);
+
+        //When you are not admin
+        buttonCreateArticle.setVisible(false);
     }
 
     private void hideLogin() {

@@ -14,6 +14,7 @@ public class LandingPageJFrame extends JFrame {
     private JComboBox comboBoxLanguage;
     private JList listArticles;
     private JLabel labelArticles;
+    private JButton buttonCreateArticle;
 
     public LandingPageJFrame() {
         //Set default panel for all content
@@ -55,6 +56,10 @@ public class LandingPageJFrame extends JFrame {
 
     public JLabel getLabelArticles() {
         return labelArticles;
+    }
+
+    public JButton getButtonCreateArticle() {
+        return buttonCreateArticle;
     }
 
     {
@@ -100,6 +105,9 @@ public class LandingPageJFrame extends JFrame {
         listArticles.setSelectionMode(0);
         listArticles.setVisible(true);
         panelMain.add(listArticles, new GridConstraints(2, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 300), null, 0, false));
+        buttonCreateArticle = new JButton();
+        buttonCreateArticle.setText("Button");
+        panelMain.add(buttonCreateArticle, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
