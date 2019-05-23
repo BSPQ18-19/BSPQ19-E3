@@ -34,6 +34,8 @@ public class ClientModel {
     }
 
     public void logIn(String username, char[] password, String email, char[] confirmation, Integer mode) throws IllegalArgumentException {
+        String passwordString = new String(password);
+
         if (username.length() == 0 || password.length == 0 || (email != null && email.length() == 0)) {
             throw new IllegalArgumentException("You must fill in all fields");
         }
@@ -43,27 +45,31 @@ public class ClientModel {
         if (password.length < 4) {
             throw new IllegalArgumentException("Password is too weak (please use more than 5 characters");
         }
-        if (mode == 1 && email.length() < 6) {
-            throw new IllegalArgumentException("Your email adress is too short");
-        }
-        if (mode == 1 && password != confirmation) {
-            throw new IllegalArgumentException("Passwords do not match");
+        if (mode == 1) {
+            String confirmationString = new String(confirmation);
+
+            if(email.length() < 6) {
+                throw new IllegalArgumentException("Your email adress is too short");
+            }
+            if(!passwordString.equals(confirmationString)) {
+                throw new IllegalArgumentException("Passwords do not match");
+            }
         }
 
         try {
             switch (mode) {
                 case 1:
-                    if(service.getServer().registerUser(username, new String(password), email)) {
-                        loggedUser = service.getServer().logIn(username, new String(password));
+                    if(service.getServer().registerUser(username, passwordString, email)) {
+                        loggedUser = service.getServer().logIn(username, passwordString);
                     } else {
                         throw new IllegalArgumentException("User can not be create");
                     }
                     break;
                 case 2:
-                    loggedUser = service.getServer().logInAdmin(username, new String(password));
+                    loggedUser = service.getServer().logInAdmin(username, passwordString);
                     break;
                 default:
-                    loggedUser = service.getServer().logIn(username, new String(password));
+                    loggedUser = service.getServer().logIn(username, passwordString);
             }
 
             LOGGER.info("Log in is done for user: " + model);
