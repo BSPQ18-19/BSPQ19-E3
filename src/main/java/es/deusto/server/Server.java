@@ -248,21 +248,17 @@ public class Server extends UnicastRemoteObject implements IServer {
 			Admin autho) throws RemoteException {
 		// It's made so you can only change the articles title and body, we can make it
 		// more complex later.
-		/*
+
 		try {
 			tx.begin();
 			logger.info("Searching for the article to edit in the db...");
 			try {
 				Article artDB = pm.getObjectById(Article.class, art.title);
 
-				if (changeTitle == true) {
-					logger.info("Changing the title...");
-					artDB.setTitle(newTitle);
-				}
-				if (changeBody == true) {
-					logger.info("Changing the body...");
-					artDB.setBody(newBody);
-				}
+				logger.info("Changing the title...");
+				artDB.setTitle(newTitle);
+				logger.info("Changing the body...");
+				artDB.setBody(newBody);
 				// Deleting the old article in the db
 				logger.info("Deleting old article in the db...");
 				deleteArticle(art, autho);
@@ -282,7 +278,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
-		}*/
+		}
 		return false;
 	}
 

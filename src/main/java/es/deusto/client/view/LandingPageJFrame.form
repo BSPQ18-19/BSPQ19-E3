@@ -46,7 +46,7 @@
       </component>
       <component id="521d0" class="javax.swing.JLabel" binding="labelArticles">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Articles"/>
@@ -65,13 +65,12 @@
           <visible value="true"/>
         </properties>
       </component>
-      <component id="90152" class="javax.swing.JButton" binding="buttonCreateArticle">
+      <component id="9c436" class="javax.swing.JButton" binding="buttonNewArticle">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="New article"/>
-          <visible value="true"/>
+          <text value="Add article"/>
         </properties>
       </component>
     </children>

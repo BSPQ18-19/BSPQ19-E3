@@ -102,7 +102,7 @@ public class ArticleJDialog extends JDialog {
         bodyLabel.setText("Body");
         contentPane.add(bodyLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         bodyTextArea = new JTextArea();
-        bodyTextArea.setEditable(false);
+        bodyTextArea.setEditable(true);
         bodyTextArea.setEnabled(false);
         bodyTextArea.setLineWrap(true);
         bodyTextArea.setMargin(new Insets(2, 5, 2, 5));
@@ -110,7 +110,7 @@ public class ArticleJDialog extends JDialog {
         bodyTextArea.setWrapStyleWord(true);
         contentPane.add(bodyTextArea, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         textFieldTitle = new JTextField();
-        textFieldTitle.setEditable(false);
+        textFieldTitle.setEditable(true);
         textFieldTitle.setEnabled(false);
         contentPane.add(textFieldTitle, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }

@@ -14,7 +14,8 @@ public class LandingPageJFrame extends JFrame {
     private JComboBox comboBoxLanguage;
     private JList listArticles;
     private JLabel labelArticles;
-    private JButton buttonCreateArticle;
+
+    private JButton buttonNewArticle;
 
     public LandingPageJFrame() {
         //Set default panel for all content
@@ -58,8 +59,8 @@ public class LandingPageJFrame extends JFrame {
         return labelArticles;
     }
 
-    public JButton getButtonCreateArticle() {
-        return buttonCreateArticle;
+    public JButton getButtonNewArticle() {
+        return buttonNewArticle;
     }
 
     {
@@ -98,16 +99,16 @@ public class LandingPageJFrame extends JFrame {
         labelArticles = new JLabel();
         labelArticles.setText("Articles");
         labelArticles.setVisible(true);
-        panelMain.add(labelArticles, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelMain.add(labelArticles, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         listArticles = new JList();
         final DefaultListModel defaultListModel1 = new DefaultListModel();
         listArticles.setModel(defaultListModel1);
         listArticles.setSelectionMode(0);
         listArticles.setVisible(true);
         panelMain.add(listArticles, new GridConstraints(2, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 300), null, 0, false));
-        buttonCreateArticle = new JButton();
-        buttonCreateArticle.setText("Button");
-        panelMain.add(buttonCreateArticle, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonNewArticle = new JButton();
+        buttonNewArticle.setText("Add article");
+        panelMain.add(buttonNewArticle, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

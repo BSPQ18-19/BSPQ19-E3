@@ -19,7 +19,7 @@ public class LandingPageController {
     private JButton buttonLoginUser;
     private JButton buttonRegister;
     private JButton buttonAdmin;
-    private JButton buttonCreateArticle;
+    private JButton buttonAddArticle;
     private JList listArticles;
     private JLabel labelArticles;
 
@@ -27,6 +27,7 @@ public class LandingPageController {
     private LoginController login;
     private ArticleController article;
     private Boolean userLoggedIn = false;
+    private Integer mode = 0;
 
     public LandingPageController() {
         LOGGER =  LoggerClient.getLogger();
@@ -43,9 +44,9 @@ public class LandingPageController {
         buttonLoginUser = landingPage.getButtonLoginUser();
         buttonRegister = landingPage.getButtonRegister();
         buttonAdmin = landingPage.getButtonAdmin();
-        buttonCreateArticle = landingPage.getButtonCreateArticle();
         listArticles = landingPage.getListArticles();
         labelArticles = landingPage.getLabelArticles();
+        buttonAddArticle = landingPage.getButtonNewArticle();
     }
 
     public void showLandingPageWindow() {
@@ -56,8 +57,8 @@ public class LandingPageController {
         listArticles.setVisible(false);
         labelArticles.setVisible(false);
 
-        //When you are not admin
-        buttonCreateArticle.setVisible(false);
+        //Only for Admin
+        buttonAddArticle.setVisible(false);
     }
 
     private void hideLogin() {
@@ -70,6 +71,12 @@ public class LandingPageController {
         labelArticles.setVisible(true);
 
         listArticles.setModel(model.getArticles());
+
+
+        LOGGER.info(this.mode);
+        if(this.mode == 2) {
+            buttonAddArticle.setVisible(true);
+        }
     }
 
     private void showLogin() {
@@ -80,6 +87,10 @@ public class LandingPageController {
 
         listArticles.setVisible(false);
         labelArticles.setVisible(false);
+
+        if(this.mode == 2) {
+            buttonAddArticle.setVisible(false);
+        }
     }
 
     private void initListeners() {
@@ -87,6 +98,7 @@ public class LandingPageController {
         buttonRegister.addActionListener(this::actionRegister);
         buttonAdmin.addActionListener(this::actionAdmin);
         listArticles.addListSelectionListener(this::actionArticle);
+        buttonAddArticle.addActionListener(this::actionAddArticle);
     }
 
     private void initModel() {
@@ -99,7 +111,7 @@ public class LandingPageController {
             login = new LoginController(0);
 
             //Check after close window, if user is logged in
-            login.getLogin().addHierarchyListener(this::hierarchyChanged);
+            login.getLogin().addHierarchyListener(this::hierarchyUserChanged);
 
             //Load articles
             model.getArticles();
@@ -122,7 +134,7 @@ public class LandingPageController {
         login = new LoginController(1);
 
         //Check after close window, if user is logged in
-        login.getLogin().addHierarchyListener(this::hierarchyChanged);
+        login.getLogin().addHierarchyListener(this::hierarchyUserChanged);
 
         login.showLoginWindow();
     }
@@ -132,18 +144,32 @@ public class LandingPageController {
         login = new LoginController(2);
 
         //Check after close window, if user is logged in
-        login.getLogin().addHierarchyListener(this::hierarchyChanged);
+        login.getLogin().addHierarchyListener(this::hierarchyUserChanged);
 
         login.showLoginWindow();
     }
 
     private void actionArticle(ListSelectionEvent listSelectionEvent) {
         article = new ArticleController(listArticles.getSelectedValue().toString());
+
         article.showArticleWindow();
     }
 
-    private void hierarchyChanged(HierarchyEvent e1) {
+    private void actionAddArticle(ActionEvent actionEvent) {
+        article = new ArticleController(null);
+
+        //Check after close window, if admin add new arcitle
+        login.getLogin().addHierarchyListener(this::hierarchyArticleChanged);
+
+        article.showArticleWindow();
+    }
+
+    private void hierarchyUserChanged(HierarchyEvent e1) {
         if (model.isLogInUser() & !userLoggedIn) {
+            //Which role is log in
+            this.mode = model.getMode();
+            LOGGER.info("Role level: " + this.mode);
+
             //Hide all option for log in
             hideLogin();
 
@@ -152,5 +178,9 @@ public class LandingPageController {
 
             LOGGER.info("Detected user log in user: " + model);
         }
+    }
+
+    private void hierarchyArticleChanged(HierarchyEvent e1) {
+        listArticles.setModel(model.getArticles());
     }
 }

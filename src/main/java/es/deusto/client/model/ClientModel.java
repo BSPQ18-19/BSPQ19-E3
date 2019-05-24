@@ -2,6 +2,7 @@ package es.deusto.client.model;
 
 import es.deusto.client.logger.LoggerClient;
 import es.deusto.client.service.RMIService;
+import es.deusto.server.jdo.Admin;
 import es.deusto.server.jdo.Article;
 import es.deusto.server.jdo.User;
 import org.apache.log4j.Logger;
@@ -9,8 +10,6 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class ClientModel {
     private static ClientModel model = new ClientModel();
@@ -19,13 +18,16 @@ public class ClientModel {
 
     private Article article = null;
     private User loggedUser = null;
+    private Admin loggedAdmin = null;
+    private Integer mode = 0;
     private DefaultListModel<String> articles;
+    private Integer index = 0;
 
     private ClientModel() {
         LOGGER =  LoggerClient.getLogger();
         service = RMIService.getService();
 
-        articles = new DefaultListModel<>();
+        articles = new DefaultListModel<String>();
         connectArticles();
     }
 
@@ -60,13 +62,14 @@ public class ClientModel {
             switch (mode) {
                 case 1:
                     if(service.getServer().registerUser(username, passwordString, email)) {
-                        loggedUser = service.getServer().logIn(username, passwordString);
+                        loggedAdmin = (Admin) service.getServer().logIn(username, passwordString);
                     } else {
                         throw new IllegalArgumentException("User can not be create");
                     }
                     break;
                 case 2:
                     loggedUser = service.getServer().logInAdmin(username, passwordString);
+                    this.mode = 2;
                     break;
                 default:
                     loggedUser = service.getServer().logIn(username, passwordString);
@@ -82,10 +85,15 @@ public class ClientModel {
     public void logOut() {
         LOGGER.info("Your user was log out " + model);
         loggedUser = null;
+        mode = 0;
     }
 
     public Boolean isLogInUser() {
-        return loggedUser != null;
+        return loggedUser != null || loggedAdmin != null;
+    }
+
+    public Integer getMode() {
+        return mode;
     }
 
     @Override
@@ -96,7 +104,6 @@ public class ClientModel {
     private void connectArticles() {
         try {
             ArrayList<Article> arts = service.getServer().getFirstArticles();
-            int index = 0;
             for (Article article: arts) {
                 articles.add(index, article.getTitle());
                 index++;
@@ -118,5 +125,25 @@ public class ClientModel {
         }
 
         return article;
+    }
+
+    public Article editArticle(Article art, String title, String body) {
+        try {
+            //article = service.getServer().editArticle(art, title, body);
+        } catch (Exception ex) {
+            LOGGER.info(ex);
+        }
+        return article;
+    }
+
+    public void addArticle(String title, String body) {
+        article = new Article(title, body, "", loggedAdmin);
+
+        try {
+            if(service.getServer().createArticle(article, loggedAdmin))
+                articles.add(index, title);
+        } catch (RemoteException ex) {
+            LOGGER.info(ex);
+        }
     }
 }
