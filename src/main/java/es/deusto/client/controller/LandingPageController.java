@@ -3,13 +3,13 @@ package es.deusto.client.controller;
 import es.deusto.client.logger.LoggerClient;
 import es.deusto.client.model.ClientModel;
 import es.deusto.client.view.LandingPageJFrame;
-import es.deusto.server.jdo.Article;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 
 public class LandingPageController {
@@ -22,6 +22,7 @@ public class LandingPageController {
     private JButton buttonAddArticle;
     private JList listArticles;
     private JLabel labelArticles;
+    private JComboBox comboBoxLanguage;
 
     private Logger LOGGER;
     private LoginController login;
@@ -31,6 +32,7 @@ public class LandingPageController {
 
     public LandingPageController() {
         LOGGER =  LoggerClient.getLogger();
+        //Scanner scan = new Scanner(System.in);
 
         initComponents();
         initListeners();
@@ -47,6 +49,7 @@ public class LandingPageController {
         listArticles = landingPage.getListArticles();
         labelArticles = landingPage.getLabelArticles();
         buttonAddArticle = landingPage.getButtonNewArticle();
+        comboBoxLanguage = landingPage.getComboBoxLanguage();
     }
 
     public void showLandingPageWindow() {
@@ -58,11 +61,11 @@ public class LandingPageController {
         labelArticles.setVisible(false);
 
         //Only for Admin
-        buttonAddArticle.setVisible(false);
+        buttonAddArticle.setVisible(true);
     }
 
     private void hideLogin() {
-        buttonLoginUser.setText("Log out");
+        buttonLoginUser.setText(model.getBundle().getString("LogIn_User"));
 
         buttonRegister.setVisible(false);
         buttonAdmin.setVisible(false);
@@ -99,6 +102,7 @@ public class LandingPageController {
         buttonAdmin.addActionListener(this::actionAdmin);
         listArticles.addListSelectionListener(this::actionArticle);
         buttonAddArticle.addActionListener(this::actionAddArticle);
+        comboBoxLanguage.addActionListener(this::switchLanguages);
     }
 
     private void initModel() {
@@ -182,5 +186,12 @@ public class LandingPageController {
 
     private void hierarchyArticleChanged(HierarchyEvent e1) {
         listArticles.setModel(model.getArticles());
+    }
+
+    private void switchLanguages(ActionEvent actionEvent) {
+        /*String lang = (String) this.comboBoxLanguage.getSelectedItem();
+        if (lang == "Česky") {
+            model.setBundle(ResourceBundle.getBundle("lang/translations_CZ"));
+        }*/
     }
 }

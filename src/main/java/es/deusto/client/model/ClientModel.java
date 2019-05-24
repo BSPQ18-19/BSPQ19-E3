@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class ClientModel {
     private static ClientModel model = new ClientModel();
@@ -22,6 +23,7 @@ public class ClientModel {
     private Integer mode = 0;
     private DefaultListModel<String> articles;
     private Integer index = 0;
+    private ResourceBundle bundle = ResourceBundle.getBundle("lang/translations_ES");
 
     private ClientModel() {
         LOGGER =  LoggerClient.getLogger();
@@ -37,6 +39,7 @@ public class ClientModel {
 
     public void logIn(String username, char[] password, String email, char[] confirmation, Integer mode) throws IllegalArgumentException {
         String passwordString = new String(password);
+        this.mode = mode;
 
         if (username.length() == 0 || password.length == 0 || (email != null && email.length() == 0)) {
             throw new IllegalArgumentException("You must fill in all fields");
@@ -62,14 +65,13 @@ public class ClientModel {
             switch (mode) {
                 case 1:
                     if(service.getServer().registerUser(username, passwordString, email)) {
-                        loggedAdmin = (Admin) service.getServer().logIn(username, passwordString);
+                        loggedUser = service.getServer().logIn(username, passwordString);
                     } else {
                         throw new IllegalArgumentException("User can not be create");
                     }
                     break;
                 case 2:
-                    loggedUser = service.getServer().logInAdmin(username, passwordString);
-                    this.mode = 2;
+                    loggedAdmin = service.getServer().logInAdmin(username, passwordString);
                     break;
                 default:
                     loggedUser = service.getServer().logIn(username, passwordString);
@@ -98,7 +100,13 @@ public class ClientModel {
 
     @Override
     public String toString() {
-        return loggedUser.username;
+        if (loggedUser != null) {
+            return loggedUser.username;
+        }
+        if (loggedAdmin != null) {
+            return loggedAdmin.username;
+        }
+        return "";
     }
 
     private void connectArticles() {
@@ -137,13 +145,22 @@ public class ClientModel {
     }
 
     public void addArticle(String title, String body) {
-        article = new Article(title, body, "", loggedAdmin);
+        article = new Article(title, body, null, loggedAdmin);
 
         try {
-            if(service.getServer().createArticle(article, loggedAdmin))
+            if(service.getServer().createArticle(article, loggedAdmin)) {
                 articles.add(index, title);
+            }
         } catch (RemoteException ex) {
             LOGGER.info(ex);
         }
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
     }
 }

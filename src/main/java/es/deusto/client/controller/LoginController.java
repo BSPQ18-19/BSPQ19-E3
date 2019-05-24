@@ -50,7 +50,7 @@ public class LoginController {
         passwordConfirmField = login.getPasswordConfirmField();
         labelConfirmPassword = login.getLabelConfirmPassword();
 
-        switch (mode) {
+        switch (this.mode) {
             case 1:
                 loginLabel.setText("Register your user");
                 showRegisterFields();
@@ -65,7 +65,7 @@ public class LoginController {
         }
     }
 
-    void showLoginWindow() {
+    public void showLoginWindow() {
         //Show landing page
         login.setVisible(true);
     }

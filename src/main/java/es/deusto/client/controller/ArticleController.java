@@ -60,7 +60,7 @@ public class ArticleController {
         buttonOK = article.getButtonOK();
     }
 
-    void showArticleWindow() {
+    public void showArticleWindow() {
         //Show landing page
         article.setVisible(true);
     }
